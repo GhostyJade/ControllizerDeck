@@ -10,6 +10,7 @@ const url = require('url');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let appTrayIcon
 
 function createWindow() {
   // Create the browser window.
@@ -35,25 +36,31 @@ function createWindow() {
   })
 }
 
-function createTrayIcon(){
-
+function createTrayIcon() {
+  appTrayIcon = new electron.Tray(path.join(__dirname, '../public/logo192.png'))
+  appTrayIcon.setToolTip('Controllizer Deck')
+  const contextMenu = electron.Menu.buildFromTemplate([
+    { label: 'Open', type: 'normal', click: createWindow },
+    { label: 'Close', type: 'normal', click: app.quit }
+  ])
+  appTrayIcon.setContextMenu(contextMenu)
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', function(){
-  createWindow()
+app.on('ready', function () {
   createTrayIcon()
+  createWindow()
 });
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
+  /*if (process.platform !== 'darwin') {
     app.quit()
-  }
+  }*/
 });
 
 app.on('activate', function () {
