@@ -1,5 +1,8 @@
 ﻿using ControlizerCore.Serial;
-using System;
+
+using ControllizerDeckProject.Net;
+
+using System.Threading.Tasks;
 
 namespace ControllizerDeckProject
 {
@@ -9,6 +12,9 @@ namespace ControllizerDeckProject
         {
             SerialManager manager = new SerialManager();
             manager.Start();
+            HttpServer server = new HttpServer("http://localhost:8080/", 8080);
+            Task listen = server.Listen();
+            listen.GetAwaiter().GetResult();
         }
     }
 }
