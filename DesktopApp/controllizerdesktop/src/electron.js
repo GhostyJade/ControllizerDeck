@@ -14,7 +14,7 @@ let appTrayIcon
 
 function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({ width: 800, height: 600 });
+  mainWindow = new BrowserWindow({ width: 800, height: 600, webPreferences: { webSecurity: false } })
 
   // and load the index.html of the app.
   const startURL = process.env.ELECTRON_START_URL || url.format({
@@ -41,6 +41,7 @@ function createTrayIcon() {
   appTrayIcon.setToolTip('Controllizer Deck')
   const contextMenu = electron.Menu.buildFromTemplate([
     { label: 'Open', type: 'normal', click: createWindow },
+    { label: 'Kill daemon', type: 'normal' },
     { label: 'Close', type: 'normal', click: app.quit }
   ])
   appTrayIcon.setContextMenu(contextMenu)
