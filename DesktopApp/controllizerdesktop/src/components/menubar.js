@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-import { Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider, IconButton, ListItemIcon, ListItemText, ListItem } from '@material-ui/core'
+import { Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider, IconButton, ListItemIcon, ListItemText, ListItem, Button } from '@material-ui/core'
 import { ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon, Mail as MailIcon, MoveToInbox as InboxIcon, Menu as MenuIcon } from '@material-ui/icons'
 
 const drawerWidth = 240
@@ -88,7 +88,7 @@ export default function MenuBar(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            Controllizer Deck
             </Typography>
         </Toolbar>
       </AppBar>
@@ -126,6 +126,7 @@ export default function MenuBar(props) {
         <Typography paragraph>
           Some cool content, but I'm lazy so it isn't cool :3
           </Typography>
+          <Button onClick={fetch("http://localhost:8080/exit/",{method:'POST'})}>exit</Button>
       </main>
     </div>
   )
