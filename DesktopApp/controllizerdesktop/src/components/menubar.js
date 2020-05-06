@@ -126,7 +126,7 @@ export default function MenuBar(props) {
         <Typography paragraph>
           Some cool content, but I'm lazy so it isn't cool :3
           </Typography>
-          <Button onClick={fetch("http://localhost:8080/exit/",{method:'POST'})}>exit</Button>
+          <Button onClick={()=>fetch("http://localhost:8080/exit/",{method:'POST'})}>exit</Button>
       </main>
     </div>
   )
