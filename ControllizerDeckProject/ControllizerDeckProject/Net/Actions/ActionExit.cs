@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ControllizerDeckProject.Net.Actions
 {
@@ -9,7 +7,7 @@ namespace ControllizerDeckProject.Net.Actions
         public ActionExit() : base("exit", "/exit/", HTTPType.POST)
         { }
 
-        public override void Execute()
+        public override void OnPost()
         {
             Console.WriteLine("called exit");
         }

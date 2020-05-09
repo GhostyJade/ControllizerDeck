@@ -18,7 +18,8 @@
             ActionType = type;
         }
 
-        public abstract void Execute();
+        public virtual void OnPost() { }
+        public virtual void OnGet() { }
 
     }
 }

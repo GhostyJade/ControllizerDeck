@@ -15,6 +15,8 @@ namespace ControllizerDeckProject.Net
         {
             this.port = port;
             this.address = address;
+
+            ActionManager.INIT(); //And i should move this line elsewhere.
         }
 
         public async Task Listen()
@@ -35,24 +37,12 @@ namespace ControllizerDeckProject.Net
                 HandleGETRequest(req);
                 HandlePOSTRequest(req);
 
-                // Print out some info about the request
-                Console.WriteLine("Request #: {0}", "");//, ++requestCount);
-                Console.WriteLine(req.Url.ToString());
-                Console.WriteLine(req.HttpMethod);
-                Console.WriteLine(req.UserHostName);
-                Console.WriteLine(req.UserAgent);
-                Console.WriteLine();
-
                 // If `shutdown` url requested w/ POST, then shutdown the server after serving the page
                 if ((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/shutdown"))
                 {
                     Console.WriteLine("Shutdown requested");
                     Active = false;
                 }
-
-                // Make sure we don't increment the page views counter if `favicon.ico` is requested
-                if (req.Url.AbsolutePath != "/favicon.ico")
-                    ;// pageViews += 1;
 
                 // Write the response info
                 string disableSubmit = !Active ? "disabled" : "";
@@ -72,12 +62,14 @@ namespace ControllizerDeckProject.Net
             if (!request.HttpMethod.Equals("POST"))
                 return;
             //handle right request position ("/exit/" || "/add/" etc)
-            ActionManager.GetPOSTActions().ForEach(e => e.Execute());
+            ActionManager.GetPOSTActions().Find(e => e.ActionURI.Equals(request.RawUrl)).OnPost();
         }
         private void HandleGETRequest(HttpListenerRequest request)
         {
             if (!request.HttpMethod.Equals("GET"))
                 return;
+            ActionManager.GetGETActions().Find(e => e.ActionURI.Equals(request.RawUrl)).OnGet();
         }
     }
+
 }
