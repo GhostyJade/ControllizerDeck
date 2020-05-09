@@ -40,7 +40,7 @@ function createTrayIcon() {
   appTrayIcon = new electron.Tray(path.join(__dirname, '../public/logo192.png'))
   appTrayIcon.setToolTip('Controllizer Deck')
   const contextMenu = electron.Menu.buildFromTemplate([
-    { label: 'Open', type: 'normal', click: createWindow },
+    { label: 'Open', type: 'normal', click: () => { if (mainWindow === null) createWindow() } },
     { label: 'Kill daemon', type: 'normal' },
     { label: 'Close', type: 'normal', click: app.quit }
   ])
