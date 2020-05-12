@@ -16,6 +16,8 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using System.Net;
+
 namespace ControllizerDeckProject.Net.Actions
 {
     public abstract class ActionBase
@@ -36,8 +38,8 @@ namespace ControllizerDeckProject.Net.Actions
             ActionType = type;
         }
 
-        public virtual void OnPost() { }
-        public virtual void OnGet() { }
+        public virtual void OnPost(HttpListenerRequest request, HttpListenerResponse response) { }
+        public virtual void OnGet(HttpListenerRequest request, HttpListenerResponse response) { }
 
     }
 }

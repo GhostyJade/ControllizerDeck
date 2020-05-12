@@ -16,7 +16,6 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using System;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -27,7 +26,8 @@ namespace ControllizerDeckProject.Net
         protected string address;
         protected int port;
         protected HttpListener listener;
-        protected bool Active = false;
+
+        protected bool Active = false; //TODO change this to false when POST /exit/ is performed
 
         public HttpServer(string address, int port)
         {
@@ -52,41 +52,24 @@ namespace ControllizerDeckProject.Net
                 HttpListenerRequest req = ctx.Request;
                 HttpListenerResponse resp = ctx.Response;
 
-                HandleGETRequest(req);
-                HandlePOSTRequest(req);
-
-                // If `shutdown` url requested w/ POST, then shutdown the server after serving the page
-                if ((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/shutdown"))
-                {
-                    Console.WriteLine("Shutdown requested");
-                    Active = false;
-                }
-
-                // Write the response info
-                string disableSubmit = !Active ? "disabled" : "";
-                /*byte[] data = Encoding.UTF8.GetBytes(string.Format(pageData, pageViews, disableSubmit));
-                resp.ContentType = "text/html";
-                resp.ContentEncoding = Encoding.UTF8;
-                resp.ContentLength64 = data.LongLength;
-
-                // Write out to the response stream (asynchronously), then close it
-                await resp.OutputStream.WriteAsync(data, 0, data.Length);*/
-                resp.Close();
+                HandleGETRequest(req, resp);
+                HandlePOSTRequest(req, resp);
             }
         }
 
-        private void HandlePOSTRequest(HttpListenerRequest request)
+        //Known bug: if the given RawUrl is not existent in the available methods it crashes...make it try/catch or delete the last / in the request
+        private void HandlePOSTRequest(HttpListenerRequest request, HttpListenerResponse response)
         {
             if (!request.HttpMethod.Equals("POST"))
                 return;
             //handle right request position ("/exit/" || "/add/" etc)
-            ActionManager.GetPOSTActions().Find(e => e.ActionURI.Equals(request.RawUrl)).OnPost();
+            ActionManager.GetPOSTActions().Find(e => e.ActionURI.Equals(request.RawUrl)).OnPost(request, response);
         }
-        private void HandleGETRequest(HttpListenerRequest request)
+        private void HandleGETRequest(HttpListenerRequest request, HttpListenerResponse response)
         {
             if (!request.HttpMethod.Equals("GET"))
                 return;
-            ActionManager.GetGETActions().Find(e => e.ActionURI.Equals(request.RawUrl)).OnGet();
+            ActionManager.GetGETActions().Find(e => e.ActionURI.Equals(request.RawUrl)).OnGet(request, response);
         }
     }
 
