@@ -68,6 +68,16 @@ export default function MenuBar(props) {
   const classes = useStyles();
   const theme = useTheme()
 
+  const handleClose = () => {
+    fetch("http://localhost:8080/exit/", { method: 'POST' })
+      .then(response => response.json())
+      .then(data => {
+        if (data.result) {
+          window.ipcRenderer.send('exit', null) //This works only on electron and electron-dev scripts
+        }
+      })
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -126,7 +136,7 @@ export default function MenuBar(props) {
         <Typography paragraph>
           Some cool content, but I'm lazy so it isn't cool :3
           </Typography>
-          <Button onClick={()=>fetch("http://localhost:8080/exit/",{method:'POST'})}>exit</Button>
+        <Button onClick={handleClose}>Exit</Button>
       </main>
     </div>
   )
