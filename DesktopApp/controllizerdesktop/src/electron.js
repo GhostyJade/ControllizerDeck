@@ -6,6 +6,7 @@ const BrowserWindow = electron.BrowserWindow;
 
 const path = require('path');
 const url = require('url');
+const ipcMain = electron.ipcMain;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -14,7 +15,7 @@ let appTrayIcon
 
 function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({ width: 800, height: 600, webPreferences: { webSecurity: false } })
+  mainWindow = new BrowserWindow({ width: 800, height: 600, webPreferences: { webSecurity: false, nodeIntegration: true, preload: __dirname + "/preload.js" } })
 
   // and load the index.html of the app.
   const startURL = process.env.ELECTRON_START_URL || url.format({
@@ -71,6 +72,9 @@ app.on('activate', function () {
     createWindow()
   }
 });
+
+// Used to quit from the render process, invoked after closing the daemon.
+ipcMain.on('exit', (event, args) => { app.exit() })
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
