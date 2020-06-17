@@ -16,21 +16,11 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using ControllizerDeckProject.Net;
-
-using System.Threading.Tasks;
-
 namespace ControllizerDeckProject
 {
-    public class Program
+    public static class CoreState
     {
-        public static void Main(string[] args)
-        {
-            // SerialManager manager = new SerialManager();
-            // manager.Start();
-            HttpServer server = new HttpServer("localhost", 8080);
-            Task listen = server.Listen();
-            listen.GetAwaiter().GetResult();
-        }
+        public static bool HasCloseRequested { get; set; } = false;
+        public static string COMPort { get; set; } = string.Empty;
     }
 }

@@ -25,9 +25,11 @@ namespace ControllizerDeckProject.Net
     {
         public static Dictionary<string, ActionBase> actions = new Dictionary<string, ActionBase>();
 
-        public static void INIT()
+        public static void Init()
         {
             RegisterAction(new ActionExit());
+            RegisterAction(new ActionAvailablePorts());
+            RegisterAction(new ActionSetCOMPort());
         }
 
         public static void RegisterAction(ActionBase a)

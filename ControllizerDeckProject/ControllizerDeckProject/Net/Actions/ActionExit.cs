@@ -33,7 +33,7 @@ namespace ControllizerDeckProject.Net.Actions
             {
                 CoreState.HasCloseRequested = true; // TODO i should use this instead of closing the application directly
                 
-                //TODO move this method to a ResposeFactory (or something like that)
+                //TODO move this method to a ResponseFactory (or something like that)
                 string jsonResponse = "{\"result\":true}";
                 byte[] data = Encoding.UTF8.GetBytes(jsonResponse);
                 // Write the response info

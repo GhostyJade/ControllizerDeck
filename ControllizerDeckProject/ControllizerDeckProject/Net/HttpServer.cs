@@ -34,7 +34,7 @@ namespace ControllizerDeckProject.Net
             this.port = port;
             this.address = address;
 
-            ActionManager.INIT(); //And i should move this line elsewhere.
+            ActionManager.Init(); //And i should move this line elsewhere.
         }
 
         public async Task Listen()

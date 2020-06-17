@@ -16,6 +16,8 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using ControllizerDeckProject;
+
 using System;
 using System.Threading;
 
@@ -27,6 +29,17 @@ namespace ControlizerCore.Serial
     /// </summary>
     public class SerialManager
     {
+        private static SerialManager instance;
+        public static SerialManager ManagerInstance
+        {
+            get
+            {
+                if (instance == null) 
+                    instance = new SerialManager();
+                return instance;
+            }
+        }
+
         /// <summary>
         /// The thread on which the program listen data to
         /// </summary>
@@ -39,7 +52,7 @@ namespace ControlizerCore.Serial
         {
             //Create setters for these properties
             SerialIO.BaudRate = 9600;
-            SerialIO.PortName = "COM6"; //TODO this should changed to a selectable value
+            SerialIO.PortName = CoreState.COMPort;
             SerialIO.GetInstance().Init();
             SerialIO.GetInstance().Listen();
             serialThread = new Thread(Listen);
