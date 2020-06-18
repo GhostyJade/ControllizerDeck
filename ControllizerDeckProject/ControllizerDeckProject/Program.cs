@@ -26,8 +26,6 @@ namespace ControllizerDeckProject
     {
         public static void Main(string[] args)
         {
-            // SerialManager manager = new SerialManager();
-            // manager.Start();
             HttpServer server = new HttpServer("localhost", 8080);
             Task listen = server.Listen();
             listen.GetAwaiter().GetResult();
