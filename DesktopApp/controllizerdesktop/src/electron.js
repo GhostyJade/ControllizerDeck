@@ -6,20 +6,21 @@ const BrowserWindow = electron.BrowserWindow;
 
 const path = require('path');
 const url = require('url');
+const { createSettingWindow } = require('./windows/settingswindow');
 const ipcMain = electron.ipcMain;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow;
+let mainWindow
 let appTrayIcon
 
 function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({ width: 800, height: 600, webPreferences: { webSecurity: false, nodeIntegration: true, preload: __dirname + "/preload.js" } })
+  mainWindow = new BrowserWindow({ width: 800, height: 600, show: false, webPreferences: { webSecurity: false, nodeIntegration: true, preload: __dirname + "/preload.js" } })
 
   // and load the index.html of the app.
-  const startURL = process.env.ELECTRON_START_URL || url.format({
-    pathname: path.join(__dirname, '/../build/index.html'),
+  const startURL = ("http://localhost:3000/?home") || url.format({
+    pathname: path.join(__dirname, '/../build/index.html/?home'),
     protocol: 'file:',
     slashes: true
   })
@@ -35,6 +36,7 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+  mainWindow.once('ready-to-show', () => { mainWindow.show() })
 }
 
 function createTrayIcon() {
@@ -76,5 +78,7 @@ app.on('activate', function () {
 // Used to quit from the render process, invoked after closing the daemon.
 ipcMain.on('exit', (event, args) => { app.exit() })
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+ipcMain.on('settings', (event, args) => {
+  //create settings window
+  createSettingWindow()
+})
