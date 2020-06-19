@@ -1,0 +1,16 @@
+{
+    "PushButton": [
+        {
+            "id": 1
+        },
+        {
+            "id": 2
+        }
+    ],
+    "RotaryEncoder": [
+        {
+            "id": 0,
+            "hasButton": true
+        }
+    ]
+}
