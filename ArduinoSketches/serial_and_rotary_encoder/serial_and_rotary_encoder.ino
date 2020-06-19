@@ -19,7 +19,7 @@ void setup()
 
   pinMode(ROTARY_CLK, INPUT);
   pinMode(ROTARY_DT, INPUT);
-  pinMode(ROTARY_SW, INPUT);
+  pinMode(ROTARY_SW, INPUT_PULLUP);
 
   Serial.begin(BAUD_RATE);
 
@@ -62,7 +62,7 @@ void loop()
     }
   }
 
-  if (digitalRead(ROTARY_SW))
+  if (!digitalRead(ROTARY_SW))
   {
     if (!switchBtnPressed)
       Serial.write("[SwBtn] Pressed\n");
