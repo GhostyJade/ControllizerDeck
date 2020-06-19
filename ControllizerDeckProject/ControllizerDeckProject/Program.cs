@@ -26,6 +26,7 @@ namespace ControllizerDeckProject
     {
         public static void Main(string[] args)
         {
+            ActionManager.Init();
             HttpServer server = new HttpServer("localhost", 8080);
             Task listen = server.Listen();
             listen.GetAwaiter().GetResult();
