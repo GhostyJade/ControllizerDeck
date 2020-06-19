@@ -18,6 +18,8 @@
 
 using ControlizerCore.Serial;
 
+using ControllizerDeckProject.Utils;
+
 using Newtonsoft.Json.Linq;
 
 using System.IO;
@@ -34,6 +36,11 @@ namespace ControllizerDeckProject.Net.Actions
 
         public override void OnPost(HttpListenerRequest request, HttpListenerResponse response)
         {
+            if (request.ContentType == null)
+            {
+                ConsoleManager.LogError("Missing ContentType in " + ActionName);
+                return;
+            }
             if (!request.ContentType.Equals("application/json")) return;//TODO Create exception
             // Get request body
             Stream body = request.InputStream;
