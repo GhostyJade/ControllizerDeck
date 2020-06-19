@@ -19,6 +19,7 @@ void setup()
 
   pinMode(ROTARY_CLK, INPUT);
   pinMode(ROTARY_DT, INPUT);
+  pinMode(ROTARY_SW, INPUT);
 
   Serial.begin(BAUD_RATE);
 
@@ -28,7 +29,7 @@ void setup()
   attachInterrupt(1, updateEncoder, CHANGE);
 }
 
-bool btn1Pressed = false, btn2Pressed = false;
+bool btn1Pressed = false, btn2Pressed = false, switchBtnPressed = false;
 
 void loop()
 {
@@ -58,6 +59,21 @@ void loop()
     {
       btn2Pressed = false;
       Serial.write("[Btn2] Released\n");
+    }
+  }
+
+  if (digitalRead(ROTARY_SW))
+  {
+    if (!switchBtnPressed)
+      Serial.write("[SwBtn] Pressed\n");
+    switchBtnPressed = true;
+  }
+  else
+  {
+    if (switchBtnPressed)
+    {
+      switchBtnPressed = false;
+      Serial.write("[SwBtn] Released\n");
     }
   }
 }
