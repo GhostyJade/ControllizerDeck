@@ -9,3 +9,8 @@ Hai mai desiderato un dispositivo che potesse controllare le tue applicazioni pr
 
 Bene, con Controllizer Deck puoi costruire un dispositivo input DIY e controllare quello di cui hai bisogno, mappando i controlli con un'applicazione desktop utile e semplice da usare.
 
+## Vuoi più funzionalità?
+Apri un'Issue e descrivi quello che vuoi.
+
+### Licenza
+Questo progetto è sotto licenza GPLv3.

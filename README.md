@@ -8,3 +8,9 @@
 Do you ever wanted to have some kind of device that control your favourite applications but you don't have enough money to buy it (like the Elgato Stream Deck) or what you find is specific to an application(or a set of application, like the Loupdeck)?
 
 Well, with Controlizer Deck you can use a DIY input device and control everything you need, mapping controls with an useful easy-to-use Desktop app.
+
+## Do you want more features?
+Open an issue and describe what you want.
+
+### License
+This project is licensed under GPLv3.
