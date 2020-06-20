@@ -17,8 +17,6 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ControllizerDeckProject.Utils
 {
@@ -28,6 +26,13 @@ namespace ControllizerDeckProject.Utils
         public static decimal MapRange(this decimal value, decimal fromSource, decimal toSource, decimal fromTarget, decimal toTarget)
         {
             return (value - fromSource) / (toSource - fromSource) * (toTarget - fromTarget) + fromTarget;
+        }
+
+        public static bool BoolFromInt(int value)
+        {
+            if (value == 0) return false;
+            else if (value == 1) return true;
+            else throw new Exception("Invalid number value");
         }
     }
 }
