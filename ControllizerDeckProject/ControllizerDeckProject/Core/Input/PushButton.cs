@@ -18,15 +18,42 @@
 
 namespace ControllizerDeckProject.Core.Input
 {
-    //Boolean action
+    /// <summary>
+    /// A PushButton is a button that can represent a bool value (true if pressed, false if not pressed)
+    /// </summary>
     public class PushButton
     {
-        public bool IsActive { get; private set; }
+        /// <summary>
+        /// The push button generic identifier
+        /// </summary>
+        public const string PushButtonIdentifier = "PB";
+        
+        /// <summary>
+        /// <see langword="true"/> if pressed, false otherwise
+        /// </summary>
+        public bool IsPressed { get; private set; }
+        
+        /// <summary>
+        /// The push button identifier
+        /// </summary>
         public int Identifier { get; private set; }
+
+        public InputActionBase AssociatedAction;
 
         public PushButton(int id)
         {
             Identifier = id;
+        }
+
+        /// <summary>
+        /// Update the push button state
+        /// </summary>
+        /// <param name="value">The new button state</param>
+        public void UpdateState(bool value)
+        {
+            IsPressed = value;
+            if (IsPressed) 
+                AssociatedAction.Execute();
         }
     }
 }
