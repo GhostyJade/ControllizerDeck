@@ -20,6 +20,9 @@ namespace ControllizerDeckProject.Core.Input
 {
     public class RotaryEncoder
     {
+        public const string RotaryEncoderIdentifier = "RE";
+        public const string RotaryEncoderButtonIdentifier = "REB";
+
         /// <summary>
         /// Set to <see langword="true"/> if the used rotary encoder has a push button
         /// </summary>
@@ -44,6 +47,24 @@ namespace ControllizerDeckProject.Core.Input
         {
             ComponentIdentifier = id;
             HasPushButton = hasButton;
+        }
+
+        /// <summary>
+        /// Update the encoder value
+        /// </summary>
+        /// <param name="v">the new value</param>
+        public void UpdateValue(long v)
+        {
+            EncoderValue = v;
+        }
+        
+        /// <summary>
+        /// Store if the rotary encoder's button has been pressed
+        /// </summary>
+        /// <param name="value"></param>
+        public void UpdateButtonState(bool value)
+        {
+            IsButtonActive = value;
         }
 
     }
