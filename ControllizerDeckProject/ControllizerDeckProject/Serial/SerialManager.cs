@@ -17,6 +17,7 @@
 */
 
 using ControllizerDeckProject;
+using ControllizerDeckProject.Core;
 
 using System;
 using System.Threading;
@@ -72,7 +73,7 @@ namespace ControlizerCore.Serial
                 try
                 {
                     string msg = SerialIO.GetInstance().Read();
-                    Console.WriteLine(msg); //Return somewhere and use this values
+                    InputDispatcher.PerformAction(msg);
                 }
                 catch (Exception e)
                 {
