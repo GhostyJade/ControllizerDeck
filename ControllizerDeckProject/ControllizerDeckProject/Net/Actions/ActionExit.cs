@@ -45,7 +45,10 @@ namespace ControllizerDeckProject.Net.Actions
                 Task a = response.OutputStream.WriteAsync(data, 0, data.Length);
                 a.GetAwaiter().GetResult();
                 response.Close();
-                System.Environment.Exit(0); //TODO also, i have to close every thing that must be close (serial, httpserver, etc)
+
+                CoreState.DisposableElements.ForEach(e => e());
+
+                System.Environment.Exit(0); //TODO also, i have to close every thing that must be closed (serial, httpserver, etc)
             }
         }
     }
