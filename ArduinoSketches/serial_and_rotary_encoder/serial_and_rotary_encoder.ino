@@ -33,10 +33,11 @@ bool btn1Pressed = false, btn2Pressed = false, switchBtnPressed = false;
 
 void loop()
 {
+  //1 pressed, 0 released
   if (digitalRead(BTN1))
   {
     if (!btn1Pressed)
-      Serial.write("[Btn1] Pressed\n");
+      Serial.write("PB1:1\n");
     btn1Pressed = true;
   }
   else
@@ -44,13 +45,13 @@ void loop()
     if (btn1Pressed)
     {
       btn1Pressed = false;
-      Serial.write("[Btn1] Released\n");
+      Serial.write("PB1:0\n");
     }
   }
   if (digitalRead(BTN2))
   {
     if (!btn2Pressed)
-      Serial.write("[Btn2] Pressed\n");
+      Serial.write("PB2:1\n");
     btn2Pressed = true;
   }
   else
@@ -58,14 +59,15 @@ void loop()
     if (btn2Pressed)
     {
       btn2Pressed = false;
-      Serial.write("[Btn2] Released\n");
+      Serial.write("PB2:0\n");
     }
   }
 
+  //REB:"Rotary Encoder Button"
   if (!digitalRead(ROTARY_SW))
   {
     if (!switchBtnPressed)
-      Serial.write("[SwBtn] Pressed\n");
+      Serial.write("REB0:1\n");
     switchBtnPressed = true;
   }
   else
@@ -73,7 +75,7 @@ void loop()
     if (switchBtnPressed)
     {
       switchBtnPressed = false;
-      Serial.write("[SwBtn] Released\n");
+      Serial.write("REB0:0\n");
     }
   }
 }
@@ -99,7 +101,7 @@ void updateEncoder()
       encoderValue++;
     }
 
-    Serial.print("Counter: ");
+    Serial.print("RE0:");
     Serial.println(encoderValue);
   }
 
