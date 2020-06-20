@@ -27,15 +27,18 @@ namespace ControlizerCore.Serial
     /// <summary>
     /// This class manage communication with a serial device (such as an Arduino)
     /// </summary>
-    public class SerialManager
+    public class SerialManager : IDisposable
     {
         private static SerialManager instance;
         public static SerialManager ManagerInstance
         {
             get
             {
-                if (instance == null) 
+                if (instance == null)
+                {
                     instance = new SerialManager();
+                    CoreState.AddDisposable(instance.Dispose);
+                }
                 return instance;
             }
         }
@@ -76,6 +79,11 @@ namespace ControlizerCore.Serial
                     Console.WriteLine(e.Message.ToString()); //TODO better exceptions
                 }
             }
+        }
+
+        public void Dispose()
+        {
+            SerialIO.GetInstance().Close();
         }
     }
 }
