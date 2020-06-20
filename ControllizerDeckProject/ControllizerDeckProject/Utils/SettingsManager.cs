@@ -16,31 +16,57 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using ControlizerCore.Serial;
+
+using Newtonsoft.Json;
+
+using System;
 using System.IO;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace ControllizerDeckProject.Utils
 {
     public static class SettingsManager
     {
-        public static async Task SaveSettingsAsync(Settings s, string filename)
+        private const string SettingsFileName = "settings.json";
+        private const string SettingsPath = "Data";
+
+        private static bool CheckSettingsData()
         {
-            using (FileStream fs = File.Create(filename))
-            {
-                await JsonSerializer.SerializeAsync(fs, s);
-            }
+            if (!Directory.Exists(AppContext.BaseDirectory + SettingsPath))
+                Directory.CreateDirectory(AppContext.BaseDirectory + SettingsPath);
+            if (File.Exists(string.Format("{0}/{1}/{2}", AppContext.BaseDirectory, SettingsPath, SettingsFileName)))
+                return true;
+            return false;
         }
 
-        public static void SaveSettings(Settings s, string filename)
+        public static void SaveSettings(Settings s)
         {
-            string json = JsonSerializer.Serialize(s);
-            File.WriteAllText(filename, json);
+            JsonSerializer serializer = new JsonSerializer();
+            using (StreamWriter streamWriter = new StreamWriter(string.Format("{0}/{1}/{2}", AppContext.BaseDirectory, SettingsPath, SettingsFileName)))
+            using (JsonWriter writer = new JsonTextWriter(streamWriter))
+            {
+                serializer.Serialize(writer, s);
+            }
         }
 
         public static void LoadSettings()
         {
-
+            if (!CheckSettingsData())
+            {
+                CoreState.SettingsInstance = new Settings();
+            }
+            else
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                using (StreamReader sr = new StreamReader(string.Format("{0}/{1}/{2}", AppContext.BaseDirectory, SettingsPath, SettingsFileName)))
+                using (JsonReader reader = new JsonTextReader(sr))
+                {
+                    Settings settings = serializer.Deserialize<Settings>(reader);
+                    CoreState.SettingsInstance = settings;
+                    //TODO Check COM validity
+                    SerialManager.ManagerInstance.Start();
+                }
+            }
         }
     }
 }

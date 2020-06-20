@@ -27,12 +27,12 @@ namespace ControllizerDeckProject.Core.Input
         /// The push button generic identifier
         /// </summary>
         public const string PushButtonIdentifier = "PB";
-        
+
         /// <summary>
         /// <see langword="true"/> if pressed, false otherwise
         /// </summary>
         public bool IsPressed { get; private set; }
-        
+
         /// <summary>
         /// The push button identifier
         /// </summary>
@@ -52,7 +52,7 @@ namespace ControllizerDeckProject.Core.Input
         public void UpdateState(bool value)
         {
             IsPressed = value;
-            if (IsPressed) 
+            if (IsPressed && AssociatedAction != null)
                 AssociatedAction.Execute();
         }
     }

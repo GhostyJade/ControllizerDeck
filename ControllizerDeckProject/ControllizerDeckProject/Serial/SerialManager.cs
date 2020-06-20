@@ -56,7 +56,7 @@ namespace ControlizerCore.Serial
         {
             //Create setters for these properties
             SerialIO.BaudRate = 9600;
-            SerialIO.PortName = CoreState.COMPort;
+            SerialIO.PortName = CoreState.SettingsInstance.COMPort;
             SerialIO.GetInstance().Init();
             SerialIO.GetInstance().Listen();
             serialThread = new Thread(Listen);

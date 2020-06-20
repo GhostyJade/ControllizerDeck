@@ -19,6 +19,7 @@
 using ControllizerDeckProject.Core;
 using ControllizerDeckProject.Core.ControllizerActions;
 using ControllizerDeckProject.Net;
+using ControllizerDeckProject.Utils;
 
 using System.Threading.Tasks;
 
@@ -28,6 +29,8 @@ namespace ControllizerDeckProject
     {
         public static void Main(string[] args)
         {
+            SettingsManager.LoadSettings();
+
             ActionManager.Init();
             var it = new Core.Hardware.HardwareCreator("{\"PushButton\": [{\"id\": 1},{\"id\": 2}],\"RotaryEncoder\": [{\"id\": 0,\"hasButton\": true}]}");
             it.PushButtons[0].AssociatedAction = new ActionRunProgram("blender") { FullAppDirectory = @"C:\Program Files\Blender Foundation\Blender 2.83\blender.exe" };

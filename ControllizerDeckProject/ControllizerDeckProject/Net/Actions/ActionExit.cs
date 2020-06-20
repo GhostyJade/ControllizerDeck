@@ -16,6 +16,8 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using ControllizerDeckProject.Utils;
+
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,6 +49,8 @@ namespace ControllizerDeckProject.Net.Actions
                 response.Close();
 
                 CoreState.DisposableElements.ForEach(e => e());
+
+                SettingsManager.SaveSettings(CoreState.SettingsInstance);
 
                 System.Environment.Exit(0); //TODO also, i have to close every thing that must be closed (serial, httpserver, etc)
             }

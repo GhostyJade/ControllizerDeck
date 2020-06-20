@@ -16,14 +16,11 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace ControllizerDeckProject.Utils
 {
     public class Settings
     {
-        public string LocaleName;
+        public string COMPort { get; set; } = string.Empty;
+        // public string LocaleName;
     }
 }

@@ -38,7 +38,7 @@ namespace ControllizerDeckProject.Net.Actions
         {
             if (request.ContentType == null)
             {
-                ConsoleManager.LogError("Missing ContentType in " + ActionName);
+                ConsoleManager.LogError("Missing Content-Type in " + ActionName);
                 return;
             }
             if (!request.ContentType.Equals("application/json")) return;//TODO Create exception
@@ -53,7 +53,7 @@ namespace ControllizerDeckProject.Net.Actions
             string port = (string)t.SelectToken("port");
 
             // Set port value
-            CoreState.COMPort = port;
+            CoreState.SettingsInstance.COMPort = port;
 
             // Starts the SerialManager
             SerialManager.ManagerInstance.Start();
