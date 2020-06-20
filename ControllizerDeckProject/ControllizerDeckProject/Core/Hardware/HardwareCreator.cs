@@ -20,18 +20,34 @@ using ControllizerDeckProject.Core.Input;
 
 using Newtonsoft.Json.Linq;
 
+using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ControllizerDeckProject.Core.Hardware
 {
     public class HardwareCreator
     {
+        private const string HardwareDescriptionFile = "Data/Hardware/hardwaredescription.json";
+
         public List<PushButton> PushButtons { get; private set; } = new List<PushButton>();
         public List<RotaryEncoder> RotaryEncoders { get; private set; } = new List<RotaryEncoder>();
 
         public HardwareCreator(string jsonHardwareData)
         {
             ParseJson(jsonHardwareData);
+        }
+
+        public HardwareCreator()
+        {
+            ParseJson(LoadFromFile());
+        }
+
+        private string LoadFromFile()
+        {
+            if (!File.Exists(AppContext.BaseDirectory + HardwareDescriptionFile)) 
+                throw new FileNotFoundException(HardwareDescriptionFile);
+            return File.ReadAllText(AppContext.BaseDirectory + HardwareDescriptionFile);
         }
 
         private void ParseJson(string jsonData)

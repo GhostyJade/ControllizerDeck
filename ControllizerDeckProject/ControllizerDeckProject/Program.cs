@@ -32,7 +32,7 @@ namespace ControllizerDeckProject
             SettingsManager.LoadSettings();
 
             ActionManager.Init();
-            var it = new Core.Hardware.HardwareCreator("{\"PushButton\": [{\"id\": 1},{\"id\": 2}],\"RotaryEncoder\": [{\"id\": 0,\"hasButton\": true}]}");
+            var it = new Core.Hardware.HardwareCreator();
             it.PushButtons[0].AssociatedAction = new ActionRunProgram("blender") { FullAppDirectory = @"C:\Program Files\Blender Foundation\Blender 2.83\blender.exe" };
             InputDispatcher.RegisterHardware(it);
             HttpServer server = new HttpServer("localhost", 8080);
