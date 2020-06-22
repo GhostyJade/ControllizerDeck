@@ -17,11 +17,13 @@
 */
 
 using ControllizerDeckProject.Core;
+using ControllizerDeckProject.Core.Hardware;
 using ControllizerDeckProject.Core.ControllizerActions;
 using ControllizerDeckProject.Net;
 using ControllizerDeckProject.Utils;
 
 using System.Threading.Tasks;
+using System;
 
 namespace ControllizerDeckProject
 {
@@ -32,7 +34,7 @@ namespace ControllizerDeckProject
             SettingsManager.LoadSettings();
 
             ActionManager.Init();
-            var it = new Core.Hardware.HardwareCreator();
+            var it = new HardwareCreator();
             it.PushButtons[0].AssociatedAction = new ActionRunProgram("blender") { FullAppDirectory = @"C:\Program Files\Blender Foundation\Blender 2.83\blender.exe" };
             InputDispatcher.RegisterHardware(it);
             HttpServer server = new HttpServer("localhost", 8080);

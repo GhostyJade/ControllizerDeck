@@ -16,7 +16,8 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using ControllizerAPI.Plugin;
+using ControllizerCore.Plugin;
+
 using System;
 using System.Collections.Generic;
 using System.IO;

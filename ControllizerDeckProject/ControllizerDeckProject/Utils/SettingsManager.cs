@@ -39,7 +39,12 @@ namespace ControllizerDeckProject.Utils
             return false;
         }
 
-        public static void SaveSettings(Settings s)
+        public static void SaveSettings()
+        {
+            SaveSettings(CoreState.SettingsInstance);
+        }
+
+        private static void SaveSettings(Settings s)
         {
             JsonSerializer serializer = new JsonSerializer();
             using (StreamWriter streamWriter = new StreamWriter(string.Format("{0}/{1}/{2}", AppContext.BaseDirectory, SettingsPath, SettingsFileName)))
@@ -62,8 +67,8 @@ namespace ControllizerDeckProject.Utils
                 using (JsonReader reader = new JsonTextReader(sr))
                 {
                     Settings settings = serializer.Deserialize<Settings>(reader);
-                    CoreState.SettingsInstance = settings;
                     //TODO Check COM validity
+                    CoreState.SettingsInstance = settings;
                     SerialManager.ManagerInstance.Start();
                 }
             }

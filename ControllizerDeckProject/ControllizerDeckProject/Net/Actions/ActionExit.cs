@@ -50,7 +50,7 @@ namespace ControllizerDeckProject.Net.Actions
 
                 CoreState.DisposableElements.ForEach(e => e());
 
-                SettingsManager.SaveSettings(CoreState.SettingsInstance);
+                SettingsManager.SaveSettings();
 
                 System.Environment.Exit(0); //TODO also, i have to close every thing that must be closed (serial, httpserver, etc)
             }

@@ -45,7 +45,7 @@ namespace ControllizerDeckProject.Core.Hardware
 
         private string LoadFromFile()
         {
-            if (!File.Exists(AppContext.BaseDirectory + HardwareDescriptionFile)) 
+            if (!File.Exists(AppContext.BaseDirectory + HardwareDescriptionFile))
                 throw new FileNotFoundException(HardwareDescriptionFile);
             return File.ReadAllText(AppContext.BaseDirectory + HardwareDescriptionFile);
         }
