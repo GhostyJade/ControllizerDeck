@@ -20,6 +20,8 @@ using ControllizerDeckProject.Core.Hardware;
 using ControllizerDeckProject.Core.Input;
 using ControllizerDeckProject.Utils;
 
+using Newtonsoft.Json;
+
 using System;
 
 namespace ControllizerDeckProject.Core
@@ -31,6 +33,11 @@ namespace ControllizerDeckProject.Core
         public static void RegisterHardware(HardwareCreator instance)
         {
             InputEvents = instance;
+        }
+
+        public static string ObjectsToJSON()
+        {
+            return JsonConvert.SerializeObject(InputEvents,Formatting.Indented);
         }
 
         public static void PerformAction(string msg)
