@@ -16,7 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-namespace ControllizerAPI.Plugin
+namespace ControllizerCore.Plugin
 {
     public abstract class PluginBase
     {

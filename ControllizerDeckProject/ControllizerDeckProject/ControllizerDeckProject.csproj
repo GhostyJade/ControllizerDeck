@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ControllizerAPI\ControllizerAPI.csproj" />
+    <ProjectReference Include="..\ControllizerCore\ControllizerCore.csproj" />
   </ItemGroup>
 
 </Project>
