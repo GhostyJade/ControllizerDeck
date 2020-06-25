@@ -6,7 +6,6 @@ const BrowserWindow = electron.BrowserWindow;
 
 const path = require('path');
 const url = require('url');
-const { createSettingWindow } = require('./windows/settingswindow');
 const ipcMain = electron.ipcMain;
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -19,8 +18,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({ width: 800, height: 600, show: false, webPreferences: { webSecurity: false, nodeIntegration: true, preload: __dirname + "/preload.js" } })
 
   // and load the index.html of the app.
-  const startURL = ("http://localhost:3000/?home") || url.format({
-    pathname: path.join(__dirname, '/../build/index.html/?home'),
+  const startURL = ("http://localhost:3000/home") || url.format({
+    pathname: path.join(__dirname, '/../build/index.html/home'),
     protocol: 'file:',
     slashes: true
   })
@@ -77,8 +76,3 @@ app.on('activate', function () {
 
 // Used to quit from the render process, invoked after closing the daemon.
 ipcMain.on('exit', (event, args) => { app.exit() })
-
-ipcMain.on('settings', (event, args) => {
-  //create settings window
-  createSettingWindow()
-})

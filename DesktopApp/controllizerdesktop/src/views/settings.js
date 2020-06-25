@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 
 import { Button, MenuItem, Select, FormControl, InputLabel } from '@material-ui/core'
 
-
 export default function Settings(props) {
 
     const [availablePorts, setAvailablePorts] = React.useState([])
@@ -37,7 +36,6 @@ export default function Settings(props) {
 
     return (
         <div>
-
             <FormControl>
                 <InputLabel id="lbl-port">Port</InputLabel>
                 <Select labelId="lbl-port" value={port} onChange={handlePortChange}>
