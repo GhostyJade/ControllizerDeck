@@ -7,10 +7,10 @@ import AppTabs from './components/apptabs'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import { useTracked } from './components/DataContainer';
+import { useTracked } from './components/DataContainer'
 
 function App() {
-  const [state, dispatch] = useTracked();
+  const [state, dispatch] = useTracked()
 
   return (
     <Router>
