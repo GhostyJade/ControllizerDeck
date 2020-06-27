@@ -1,39 +1,25 @@
 import React, { useEffect } from 'react'
-import { Drawer, makeStyles, Button, Toolbar } from '@material-ui/core'
-
-const drawerWidth = 200
-
-const useStyle = makeStyles((theme) => ({
-    drawerPaper: {
-        width: drawerWidth
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0
-    },
-    saveButton: {
-        backgroundColor: '#a800ff',
-        color: '#fff',
-        position: 'absolute',
-        width: 90,
-        alignSelf: 'center',
-        bottom: 12
-    }
-}))
-
+import HardwareDrawer from '../components/hardwaredrawer'
+import axios from 'axios'
+import ConfigurationBar from '../components/configurationbar'
 
 export default function Home(props) {
 
-    const styles = useStyle()
+    const [hardwareComponents, setHardwareComponents] = React.useState({})
+
 
     useEffect(() => {
-        fetch('http://localhost:8080/hardware/').then(data => data.json()).then(e => console.log(e))
+        async function fetchData() {
+            const result = await axios('http://localhost:8080/hardware/')
+            setHardwareComponents(result.data)
+        }
+        fetchData()
     }, [])
 
     return (
-        <Drawer classes={{ paper: styles.drawerPaper }} className={styles.drawer} variant="permanent" anchor="right">
-            <Toolbar />
-            <Button className={styles.saveButton} size="small" variant="contained">Save</Button>
-        </Drawer>
+        <>
+            <ConfigurationBar />
+            <HardwareDrawer data={hardwareComponents} />
+        </>
     )
 }
