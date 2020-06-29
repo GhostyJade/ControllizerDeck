@@ -14,22 +14,22 @@ bool btn1Pressed = false, btn2Pressed = false;
 void loop() {
   if(digitalRead(BTN1)){
     if(!btn1Pressed)
-      Serial.write("[Btn1] Pressed\n");
+      Serial.write("REB0:1\n");
     btn1Pressed = true;
   }else {
     if(btn1Pressed){
       btn1Pressed = false;
-      Serial.write("[Btn1] Released\n");
+      Serial.write("REB0:0\n");
     }
   }
   if(digitalRead(BTN2)){
     if(!btn2Pressed)
-      Serial.write("[Btn2] Pressed\n");
+      Serial.write("REB1:1\n");
     btn2Pressed = true;
   }else{
     if(btn2Pressed) {
       btn2Pressed = false;
-      Serial.write("[Btn2] Released\n");
+      Serial.write("REB1:0\n");
     }
   }
 }
