@@ -31,6 +31,7 @@ namespace ControllizerDeckProject.Net
             RegisterAction(new ActionAvailablePorts());
             RegisterAction(new ActionSetCOMPort());
             RegisterAction(new ActionGetHardwareComponents());
+            RegisterAction(new ActionSetHardwareFunctions());
         }
 
         public static void RegisterAction(ActionBase a)
