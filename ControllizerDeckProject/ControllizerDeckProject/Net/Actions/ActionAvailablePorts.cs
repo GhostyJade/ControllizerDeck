@@ -18,12 +18,20 @@
 
 using ControlizerCore.Serial;
 
+using ControllizerDeckProject.Utils;
+
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ControllizerDeckProject.Net.Actions
 {
+
+    /// <summary>
+    /// Path: /ports/list/
+    /// Method: GET
+    /// 
+    /// This function is used to send a list of COM ports to the client.
+    /// 
+    /// </summary>
     public class ActionAvailablePorts : ActionBase
     {
         public ActionAvailablePorts() : base("AvailablePortList", "/ports/list/", HTTPType.GET)
@@ -33,9 +41,8 @@ namespace ControllizerDeckProject.Net.Actions
         {
             string[] portArray = SerialIO.GetPortNames().ToArray();
 
-            //TODO move this method to a ResponseFactory (or something like that)
             string jsonResponse = "{\"result\":true,\n \"ports\":[";
-            for(int i = 0; i < portArray.Length; i++)
+            for (int i = 0; i < portArray.Length; i++)
             {
                 jsonResponse += $"\"{portArray[i]}\"";
                 if (i != portArray.Length - 1)
@@ -43,16 +50,7 @@ namespace ControllizerDeckProject.Net.Actions
             }
             jsonResponse += "]}";
 
-            byte[] data = Encoding.UTF8.GetBytes(jsonResponse);
-            // Write the response info
-            response.ContentType = "application/json";
-            response.ContentEncoding = Encoding.UTF8;
-            response.ContentLength64 = data.LongLength;
-
-            // Write out to the response stream (asynchronously), then close it
-            Task a = response.OutputStream.WriteAsync(data, 0, data.Length);
-            a.GetAwaiter().GetResult();
-            response.Close();
+            ResponseFactory.GenerateResponse(response, jsonResponse);
         }
     }
 }

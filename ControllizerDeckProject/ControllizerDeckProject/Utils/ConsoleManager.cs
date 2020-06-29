@@ -20,8 +20,15 @@ using System;
 
 namespace ControllizerDeckProject.Utils
 {
+    /// <summary>
+    /// This class provide some console utils (color changing, logging, etc.)
+    /// </summary>
     public static class ConsoleManager
     {
+        /// <summary>
+        /// Log a message changing text's color to red
+        /// </summary>
+        /// <param name="msg">The message string</param>
         public static void LogError(string msg)
         {
             Console.ForegroundColor = ConsoleColor.Red;

@@ -18,7 +18,6 @@
 
 using ControllizerDeckProject.Core;
 using ControllizerDeckProject.Core.Hardware;
-using ControllizerDeckProject.Core.ControllizerActions;
 using ControllizerDeckProject.Net;
 using ControllizerDeckProject.Utils;
 

@@ -19,11 +19,16 @@
 using ControllizerDeckProject.Utils;
 
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ControllizerDeckProject.Net.Actions
 {
+    /// <summary>
+    /// Path: /exit/
+    /// Method: POST
+    /// 
+    /// This function is called to kill the daemon.
+    /// 
+    /// </summary>
     public class ActionExit : ActionBase
     {
         public ActionExit() : base("exit", "/exit/", HTTPType.POST)
@@ -34,19 +39,9 @@ namespace ControllizerDeckProject.Net.Actions
             if (!CoreState.HasCloseRequested)
             {
                 CoreState.HasCloseRequested = true; // TODO i should use this instead of closing the application directly
-                
-                //TODO move this method to a ResponseFactory (or something like that)
-                string jsonResponse = "{\"result\":true}";
-                byte[] data = Encoding.UTF8.GetBytes(jsonResponse);
-                // Write the response info
-                response.ContentType = "application/json";
-                response.ContentEncoding = Encoding.UTF8;
-                response.ContentLength64 = data.LongLength;
 
-                // Write out to the response stream (asynchronously), then close it
-                Task a = response.OutputStream.WriteAsync(data, 0, data.Length);
-                a.GetAwaiter().GetResult();
-                response.Close();
+                string jsonResponse = "{\"result\":true}";
+                ResponseFactory.GenerateResponse(response, jsonResponse);
 
                 CoreState.DisposableElements.ForEach(e => e());
 

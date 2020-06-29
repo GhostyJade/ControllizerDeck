@@ -18,8 +18,14 @@
 
 namespace ControllizerDeckProject.Utils
 {
+    /// <summary>
+    /// The settings class
+    /// </summary>
     public class Settings
     {
+        /// <summary>
+        /// The COM port value
+        /// </summary>
         public string COMPort { get; set; } = string.Empty;
         // public string LocaleName;
     }

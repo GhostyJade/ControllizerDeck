@@ -22,13 +22,17 @@ using ControllizerDeckProject.Utils;
 
 using Newtonsoft.Json.Linq;
 
-using System.IO;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ControllizerDeckProject.Net.Actions
 {
+    /// <summary>
+    /// Path: /ports/
+    /// Method: POST
+    /// 
+    /// This function is called to set the new COM port.
+    /// 
+    /// </summary>
     public class ActionSetCOMPort : ActionBase
     {
         public ActionSetCOMPort() : base("SetCOMPort", "/ports/", HTTPType.POST)
@@ -43,10 +47,7 @@ namespace ControllizerDeckProject.Net.Actions
             }
             if (!request.ContentType.Equals("application/json")) return;//TODO Create exception
             // Get request body
-            Stream body = request.InputStream;
-            Encoding bodyEncoding = request.ContentEncoding;
-            StreamReader reader = new StreamReader(body, bodyEncoding);
-            string jsonBody = reader.ReadToEnd();
+            string jsonBody = ResponseFactory.JsonStringFromRequest(request);
 
             //Parse body and get port value
             JToken t = JToken.Parse(jsonBody);
@@ -59,16 +60,7 @@ namespace ControllizerDeckProject.Net.Actions
             SerialManager.ManagerInstance.Start();
 
             string jsonResponse = "{\"result\":true}";
-            byte[] data = Encoding.UTF8.GetBytes(jsonResponse);
-            // Write the response info
-            response.ContentType = "application/json";
-            response.ContentEncoding = Encoding.UTF8;
-            response.ContentLength64 = data.LongLength;
-
-            // Write out to the response stream (asynchronously), then close it
-            Task a = response.OutputStream.WriteAsync(data, 0, data.Length);
-            a.GetAwaiter().GetResult();
-            response.Close();
+            ResponseFactory.GenerateResponse(response, jsonResponse);
         }
     }
 }

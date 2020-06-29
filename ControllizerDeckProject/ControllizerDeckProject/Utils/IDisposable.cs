@@ -18,8 +18,14 @@
 
 namespace ControllizerDeckProject.Utils
 {
+    /// <summary>
+    /// Implemented when dispose on close needed
+    /// </summary>
     public interface IDisposable
     {
+        /// <summary>
+        /// Called when needed to dispose the component
+        /// </summary>
         void Dispose();
     }
 }

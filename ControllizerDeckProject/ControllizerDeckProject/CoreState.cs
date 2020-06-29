@@ -25,12 +25,25 @@ namespace ControllizerDeckProject
 {
     public static class CoreState
     {
+        /// <summary>
+        /// The application's settings instance
+        /// </summary>
         public static Settings SettingsInstance { get; set; }
 
+        /// <summary>
+        /// Check if exit has been requested
+        /// </summary>
         public static bool HasCloseRequested { get; set; } = false;
         
+        /// <summary>
+        /// Keep track of what must be destroyed when the application closes
+        /// </summary>
         public static List<Action> DisposableElements { get; } = new List<Action>();
 
+        /// <summary>
+        /// Register a disposable object method (the object name must be Dispose)
+        /// </summary>
+        /// <param name="e"></param>
         public static void AddDisposable(Action e) { if (!e.Method.Name.Equals("Dispose")) { ConsoleManager.LogError("Invalid dispose method name " + e.Method.Name); return; } DisposableElements.Add(e); }
     }
 }

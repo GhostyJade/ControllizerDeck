@@ -20,14 +20,31 @@ using System;
 
 namespace ControllizerDeckProject.Utils
 {
+    /// <summary>
+    /// This class provides some useful Math related methods
+    /// </summary>
     public static class MathHelper
     {
-
+        /// <summary>
+        /// Get value from mapped range
+        /// </summary>
+        /// <param name="value">the value to map</param>
+        /// <param name="fromSource">map min source value</param>
+        /// <param name="toSource">map max source value</param>
+        /// <param name="fromTarget">map min target value</param>
+        /// <param name="toTarget">map max target value</param>
+        /// <returns>the mapped value</returns>
         public static decimal MapRange(this decimal value, decimal fromSource, decimal toSource, decimal fromTarget, decimal toTarget)
         {
             return (value - fromSource) / (toSource - fromSource) * (toTarget - fromTarget) + fromTarget;
         }
 
+        /// <summary>
+        /// Convert int to bool
+        /// </summary>
+        /// <param name="value">the int value (0 or 1)</param>
+        /// <returns>the bool representation</returns>
+        /// <exception cref="Exception">if number is invalid</exception>
         public static bool BoolFromInt(int value)
         {
             if (value == 0) return false;

@@ -22,16 +22,23 @@ using ControllizerDeckProject.Utils;
 
 using Newtonsoft.Json.Linq;
 
-using System;
-using System.IO;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ControllizerDeckProject.Net.Actions
 {
+    /// <summary>
+    /// Path: /hardware/functions/
+    /// Method: POST
+    /// 
+    /// This function is called to set an hardware specific action.
+    /// The request must contain a body
+    /// 
+    /// </summary>
     public class ActionSetHardwareFunctions : ActionBase
     {
+        /// <summary>
+        /// Map index with event names
+        /// </summary>
         private enum EventTypeMapping
         {
             None = 0,
@@ -50,11 +57,9 @@ namespace ControllizerDeckProject.Net.Actions
             }
             if (!request.ContentType.Equals("application/json")) return;
 
-            Stream body = request.InputStream;
-            Encoding bodyEncoding = request.ContentEncoding;
-            StreamReader reader = new StreamReader(body, bodyEncoding);
-            string jsonBody = reader.ReadToEnd();
+            string jsonBody = ResponseFactory.JsonStringFromRequest(request);
 
+            //Parse data
             JToken t = JToken.Parse(jsonBody);
             int componentId = (int)t.SelectToken("id");
 
@@ -73,16 +78,7 @@ namespace ControllizerDeckProject.Net.Actions
             }
 
             string jsonResponse = "{\"result\":true}";
-            byte[] data = Encoding.UTF8.GetBytes(jsonResponse);
-            // Write the response info
-            response.ContentType = "application/json";
-            response.ContentEncoding = Encoding.UTF8;
-            response.ContentLength64 = data.LongLength;
-
-            // Write out to the response stream (asynchronously), then close it
-            Task a = response.OutputStream.WriteAsync(data, 0, data.Length);
-            a.GetAwaiter().GetResult();
-            response.Close();
+            ResponseFactory.GenerateResponse(response, jsonResponse);
         }
     }
 }

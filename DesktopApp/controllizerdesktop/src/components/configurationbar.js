@@ -66,6 +66,7 @@ const FileChooser = (props) => {
                 <TextField
                     id="actionName"
                     type="text"
+                    className={props.styles.actionTypeBox}
                     value={props.itemData.name}
                     onChange={e => props.setItemData({ ...props.itemData, name: e.target.value })}
                     label="Action name"
@@ -97,7 +98,7 @@ const FileChooser = (props) => {
 
 export default function ConfigurationBar(props) {
     const styles = useStyle()
-    const [state, dispatch] = useTracked()
+    const [state,] = useTracked()
 
     const [itemData, setItemData] = React.useState({ action: 0, name: '', path: '' })
 

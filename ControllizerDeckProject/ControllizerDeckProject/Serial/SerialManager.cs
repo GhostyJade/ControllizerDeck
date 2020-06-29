@@ -82,6 +82,9 @@ namespace ControlizerCore.Serial
             }
         }
 
+        /// <summary>
+        /// Destroy the Serial instance
+        /// </summary>
         public void Dispose()
         {
             SerialIO.GetInstance().Close();

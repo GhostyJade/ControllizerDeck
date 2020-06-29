@@ -26,25 +26,45 @@ using System;
 
 namespace ControllizerDeckProject.Core
 {
+    /// <summary>
+    /// Provides some methods to trigger input events from Serial communication
+    /// </summary>
     public static class InputDispatcher
     {
         private static HardwareCreator InputEvents { get; set; }
 
+        /// <summary>
+        /// Assign to a PushButton an action
+        /// </summary>
+        /// <param name="id">the PushButton id</param>
+        /// <param name="action">the PushButton new action</param>
         public static void UpdatePushButtonAction(int id, InputActionBase action)
         {
             InputEvents.PushButtons.Find(e => e.Identifier == id).AssociatedAction = action;
         }
 
+        /// <summary>
+        /// Set the hardware representation from an existing object
+        /// </summary>
+        /// <param name="instance"></param>
         public static void RegisterHardware(HardwareCreator instance)
         {
             InputEvents = instance;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>A string containing the hardware description data.</returns>
         public static string ObjectsToJSON()
         {
-            return JsonConvert.SerializeObject(InputEvents,Formatting.Indented);
+            return JsonConvert.SerializeObject(InputEvents, Formatting.Indented);
         }
 
+        /// <summary>
+        /// Perform action based on Serial input
+        /// </summary>
+        /// <param name="msg">The Serial input message</param>
         public static void PerformAction(string msg)
         {
             string[] data = msg.Split(':');

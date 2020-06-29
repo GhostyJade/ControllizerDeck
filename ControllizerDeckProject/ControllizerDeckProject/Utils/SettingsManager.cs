@@ -25,11 +25,25 @@ using System.IO;
 
 namespace ControllizerDeckProject.Utils
 {
+    /// <summary>
+    /// Class used to manage settings data (creation, save, load)
+    /// </summary>
     public static class SettingsManager
     {
+        /// <summary>
+        /// Settings file name
+        /// </summary>
         private const string SettingsFileName = "settings.json";
+        
+        /// <summary>
+        /// 
+        /// </summary>
         private const string SettingsPath = "Data";
 
+        /// <summary>
+        /// Check if settings file exists and create data folder if missing
+        /// </summary>
+        /// <returns><see langword="true"/> if settings were previously saved, false otherwise</returns>
         private static bool CheckSettingsData()
         {
             if (!Directory.Exists(AppContext.BaseDirectory + SettingsPath))
@@ -39,11 +53,18 @@ namespace ControllizerDeckProject.Utils
             return false;
         }
 
+        /// <summary>
+        /// Save settings to file
+        /// </summary>
         public static void SaveSettings()
         {
             SaveSettings(CoreState.SettingsInstance);
         }
 
+        /// <summary>
+        /// Save settings to file
+        /// </summary>
+        /// <param name="s">The settings instance</param>
         private static void SaveSettings(Settings s)
         {
             JsonSerializer serializer = new JsonSerializer();
@@ -54,6 +75,9 @@ namespace ControllizerDeckProject.Utils
             }
         }
 
+        /// <summary>
+        /// Load settings from file and store it's data in the CoreState instance
+        /// </summary>
         public static void LoadSettings()
         {
             if (!CheckSettingsData())

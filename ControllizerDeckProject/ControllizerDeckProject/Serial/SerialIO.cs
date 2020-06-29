@@ -90,11 +90,18 @@ namespace ControlizerCore.Serial
         /// <returns>a string containing the readed line</returns>
         public string Read() => serial.ReadLine();
 
+        /// <summary>
+        /// Write message to the serial port
+        /// </summary>
+        /// <param name="msg">The message string terminated by "\n"</param>
         public void Write(string msg)
         {
             serial.WriteLine(msg);
         }
 
+        /// <summary>
+        /// Close the Serial port instance
+        /// </summary>
         public void Close()
         {
             serial.Close();
