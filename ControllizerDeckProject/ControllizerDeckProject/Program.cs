@@ -23,13 +23,14 @@ using ControllizerDeckProject.Net;
 using ControllizerDeckProject.Utils;
 
 using System.Threading.Tasks;
-using System;
 
 namespace ControllizerDeckProject
 {
     public class Program
     {
+#pragma warning disable IDE0060 // Remove unused parameter
         public static void Main(string[] args)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             SettingsManager.LoadSettings();
 

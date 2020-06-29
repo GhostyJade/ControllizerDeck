@@ -60,7 +60,6 @@ const DataComponent = (props) => {
 }
 
 const FileChooser = (props) => {
-    //actionName lost focus everytime
     return (
         <div>
             <FormControl>
