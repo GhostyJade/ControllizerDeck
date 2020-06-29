@@ -16,10 +16,13 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using ControllizerDeckProject.Core;
+using ControllizerDeckProject.Core.ControllizerActions;
 using ControllizerDeckProject.Utils;
 
 using Newtonsoft.Json.Linq;
 
+using System;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -29,6 +32,12 @@ namespace ControllizerDeckProject.Net.Actions
 {
     public class ActionSetHardwareFunctions : ActionBase
     {
+        private enum EventTypeMapping
+        {
+            None = 0,
+            LaunchApp = 1
+        }
+
         public ActionSetHardwareFunctions() : base("SetHardwareFunctions", "/hardware/functions/", HTTPType.POST)
         { }
 
@@ -47,8 +56,21 @@ namespace ControllizerDeckProject.Net.Actions
             string jsonBody = reader.ReadToEnd();
 
             JToken t = JToken.Parse(jsonBody);
+            int componentId = (int)t.SelectToken("id");
 
-            //do stuff
+            JObject obj = (JObject)t.SelectToken("data");
+            EventTypeMapping eventType = (EventTypeMapping)(int)obj.SelectToken("action");
+            switch (eventType)
+            {
+                case EventTypeMapping.None:
+                    InputDispatcher.UpdatePushButtonAction(componentId, null);
+                    break;
+                case EventTypeMapping.LaunchApp:
+                    string actionName = (string)obj.SelectToken("name");
+                    string appPath = (string)obj.SelectToken("path");
+                    InputDispatcher.UpdatePushButtonAction(componentId, new ActionRunProgram(actionName) { FullAppDirectory = appPath, AppName = actionName });
+                    break;
+            }
 
             string jsonResponse = "{\"result\":true}";
             byte[] data = Encoding.UTF8.GetBytes(jsonResponse);

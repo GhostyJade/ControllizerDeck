@@ -35,9 +35,7 @@ namespace ControllizerDeckProject
             SettingsManager.LoadSettings();
 
             ActionManager.Init();
-            var it = new HardwareCreator();
-            it.PushButtons[0].AssociatedAction = new ActionRunProgram("blender") { FullAppDirectory = @"C:\Program Files\Blender Foundation\Blender 2.83\blender.exe" };
-            InputDispatcher.RegisterHardware(it);
+            InputDispatcher.RegisterHardware(new HardwareCreator());
             HttpServer server = new HttpServer("localhost", 8080);
             Task listen = server.Listen();
             listen.GetAwaiter().GetResult();

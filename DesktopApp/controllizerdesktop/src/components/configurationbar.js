@@ -106,12 +106,12 @@ export default function ConfigurationBar(props) {
     }, [state.selectedItem])
 
     const sendData = () => {
-        if (itemData.action === 0 || itemData.name === '') return;//check path if action number is 1
-            fetch('http://localhost:8080/hardware/functions/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: itemData
-            }).then(response => response.json()).then(e => console.log(e))
+        if (itemData.action === 0 || itemData.name === '') return;//check path if action number is 1, allow 0 to be action reset
+        fetch('http://localhost:8080/hardware/functions/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: state.selectedItem.Identifier, data: itemData })
+        }).then(response => response.json()).then(e => console.log(e))
     }
 
     return (

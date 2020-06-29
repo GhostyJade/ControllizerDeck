@@ -30,6 +30,11 @@ namespace ControllizerDeckProject.Core
     {
         private static HardwareCreator InputEvents { get; set; }
 
+        public static void UpdatePushButtonAction(int id, InputActionBase action)
+        {
+            InputEvents.PushButtons.Find(e => e.Identifier == id).AssociatedAction = action;
+        }
+
         public static void RegisterHardware(HardwareCreator instance)
         {
             InputEvents = instance;
