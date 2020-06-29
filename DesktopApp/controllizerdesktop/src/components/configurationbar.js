@@ -106,7 +106,7 @@ export default function ConfigurationBar(props) {
     }, [state.selectedItem])
 
     const sendData = () => {
-        if (itemData.action === 0 || itemData.name === '') //check path if action number is 1
+        if (itemData.action === 0 || itemData.name === '') return;//check path if action number is 1
             fetch('http://localhost:8080/hardware/functions/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
