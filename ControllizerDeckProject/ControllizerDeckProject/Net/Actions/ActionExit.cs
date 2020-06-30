@@ -47,7 +47,8 @@ namespace ControllizerDeckProject.Net.Actions
 
                 SettingsManager.SaveSettings();
 
-                System.Environment.Exit(0); //TODO also, i have to close every thing that must be closed (serial, httpserver, etc)
+                // System.Environment.Exit(0); //TODO also, i have to close every thing that must be closed (serial, httpserver, etc)
+                //Bug: if I use System.Env.exit, every method after this invocation is not called.
             }
         }
     }

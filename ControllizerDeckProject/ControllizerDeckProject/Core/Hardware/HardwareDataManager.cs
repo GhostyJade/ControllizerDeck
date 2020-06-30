@@ -16,8 +16,10 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using ControllizerDeckProject.Core.ControllizerActions;
 using ControllizerDeckProject.Core.Input;
 
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using System;
@@ -29,27 +31,28 @@ namespace ControllizerDeckProject.Core.Hardware
     /// <summary>
     /// This class load the hardware description file and prepare it's content to be read to the rest of the app
     /// </summary>
-    public class HardwareCreator
+    public class HardwareDataManager
     {
         private const string HardwareDescriptionFile = "Data/Hardware/hardwaredescription.json";
+        private const string ActionDataFile = "Data/Hardware/actionmapping.json";
 
         /// <summary>
         /// A list of PushButtons
         /// </summary>
         public List<PushButton> PushButtons { get; private set; } = new List<PushButton>();
-        
+
         /// <summary>
         /// A list of Rotary Encoders
         /// </summary>
         public List<RotaryEncoder> RotaryEncoders { get; private set; } = new List<RotaryEncoder>();
 
-        //TODO add linear encoders
+        //TODO add linear encoders or set "hasButton" to false.
 
         /// <summary>
         /// Create an Hardware mapping from a raw json string
         /// </summary>
         /// <param name="jsonHardwareData">the hardware json description string</param>
-        public HardwareCreator(string jsonHardwareData)
+        public HardwareDataManager(string jsonHardwareData)
         {
             ParseJson(jsonHardwareData);
         }
@@ -57,7 +60,7 @@ namespace ControllizerDeckProject.Core.Hardware
         /// <summary>
         /// Load an Hardware mapping from file
         /// </summary>
-        public HardwareCreator()
+        public HardwareDataManager()
         {
             ParseJson(LoadFromFile());
         }
@@ -85,6 +88,34 @@ namespace ControllizerDeckProject.Core.Hardware
                 int id = (int)rotEnc[i].SelectToken("id");
                 bool hasButton = (bool)rotEnc[i].SelectToken("hasButton");
                 RotaryEncoders.Add(new RotaryEncoder(id, hasButton));
+            }
+        }
+
+        private class ActionDataMapping
+        {
+            public int id;
+            public InputActionBase action;
+        }
+
+        public void StoreMapping()
+        {
+            List<ActionDataMapping> rawData = new List<ActionDataMapping>();
+            PushButtons.ForEach(e =>
+            {
+                if (e.AssociatedAction != null)
+                    rawData.Add(new ActionDataMapping() { id = e.Identifier, action = e.AssociatedAction });
+            });
+            JArray pushButtons = JArray.FromObject(rawData);
+            JObject obj = new JObject
+            {
+                { "PushButton", pushButtons }
+            };
+            JsonSerializer serializer = new JsonSerializer();
+            using (StreamWriter streamWriter = new StreamWriter(string.Format("{0}/{1}", AppContext.BaseDirectory, ActionDataFile)))
+            using (JsonWriter writer = new JsonTextWriter(streamWriter))
+            {
+                serializer.Formatting = Formatting.Indented;
+                serializer.Serialize(writer, obj);
             }
         }
     }

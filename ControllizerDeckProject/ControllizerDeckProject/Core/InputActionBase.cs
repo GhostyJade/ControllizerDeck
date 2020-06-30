@@ -16,6 +16,8 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using ControllizerDeckProject.Core.ControllizerActions;
+
 namespace ControllizerDeckProject.Core
 {
     /// <summary>
@@ -28,7 +30,12 @@ namespace ControllizerDeckProject.Core
         /// </summary>
         public string Name { get; private set; }
 
-        public InputActionBase(string name) { Name = name; }
+        /// <summary>
+        /// The Action type
+        /// </summary>
+        public EventTypeMapping Type { get; private set; }
+
+        public InputActionBase(string name, EventTypeMapping type) { Name = name; Type = type; }
 
         /// <summary>
         /// Called when the action is initialized

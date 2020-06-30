@@ -36,7 +36,7 @@ namespace ControllizerDeckProject.Core.ControllizerActions
         /// </summary>
         public string FullAppDirectory = "";
 
-        public ActionRunProgram(string actionName) : base(actionName)
+        public ActionRunProgram(string actionName) : base(actionName, EventTypeMapping.LaunchApp)
         { }
 
         public override void Execute()

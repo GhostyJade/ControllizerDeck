@@ -31,7 +31,7 @@ namespace ControllizerDeckProject.Core
     /// </summary>
     public static class InputDispatcher
     {
-        private static HardwareCreator InputEvents { get; set; }
+        private static HardwareDataManager InputEvents { get; set; }
 
         /// <summary>
         /// Assign to a PushButton an action
@@ -47,7 +47,7 @@ namespace ControllizerDeckProject.Core
         /// Set the hardware representation from an existing object
         /// </summary>
         /// <param name="instance"></param>
-        public static void RegisterHardware(HardwareCreator instance)
+        public static void RegisterHardware(HardwareDataManager instance)
         {
             InputEvents = instance;
         }
@@ -94,7 +94,11 @@ namespace ControllizerDeckProject.Core
             {
                 Console.WriteLine(msg);
             }
+        }
 
+        public static void UpdateActionMappingFile()
+        {
+            InputEvents.StoreMapping();
         }
     }
 }

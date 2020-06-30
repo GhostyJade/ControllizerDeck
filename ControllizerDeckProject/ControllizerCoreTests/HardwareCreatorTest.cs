@@ -27,7 +27,7 @@ namespace ControllizerCoreTests
         [TestMethod]
         public void HardwareCreatorCostructor()
         {
-            HardwareCreator creator = new HardwareCreator("{\"PushButton\": [{\"id\": 1},{\"id\": 2}],\"RotaryEncoder\": [{\"id\": 0,\"hasButton\": true}]}");
+            HardwareDataManager creator = new HardwareDataManager("{\"PushButton\": [{\"id\": 1},{\"id\": 2}],\"RotaryEncoder\": [{\"id\": 0,\"hasButton\": true}]}");
             Assert.AreEqual(creator.PushButtons.Count,2);
             Assert.AreEqual(creator.RotaryEncoders.Count, 1);
         }

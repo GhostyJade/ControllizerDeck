@@ -36,14 +36,6 @@ namespace ControllizerDeckProject.Net.Actions
     /// </summary>
     public class ActionSetHardwareFunctions : ActionBase
     {
-        /// <summary>
-        /// Map index with event names
-        /// </summary>
-        private enum EventTypeMapping
-        {
-            None = 0,
-            LaunchApp = 1
-        }
 
         public ActionSetHardwareFunctions() : base("SetHardwareFunctions", "/hardware/functions/", HTTPType.POST)
         { }
@@ -74,6 +66,7 @@ namespace ControllizerDeckProject.Net.Actions
                     string actionName = (string)obj.SelectToken("name");
                     string appPath = (string)obj.SelectToken("path");
                     InputDispatcher.UpdatePushButtonAction(componentId, new ActionRunProgram(actionName) { FullAppDirectory = appPath, AppName = actionName });
+                    InputDispatcher.UpdateActionMappingFile();
                     break;
             }
 
