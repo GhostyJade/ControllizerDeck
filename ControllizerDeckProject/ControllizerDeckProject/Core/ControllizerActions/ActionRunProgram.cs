@@ -21,6 +21,9 @@ using System.Diagnostics;
 
 namespace ControllizerDeckProject.Core.ControllizerActions
 {
+    /// <summary>
+    /// This type of action is called when user want to launch an application (.exe file).
+    /// </summary>
     public class ActionRunProgram : InputActionBase
     {
         /// <summary>

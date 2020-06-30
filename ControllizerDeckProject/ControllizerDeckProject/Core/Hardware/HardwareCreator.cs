@@ -46,14 +46,17 @@ namespace ControllizerDeckProject.Core.Hardware
         //TODO add linear encoders
 
         /// <summary>
-        /// 
+        /// Create an Hardware mapping from a raw json string
         /// </summary>
-        /// <param name="jsonHardwareData"></param>
+        /// <param name="jsonHardwareData">the hardware json description string</param>
         public HardwareCreator(string jsonHardwareData)
         {
             ParseJson(jsonHardwareData);
         }
 
+        /// <summary>
+        /// Load an Hardware mapping from file
+        /// </summary>
         public HardwareCreator()
         {
             ParseJson(LoadFromFile());

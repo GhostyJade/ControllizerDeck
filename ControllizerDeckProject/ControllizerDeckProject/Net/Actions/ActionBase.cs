@@ -20,15 +20,30 @@ using System.Net;
 
 namespace ControllizerDeckProject.Net.Actions
 {
+    /// <summary>
+    /// This class represent an abstracion for an HTTP Action. Every action must implement this class and register itself via <see cref="ActionManager.RegisterAction(ActionBase)"/>
+    /// </summary>
     public abstract class ActionBase
     {
+        /// <summary>
+        /// Specifies the HTTP method required type to execute this action
+        /// </summary>
         public enum HTTPType
         {
             GET,POST
         }
 
+        /// <summary>
+        /// The action name
+        /// </summary>
         public string ActionName { get; private set; }
+        /// <summary>
+        /// The action URI where the frontend execute api calls
+        /// </summary>
         public string ActionURI { get; private set; }
+        /// <summary>
+        /// The action type
+        /// </summary>
         public HTTPType ActionType { get; private set; }
 
         public ActionBase(string name, string uri, HTTPType type)
@@ -38,7 +53,18 @@ namespace ControllizerDeckProject.Net.Actions
             ActionType = type;
         }
 
+        /// <summary>
+        /// Called when a POST request is recieved
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
         public virtual void OnPost(HttpListenerRequest request, HttpListenerResponse response) { }
+
+        /// <summary>
+        /// Called when a GET request is recieved
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="response"></param>
         public virtual void OnGet(HttpListenerRequest request, HttpListenerResponse response) { }
 
     }

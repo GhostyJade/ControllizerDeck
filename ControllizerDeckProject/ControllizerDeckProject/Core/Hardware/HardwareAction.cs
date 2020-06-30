@@ -4,7 +4,7 @@
     {
         // private const 
 
-        public void DispatchFragment(string data)
+        public void DispatchHardwareFragment(string data)
         {
 
         }

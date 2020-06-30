@@ -21,6 +21,9 @@ using System.Collections.Generic;
 
 namespace ControllizerDeckProject.Net
 {
+    /// <summary>
+    /// Util class used to manage HTTP Actions
+    /// </summary>
     public static class ActionManager
     {
         public static Dictionary<string, ActionBase> actions = new Dictionary<string, ActionBase>();
@@ -34,14 +37,22 @@ namespace ControllizerDeckProject.Net
             RegisterAction(new ActionSetHardwareFunctions());
         }
 
+        /// <summary>
+        /// Register an HTTP Action
+        /// </summary>
+        /// <param name="a">the HTTP action instance to register</param>
         public static void RegisterAction(ActionBase a)
         {
             actions.Add(a.ActionURI, a);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>A list of HTTP POST Actions</returns>
         public static List<ActionBase> GetPOSTActions()
         {
-            List<ActionBase> a = new List<ActionBase>(); //I know that this is stupid and impact on performances...but I don't care :3
+            List<ActionBase> a = new List<ActionBase>();
             foreach (ActionBase action in actions.Values)
             {
                 if (action.ActionType == ActionBase.HTTPType.POST)
@@ -50,9 +61,14 @@ namespace ControllizerDeckProject.Net
             return a;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>A list of HTTP GET Actions</returns>
         public static List<ActionBase> GetGETActions()
         {
-            List<ActionBase> a = new List<ActionBase>(); //I know that this is stupid and impact on performances, again...but I don't care :3
+            List<ActionBase> a = new List<ActionBase>();
             foreach (ActionBase action in actions.Values)
             {
                 if (action.ActionType == ActionBase.HTTPType.GET)
