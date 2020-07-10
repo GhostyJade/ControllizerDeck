@@ -1,0 +1,8 @@
+{
+    "PushButton": {
+        "type": "matrix",
+        "identifier": "PB",
+        "size": 6
+    },
+    "RotaryEncoder": []
+}
