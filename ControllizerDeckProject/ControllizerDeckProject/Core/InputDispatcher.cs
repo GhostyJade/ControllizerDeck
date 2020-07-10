@@ -31,6 +31,7 @@ namespace ControllizerDeckProject.Core
     /// </summary>
     public static class InputDispatcher
     {
+        public static bool HasInitializedAsMatrix = false;
         private static HardwareDataManager InputEvents { get; set; }
 
         /// <summary>
@@ -73,10 +74,24 @@ namespace ControllizerDeckProject.Core
             //PushButtonEvent
             if (id.StartsWith(PushButton.PushButtonIdentifier))
             {
-                int btnId = int.Parse(id.Replace(PushButton.PushButtonIdentifier, ""));
-                PushButton btn = InputEvents.PushButtons.Find(e => e.Identifier == btnId);
-                btn.UpdateState(MathHelper.BoolFromInt(int.Parse(state)));
-                Console.WriteLine(btn.Identifier + " " + btn.IsPressed);
+                if (!HasInitializedAsMatrix)
+                {
+                    int btnId = int.Parse(id.Replace(PushButton.PushButtonIdentifier, ""));
+                    PushButton btn = InputEvents.PushButtons.Find(e => e.Identifier == btnId);
+                    btn.UpdateState(MathHelper.BoolFromInt(int.Parse(state)));
+                    Console.WriteLine(btn.Identifier + " " + btn.IsPressed);
+                }
+                else
+                {
+                    int i = 0;
+                    foreach (char c in state.TrimEnd())
+                    {
+                        // Update PushButton's state for each button
+                        PushButton btn = InputEvents.PushButtons.Find(e => e.Identifier == i);
+                        btn.UpdateState(MathHelper.BoolFromChar(c));
+                        i++;
+                    }
+                }
             }
             else if (id.StartsWith(RotaryEncoder.RotaryEncoderIdentifier)) //Encoder events
             {

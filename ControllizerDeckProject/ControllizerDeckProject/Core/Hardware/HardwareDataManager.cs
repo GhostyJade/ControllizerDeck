@@ -16,7 +16,6 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using ControllizerDeckProject.Core.ControllizerActions;
 using ControllizerDeckProject.Core.Input;
 
 using Newtonsoft.Json;
@@ -75,11 +74,35 @@ namespace ControllizerDeckProject.Core.Hardware
         private void ParseJson(string jsonData)
         {
             JToken data = JToken.Parse(jsonData);
-            JArray btn = (JArray)data.SelectToken("PushButton");
-            for (int i = 0; i < btn.Count; i++)
+            JObject pushButtonObj = (JObject)data.SelectToken("PushButton");
+            string type = (string)pushButtonObj.SelectToken("type");
+            string identifier = (string)pushButtonObj.SelectToken("identifier");
+            if (identifier != null)
             {
-                int id = (int)btn[i].SelectToken("id");
-                PushButtons.Add(new PushButton(id));
+                PushButton.UpdateIdentifier(identifier);
+            }
+            //check what type of pushbutton the hardware has
+            if (type == "list")
+            {
+                JArray btn = (JArray)pushButtonObj.SelectToken("buttons");
+                for (int i = 0; i < btn.Count; i++)
+                {
+                    int id = (int)btn[i].SelectToken("id");
+                    PushButtons.Add(new PushButton(id));
+                }
+            }
+            else if (type == "matrix")
+            {
+                InputDispatcher.HasInitializedAsMatrix = true;
+                int count = (int)pushButtonObj.SelectToken("size");
+                for (int i = 0; i < count; i++)
+                {
+                    PushButtons.Add(new PushButton(i));
+                }
+            }
+            else
+            {
+                //log unknown type
             }
 
             JArray rotEnc = (JArray)data.SelectToken("RotaryEncoder");

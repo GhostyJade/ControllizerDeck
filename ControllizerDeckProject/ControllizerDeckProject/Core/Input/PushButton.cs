@@ -33,6 +33,8 @@ namespace ControllizerDeckProject.Core.Input
         /// </summary>
         public bool IsPressed { get; private set; }
 
+        private bool PreviousState { get; set; }
+
         /// <summary>
         /// The push button identifier
         /// </summary>
@@ -52,8 +54,14 @@ namespace ControllizerDeckProject.Core.Input
         public void UpdateState(bool value)
         {
             IsPressed = value;
-            if (IsPressed && AssociatedAction != null)
+
+            if (IsPressed && IsPressed != PreviousState && AssociatedAction != null)
+            {
+                PreviousState = IsPressed;
                 AssociatedAction.Execute();
+            }
+
+            if (!IsPressed) PreviousState = false;
         }
 
         /// <summary>

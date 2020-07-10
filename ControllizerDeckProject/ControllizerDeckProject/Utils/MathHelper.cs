@@ -51,5 +51,18 @@ namespace ControllizerDeckProject.Utils
             else if (value == 1) return true;
             else throw new Exception("Invalid number value");
         }
+
+        /// <summary>
+        /// Convert char to bool
+        /// </summary>
+        /// <param name="value">the char value ('0' or '1')</param>
+        /// <returns>the bool representation</returns>
+        /// <exception cref="Exception">if number is invalid</exception>
+        public static bool BoolFromChar(char value)
+        {
+            if (value == '0') return false;
+            else if (value == '1') return true;
+            else throw new Exception("Invalid number value");
+        }
     }
 }
