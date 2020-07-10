@@ -51,7 +51,7 @@ namespace ControllizerDeckProject.Utils
         {
             byte[] responseData = Encoding.UTF8.GetBytes(data);
             // Write the response info
-            response.ContentType = "application/json";
+            response.ContentType = encoding;
             response.ContentEncoding = Encoding.UTF8;
             response.ContentLength64 = responseData.LongLength;
 
