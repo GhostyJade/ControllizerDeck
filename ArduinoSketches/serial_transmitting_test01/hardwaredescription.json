@@ -1,11 +1,14 @@
 {
-    "PushButton": [
-        {
-            "id": 1
-        },
-        {
-            "id": 2
-        }
-    ],
+    "PushButton": {
+        "type": "list",
+        "buttons": [
+            {
+                "id": 1
+            },
+            {
+                "id": 2
+            }
+        ]
+    },
     "RotaryEncoder": []
 }
