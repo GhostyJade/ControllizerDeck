@@ -8,14 +8,36 @@ const int ST_CP = 3;
 
 const int IN_P = 4;
 
-IOExtension myExt(SH_CP, DS, ST_CP, IN_P); // Make instance and named anything you want (in this example the instance is myExt)
+IOExtension pushButtons(SH_CP, DS, ST_CP, IN_P);
+
+String lastButtonsValue = "";
 
 void setup()
 {
   Serial.begin(9600);
+  lastButtonsValue = readButtons();
 }
+
+#define lowestButtonID 2
+#define highestButtonID 7
 
 void loop()
 {
-  Serial.println(myExt.DigitalRead(2));
+  String currentButtonsValue = readButtons();
+  if (!currentButtonsValue.equals(lastButtonsValue))
+  {
+    Serial.println(currentButtonsValue);
+    lastButtonsValue = currentButtonsValue;
+  }
+}
+
+// Read pushbutton (74HC595) values
+String readButtons()
+{
+  String abc = "";
+  for (int i = lowestButtonID; i < highestButtonID + 1; i++)
+  {
+    abc += pushButtons.DigitalRead(i);
+  }
+  return abc;
 }
