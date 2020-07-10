@@ -34,10 +34,10 @@ void loop()
 // Read pushbutton (74HC595) values
 String readButtons()
 {
-  String abc = "";
+  String values = "PB";
   for (int i = lowestButtonID; i < highestButtonID + 1; i++)
   {
-    abc += pushButtons.DigitalRead(i);
+    values += pushButtons.DigitalRead(i);
   }
-  return abc;
+  return values;
 }

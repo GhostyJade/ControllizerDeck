@@ -26,7 +26,7 @@ namespace ControllizerDeckProject.Core.Input
         /// <summary>
         /// The push button generic identifier
         /// </summary>
-        public const string PushButtonIdentifier = "PB";
+        public static string PushButtonIdentifier { get; private set; } = "PB";
 
         /// <summary>
         /// <see langword="true"/> if pressed, false otherwise
@@ -54,6 +54,15 @@ namespace ControllizerDeckProject.Core.Input
             IsPressed = value;
             if (IsPressed && AssociatedAction != null)
                 AssociatedAction.Execute();
+        }
+
+        /// <summary>
+        /// Update the default identifier (PB) with a new one
+        /// </summary>
+        /// <param name="identifier"></param>
+        public static void UpdateIdentifier(string identifier)
+        {
+            PushButtonIdentifier = identifier;
         }
     }
 }

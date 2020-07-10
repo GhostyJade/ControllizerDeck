@@ -15,7 +15,7 @@ namespace ControllizerDeckProject.Core.Hardware
 
         public HardwareAction(HardwareDataManager descriptorInstance)
         {
-            this.instance = descriptorInstance;
+            instance = descriptorInstance;
             DispatchHardwareFragment();
         }
 
