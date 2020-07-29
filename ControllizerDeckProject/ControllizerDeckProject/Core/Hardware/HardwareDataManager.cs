@@ -47,7 +47,7 @@ namespace ControllizerDeckProject.Core.Hardware
         /// </summary>
         public List<RotaryEncoder> RotaryEncoders { get; private set; } = new List<RotaryEncoder>();
 
-        //TODO add linear encoders or set "hasButton" to false.
+        //TODO add potentiometers
 
         /// <summary>
         /// Create an Hardware mapping from a raw json string

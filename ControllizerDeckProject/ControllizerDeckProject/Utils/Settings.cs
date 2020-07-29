@@ -27,6 +27,15 @@ namespace ControllizerDeckProject.Utils
         /// The COM port value
         /// </summary>
         public string COMPort { get; set; } = string.Empty;
-        // public string LocaleName;
+
+        /// <summary>
+        /// The Local port on which the server listen to
+        /// </summary>
+        public int LocalServerPort { get; set; } = 8080;
+
+        /// <summary>
+        /// The Local address on which the server listen to
+        /// </summary>
+        public string LocalServerAddress { get; set; } = "localhost";
     }
 }

@@ -36,7 +36,6 @@ namespace ControllizerDeckProject.Net.Actions
 
         public override void OnGet(HttpListenerRequest request, HttpListenerResponse response)
         {
-            //TODO move this method to a response factory
             ResponseFactory.GenerateResponse(response, InputDispatcher.ObjectsToJSON());
         }
     }
