@@ -37,7 +37,7 @@ namespace ControllizerDeckProject
             HardwareDataManager hardware = new HardwareDataManager();
             HardwareAction actions = new HardwareAction(hardware);
             InputDispatcher.RegisterHardware(actions.HardwareCreator());
-            HttpServer server = new HttpServer(CoreState.SettingsInstance.LocalServerAddress, CoreState.SettingsInstance.LocalServerPort);
+            HttpServer server = new HttpServer(CoreState.SettingsInstance.LocalServerAddress, CoreState.SettingsInstance.LocalServerPort); //TODO allow to change default parameters
             Task listen = server.Listen();
             listen.GetAwaiter().GetResult();
         }

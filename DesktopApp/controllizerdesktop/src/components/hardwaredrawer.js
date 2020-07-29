@@ -17,7 +17,7 @@ function PushButton({ children, onPress }) {
 
 export default function HardwareDrawer(props) {
 
-    const [state, dispatch] = useTracked()
+    const [, dispatch] = useTracked()
 
     const pushButton = []
     if (Object.keys(props.data).length !== 0) {

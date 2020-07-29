@@ -43,8 +43,16 @@ const useStyle = makeStyles((theme) => ({
 
 const DataComponent = (props) => {
     const { state, styles, itemData, setItemData } = props
-    if (!state.selectedItem)
+    if (!state.selectedItem) {
         return null
+    }
+    if (state.selectedItem.AssociatedAction !== null) {
+        itemData.action = state.selectedItem.AssociatedAction.Type
+        if (state.selectedItem.AssociatedAction.Type === 1) { //action 1 = launch program
+            itemData.name = state.selectedItem.AssociatedAction.AppName
+            itemData.path = state.selectedItem.AssociatedAction.FullAppDirectory
+        }
+    }
     return (
         <div>
             <FormControl className={styles.actionTypeBox}>
