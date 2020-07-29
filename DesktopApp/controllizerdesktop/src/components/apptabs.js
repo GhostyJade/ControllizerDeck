@@ -16,7 +16,7 @@ export default function AppTabs(props) {
             <Tabs centered onChange={props.change} value={props.tab}>
                 <Tab label="Configuration" component={Link} to="/home" />
                 <Tab label="Settings" component={Link} to="/settings" />
-                <Tab label="About" />
+                <Tab label="About" component={Link} to="/about" />
             </Tabs>
         </AppBar>
     )

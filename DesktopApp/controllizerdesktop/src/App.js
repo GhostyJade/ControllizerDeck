@@ -8,6 +8,7 @@ import AppTabs from './components/apptabs'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import { useTracked } from './components/DataContainer'
+import About from './views/about'
 
 function App() {
   const [state, dispatch] = useTracked()
@@ -18,6 +19,7 @@ function App() {
       <Switch>
         <Route path='/home' component={Home} />
         <Route path='/settings' component={Settings} />
+        <Route path='/about' component={About}/>
       </Switch>
     </Router>
   )
