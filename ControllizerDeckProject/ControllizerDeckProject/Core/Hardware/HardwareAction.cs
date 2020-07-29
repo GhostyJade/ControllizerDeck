@@ -33,7 +33,7 @@ namespace ControllizerDeckProject.Core.Hardware
                     switch ((int)action.SelectToken("Type"))
                     {
                         case (int)EventTypeMapping.LaunchApp:
-                            instance.PushButtons.Find(e=>e.Identifier==id).AssociatedAction = action.ToObject<ActionRunProgram>();
+                            instance.PushButtons.Find(e => e.Identifier == id).AssociatedAction = action.ToObject<ActionRunProgram>();
                             break;
                     }
             }

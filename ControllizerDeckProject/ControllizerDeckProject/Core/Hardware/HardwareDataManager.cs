@@ -35,6 +35,8 @@ namespace ControllizerDeckProject.Core.Hardware
         private const string HardwareDescriptionFile = "Data/Hardware/hardwaredescription.json";
         private const string ActionDataFile = "Data/Hardware/actionmapping.json";
 
+        public string MatrixLayout { get; private set; }
+
         /// <summary>
         /// A list of PushButtons
         /// </summary>
@@ -94,6 +96,7 @@ namespace ControllizerDeckProject.Core.Hardware
             else if (type == "matrix")
             {
                 InputDispatcher.HasInitializedAsMatrix = true;
+                MatrixLayout = (string)pushButtonObj.SelectToken("layout");
                 int count = (int)pushButtonObj.SelectToken("size");
                 for (int i = 0; i < count; i++)
                 {

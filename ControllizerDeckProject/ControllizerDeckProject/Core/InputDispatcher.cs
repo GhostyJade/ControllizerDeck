@@ -31,8 +31,8 @@ namespace ControllizerDeckProject.Core
     /// </summary>
     public static class InputDispatcher
     {
-        public static bool HasInitializedAsMatrix = false;
-        private static HardwareDataManager InputEvents { get; set; }
+        public static bool HasInitializedAsMatrix = false;//TODO move to initialization data (static class)
+        private static HardwareDataManager InputEvents { get; set; } 
 
         /// <summary>
         /// Assign to a PushButton an action
