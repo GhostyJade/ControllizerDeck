@@ -1,58 +1,19 @@
 import React, { useEffect } from 'react'
-import { Drawer, Toolbar, Button, makeStyles, Select, FormControl, InputLabel, MenuItem, InputAdornment, IconButton, Input, TextField } from '@material-ui/core'
+import { Drawer, Toolbar, Button, Select, FormControl, InputLabel, MenuItem, InputAdornment, IconButton, Input, TextField } from '@material-ui/core'
 import { useTracked } from './DataContainer'
 
 import { Add as AddIcon } from '@material-ui/icons'
 
-const drawerWidth = 230
-
-const useStyle = makeStyles((theme) => ({
-    drawerPaper: {
-        width: drawerWidth
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0
-    },
-    saveButton: {
-        backgroundColor: '#a800ff',
-        color: '#fff',
-        position: 'absolute',
-        width: 90,
-        alignSelf: 'center',
-        bottom: 12
-    },
-    actionTypeBox: {
-        width: 190,
-        left: 20,
-        right: 20
-    },
-    executableBox: {
-        width: 190,
-        left: 20,
-        right: 20
-    },
-    iconContainer: {
-        padding: 4
-    },
-    addIcon: {
-        color: '#000',
-        fontSize: 18,
-    }
-}))
+import { ConfigurationBarStyles } from '../utils/styles'
 
 const DataComponent = (props) => {
-    const { state, styles, itemData, setItemData } = props
+    const styles = ConfigurationBarStyles()
+    const { state, itemData, setItemData } = props
+
     if (!state.selectedItem) {
         return null
     }
-    if (state.selectedItem.AssociatedAction !== null) {
-        itemData.action = state.selectedItem.AssociatedAction.Type
-        if (state.selectedItem.AssociatedAction.Type === 1) { //action 1 = launch program
-            itemData.name = state.selectedItem.AssociatedAction.AppName
-            itemData.path = state.selectedItem.AssociatedAction.FullAppDirectory
-        }
-    }
+
     return (
         <div>
             <FormControl className={styles.actionTypeBox}>
@@ -62,25 +23,33 @@ const DataComponent = (props) => {
                     <MenuItem value={1}>Launch Program</MenuItem>
                 </Select>
             </FormControl>
-            {itemData.action === 1 ? <FileChooser state={state} styles={styles} itemData={itemData} setItemData={setItemData} /> : null}
+            {itemData.action === 1 ? <FileChooser state={state} itemData={itemData} setItemData={setItemData} /> : null}
         </div>
     )
 }
 
 const FileChooser = (props) => {
+    const styles = ConfigurationBarStyles()
+
+    const ShowFilePicker = () => {
+        const dialogResult = window.dialog.showOpenDialogSync({ properties: ['openFile'] })
+        if (dialogResult) //It's length is 1 if the user has selected an app. It contains the app path at index 0
+            props.setItemData({ ...props.itemData, path: dialogResult[0] })
+    }
+
     return (
         <div>
             <FormControl>
                 <TextField
                     id="actionName"
                     type="text"
-                    className={props.styles.actionTypeBox}
+                    className={styles.actionTypeBox}
                     value={props.itemData.name}
                     onChange={e => props.setItemData({ ...props.itemData, name: e.target.value })}
                     label="Action name"
                 />
             </FormControl>
-            <FormControl className={props.styles.executableBox}>
+            <FormControl className={styles.executableBox}>
                 <InputLabel htmlFor="file">Executable location</InputLabel>
                 <Input
                     id="file"
@@ -89,11 +58,11 @@ const FileChooser = (props) => {
                     onChange={e => props.setItemData({ ...props.itemData, path: e.target.value })}
                     endAdornment={
                         <InputAdornment position="end">
-                            <IconButton className={props.styles.iconContainer}
+                            <IconButton className={styles.iconContainer}
                                 aria-label="pick app file"
-                                onClick={() => (props.setItemData({ ...props.itemData, path: window.dialog.showOpenDialogSync({ properties: ['openFile'] })[0] }))}
+                                onClick={ShowFilePicker}
                             >
-                                <AddIcon className={props.styles.addIcon} />
+                                <AddIcon className={styles.addIcon} />
                             </IconButton>
                         </InputAdornment>
                     }
@@ -105,17 +74,25 @@ const FileChooser = (props) => {
 
 
 export default function ConfigurationBar(props) {
-    const styles = useStyle()
     const [state,] = useTracked()
+    const styles = ConfigurationBarStyles()
 
     const [itemData, setItemData] = React.useState({ action: 0, name: '', path: '' })
 
     useEffect(() => {
-        setItemData({ action: 0, name: '', path: '' })
+        if (state.selectedItem != null)
+            if (state.selectedItem.AssociatedAction !== null) {
+                if (state.selectedItem.AssociatedAction.Type === 1) { //action 1 = launch program           
+                    setItemData({ action: state.selectedItem.AssociatedAction.Type, name: state.selectedItem.AssociatedAction.AppName, path: state.selectedItem.AssociatedAction.FullAppDirectory })
+                }
+            } else {
+                setItemData({ action: 0, name: '', path: '' })
+            }
+
     }, [state.selectedItem])
 
     const sendData = () => {
-        if (itemData.action === 0 || itemData.name === '') return;//check path if action number is 1, allow 0 to be action reset
+        if (itemData.action === 0 || itemData.name === '' || itemData.path === '') return;//check path if action number is 1, allow 0 to be action reset
         fetch('http://localhost:8080/hardware/functions/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -126,7 +103,7 @@ export default function ConfigurationBar(props) {
     return (
         <Drawer classes={{ paper: styles.drawerPaper }} className={styles.drawer} variant="permanent" anchor="right">
             <Toolbar />
-            <DataComponent state={state} styles={styles} itemData={itemData} setItemData={setItemData} />
+            <DataComponent state={state} itemData={itemData} setItemData={setItemData} />
             <Button className={styles.saveButton} size="small" variant="contained" onClick={sendData}>Save</Button>
         </Drawer>
     )
