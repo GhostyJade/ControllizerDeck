@@ -36,6 +36,14 @@ const ConfigurationBarStyles = makeStyles((theme) => ({
     }
 }))
 
+const HardwareDrawerStyles = {
+    container: {
+        marginTop: 34,
+        marginLeft: 34,
+    }
+}
+
 export {
-    ConfigurationBarStyles
+    ConfigurationBarStyles,
+    HardwareDrawerStyles
 }

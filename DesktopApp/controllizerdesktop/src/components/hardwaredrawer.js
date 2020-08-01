@@ -3,15 +3,17 @@ import React, { useEffect } from 'react'
 import PushButtonIcon from '../resources/pushbutton.png'
 import { useTracked } from './DataContainer'
 
-function Row({ children }) {
+import { HardwareDrawerStyles } from '../utils/styles'
+
+function Row({ children, style }) {
     return (
-        <div style={{ height: 128 }}>
+        <div style={style}>
             {children}
         </div>
     )
 }
 
-function PushButton({ children, onPress }) {
+function PushButton({ onPress }) {
     return (<img onClick={onPress} src={PushButtonIcon} alt="btnIcon"></img>)
 }
 
@@ -45,7 +47,7 @@ export default function HardwareDrawer(props) {
 
     for (let y = 0; y < h; y++) {
         rows.push(
-            <Row key={y}>
+            <Row style={{ height: 128 }} key={y}>
                 {pushButtons.slice(prevValue, currValue).map((e, i) => {
                     return <PushButton setter={props.setter} onPress={() => performPressAction(e)} key={"btn" + i} />
                 })}
@@ -55,6 +57,10 @@ export default function HardwareDrawer(props) {
         currValue += w
     }
 
-    return rows
+    return (
+        <div style={HardwareDrawerStyles.container}>
+            {rows}
+        </div>
+    )
 
 }
