@@ -16,40 +16,35 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using System;
-using System.Diagnostics;
+using ControllizerDeckProject.Core.ControllizerActions;
 
-namespace ControllizerDeckProject.Core.ControllizerActions
+namespace ControllizerDeckProject.Core
 {
     /// <summary>
-    /// This type of action is called when user want to launch an application (.exe file).
+    /// This class provide an abstraction for implementing an action for an hardware digital input
     /// </summary>
-    public class ActionRunProgram : DigitalInputActionBase
+    public abstract class DigitalInputActionBase
     {
         /// <summary>
-        /// The applicaton name
+        /// The Action name
         /// </summary>
-        public string AppName = "";
-        
+        public string Name { get; private set; }
+
         /// <summary>
-        /// The application path
+        /// The Action type
         /// </summary>
-        public string FullAppDirectory = "";
+        public EventTypeMapping Type { get; private set; }
 
-        public ActionRunProgram(string actionName) : base(actionName, EventTypeMapping.LaunchApp)
-        { }
+        public DigitalInputActionBase(string name, EventTypeMapping type) { Name = name; Type = type; }
 
-        public override void Execute()
-        {
-            var process = Process.Start(FullAppDirectory);
-            if (process == null)
-            {
-                // throw error
-                Console.WriteLine("Failed to start {0}", AppName);
-            }
-        }
+        /// <summary>
+        /// Called when the action is initialized
+        /// </summary>
+        public abstract void Init();
 
-        public override void Init()
-        { }
+        /// <summary>
+        /// Called when the action is executed
+        /// </summary>
+        public abstract void Execute();
     }
 }

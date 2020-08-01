@@ -130,7 +130,7 @@ namespace ControllizerDeckProject.Core.Hardware
         private class ActionDataMapping
         {
             public int id;
-            public InputActionBase action;
+            public DigitalInputActionBase action;
         }
 
         public void StoreMapping()

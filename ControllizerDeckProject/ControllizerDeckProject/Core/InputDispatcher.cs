@@ -39,7 +39,7 @@ namespace ControllizerDeckProject.Core
         /// </summary>
         /// <param name="id">the PushButton id</param>
         /// <param name="action">the PushButton new action</param>
-        public static void UpdatePushButtonAction(int id, InputActionBase action)
+        public static void UpdatePushButtonAction(int id, DigitalInputActionBase action)
         {
             InputEvents.PushButtons.Find(e => e.Identifier == id).AssociatedAction = action;
         }

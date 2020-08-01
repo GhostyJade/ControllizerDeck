@@ -40,7 +40,7 @@ namespace ControllizerDeckProject.Core.Input
         /// </summary>
         public int Identifier { get; private set; }
 
-        public InputActionBase AssociatedAction;
+        public DigitalInputActionBase AssociatedAction;
 
         public PushButton(int id)
         {

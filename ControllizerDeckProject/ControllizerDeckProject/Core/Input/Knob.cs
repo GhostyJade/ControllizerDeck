@@ -29,7 +29,7 @@ namespace ControllizerDeckProject.Core.Input
         public int MinValue { get; private set; }
         public int MaxValue { get; private set; }
 
-        public InputActionBase action;
+        public DigitalInputActionBase action;
 
         public Knob(int id, int min = 0, int max = 1023)
         {
