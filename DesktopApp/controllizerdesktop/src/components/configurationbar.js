@@ -6,6 +6,31 @@ import { Add as AddIcon } from '@material-ui/icons'
 
 import { ConfigurationBarStyles } from '../utils/styles'
 
+const ParametersComponent = ({ itemData, setItemData, state }) => {
+    const id = itemData.action
+    if (id === 1)
+        return <FileChooser state={state} itemData={itemData} setItemData={setItemData} />
+    if (id === 2)
+        return <WebsitePicker state={state} itemData={itemData} setItemData={setItemData} />
+    return null
+}
+
+const WebsitePicker = (props) => {
+    const styles = ConfigurationBarStyles()
+    return (
+        <FormControl className={styles.actionTypeBox}>
+            <TextField
+                id="websiteUri"
+                type="text"
+                className={styles.actionTypeBox}
+                value={props.itemData.websiteUri}
+                onChange={e => props.setItemData({ ...props.itemData, websiteUri: e.target.value })}
+                label="Website URL"
+            />
+        </FormControl>
+    )
+}
+
 const DataComponent = (props) => {
     const styles = ConfigurationBarStyles()
     const { state, itemData, setItemData } = props
@@ -21,9 +46,10 @@ const DataComponent = (props) => {
                 <Select value={itemData.action} onChange={(e) => setItemData({ ...itemData, action: e.target.value })} labelId="actionType">
                     <MenuItem value={0}>None</MenuItem>
                     <MenuItem value={1}>Launch Program</MenuItem>
+                    <MenuItem value={2}>Open Website</MenuItem>
                 </Select>
             </FormControl>
-            {itemData.action === 1 ? <FileChooser state={state} itemData={itemData} setItemData={setItemData} /> : null}
+            <ParametersComponent state={state} itemData={itemData} setItemData={setItemData} />
         </div>
     )
 }
@@ -77,7 +103,7 @@ export default function ConfigurationBar(props) {
     const [state,] = useTracked()
     const styles = ConfigurationBarStyles()
 
-    const [itemData, setItemData] = React.useState({ action: 0, name: '', path: '' })
+    const [itemData, setItemData] = React.useState({ action: 0, name: '', path: '', websiteUri: '' })
 
     useEffect(() => {
         if (state.selectedItem != null)
@@ -92,7 +118,8 @@ export default function ConfigurationBar(props) {
     }, [state.selectedItem])
 
     const sendData = () => {
-        if (itemData.action === 0 || itemData.name === '' || itemData.path === '') return;// TODO check path if action number is 1, allow 0 to be action reset
+        //if (itemData.action === 0 || itemData.name === '' || itemData.path === '') return;// TODO check path if action number is 1, allow 0 to be action reset
+        //TODO add checks
         fetch('http://localhost:8080/hardware/functions/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

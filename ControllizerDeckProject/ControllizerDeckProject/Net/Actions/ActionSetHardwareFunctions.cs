@@ -66,9 +66,13 @@ namespace ControllizerDeckProject.Net.Actions
                     string actionName = (string)obj.SelectToken("name");
                     string appPath = (string)obj.SelectToken("path");
                     InputDispatcher.UpdatePushButtonAction(componentId, new ActionRunProgram(actionName) { FullAppDirectory = appPath, AppName = actionName });
-                    InputDispatcher.UpdateActionMappingFile();
+                    break;
+                case EventTypeMapping.OpenWebsite:
+                    string uri = (string)obj.SelectToken("websiteUri");
+                    InputDispatcher.UpdatePushButtonAction(componentId, new ActionOpenWebsite(uri));
                     break;
             }
+            InputDispatcher.UpdateActionMappingFile();
 
             string jsonResponse = "{\"result\":true}";
             ResponseFactory.GenerateResponse(response, jsonResponse);

@@ -6,6 +6,8 @@
     public enum EventTypeMapping
     {
         None = 0,
-        LaunchApp = 1
+        LaunchApp = 1,
+        OpenWebsite = 2,
+        SendDiscordMessage = 3
     }
 }
