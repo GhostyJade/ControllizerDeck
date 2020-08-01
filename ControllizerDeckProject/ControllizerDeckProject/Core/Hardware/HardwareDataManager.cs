@@ -47,7 +47,10 @@ namespace ControllizerDeckProject.Core.Hardware
         /// </summary>
         public List<RotaryEncoder> RotaryEncoders { get; private set; } = new List<RotaryEncoder>();
 
-        //TODO add potentiometers
+        /// <summary>
+        /// A list of Knobs
+        /// </summary>
+        public List<Knob> Knobs { get; private set; } = new List<Knob>();
 
         /// <summary>
         /// Create an Hardware mapping from a raw json string
@@ -114,6 +117,13 @@ namespace ControllizerDeckProject.Core.Hardware
                 int id = (int)rotEnc[i].SelectToken("id");
                 bool hasButton = (bool)rotEnc[i].SelectToken("hasButton");
                 RotaryEncoders.Add(new RotaryEncoder(id, hasButton));
+            }
+
+            JObject knobsObj = (JObject)data.SelectToken("Knobs");
+            int knobsCount = (int)knobsObj.SelectToken("size");
+            for(int i = 0; i < knobsCount; i++)
+            {
+                Knobs.Add(new Knob(i));
             }
         }
 
