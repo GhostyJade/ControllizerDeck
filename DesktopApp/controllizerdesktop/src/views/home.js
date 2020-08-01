@@ -17,7 +17,7 @@ export default function Home(props) {
                 setHardwareComponents({ ...hardwareComponents, success: false })
         }
         fetchData()
-    }, [hardwareComponents])
+    }, [])
 
     return (
         !hardwareComponents.success ? <MissingBackend /> :

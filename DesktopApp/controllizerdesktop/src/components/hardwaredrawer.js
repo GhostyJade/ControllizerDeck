@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import PushButtonIcon from '../resources/pushbutton.png'
 import { useTracked } from './DataContainer'
 
 function Row({ children }) {
     return (
-        <div>
+        <div style={{ height: 128 }}>
             {children}
         </div>
     )
@@ -18,23 +18,43 @@ function PushButton({ children, onPress }) {
 export default function HardwareDrawer(props) {
 
     const [, dispatch] = useTracked()
+    const [pushButtons, setPushButtons] = React.useState([])
 
-    const pushButton = []
-    if (Object.keys(props.data).length !== 0) {
-        for (const button of props.data.PushButtons) {
-            pushButton.push(button)
+    useEffect(() => {
+        const pushButton = []
+        if (Object.keys(props.data).length !== 0) {
+            for (const button of props.data.PushButtons) {
+                pushButton.push(button)
+            }
         }
-    }
+        setPushButtons(pushButton)
+    }, [props.data])
 
     const performPressAction = (data) => {
         dispatch({ type: 'item', item: data })
     }
 
-    return (
-        <Row>
-            {pushButton.map((e, i) => {
-                return <PushButton setter={props.setter} onPress={() => performPressAction(e)} key={"btn" + i} />
-            })}
-        </Row>
-    )
+    const dimensions = props.data.MatrixLayout.split("x")
+    const w = parseInt(dimensions[0])
+    const h = parseInt(dimensions[1])
+
+    let rows = []
+
+    let prevValue = 0
+    let currValue = w
+
+    for (let y = 0; y < h; y++) {
+        rows.push(
+            <Row key={y}>
+                {pushButtons.slice(prevValue, currValue).map((e, i) => {
+                    return <PushButton setter={props.setter} onPress={() => performPressAction(e)} key={"btn" + i} />
+                })}
+            </Row>
+        )
+        prevValue = currValue
+        currValue += w
+    }
+
+    return rows
+
 }
