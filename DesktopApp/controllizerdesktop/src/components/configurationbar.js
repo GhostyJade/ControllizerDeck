@@ -18,16 +18,28 @@ const ParametersComponent = ({ itemData, setItemData, state }) => {
 const WebsitePicker = (props) => {
     const styles = ConfigurationBarStyles()
     return (
-        <FormControl className={styles.actionTypeBox}>
-            <TextField
-                id="websiteUri"
-                type="text"
-                className={styles.actionTypeBox}
-                value={props.itemData.websiteUri}
-                onChange={e => props.setItemData({ ...props.itemData, websiteUri: e.target.value })}
-                label="Website URL"
-            />
-        </FormControl>
+        <div>
+            <FormControl>
+                <TextField
+                    id="websiteName"
+                    type="text"
+                    className={styles.actionTypeBox}
+                    value={props.itemData.name}
+                    onChange={e => props.setItemData({ ...props.itemData, name: e.target.value })}
+                    label="Website Name"
+                />
+            </FormControl>
+            <FormControl>
+                <TextField
+                    id="websiteUri"
+                    type="text"
+                    className={styles.actionTypeBox}
+                    value={props.itemData.websiteUri}
+                    onChange={e => props.setItemData({ ...props.itemData, websiteUri: e.target.value })}
+                    label="Website URL"
+                />
+            </FormControl>
+        </div>
     )
 }
 
@@ -110,9 +122,11 @@ export default function ConfigurationBar(props) {
             if (state.selectedItem.AssociatedAction !== null) {
                 if (state.selectedItem.AssociatedAction.Type === 1) { //action 1 = launch program           
                     setItemData({ action: state.selectedItem.AssociatedAction.Type, name: state.selectedItem.AssociatedAction.AppName, path: state.selectedItem.AssociatedAction.FullAppDirectory })
+                } else if (state.selectedItem.AssociatedAction.Type === 2) { //action 2 = open website
+                    setItemData({ action: state.selectedItem.AssociatedAction.Type, name: state.selectedItem.AssociatedAction.WebsiteName, websiteUri: state.selectedItem.AssociatedAction.WebsiteUri })
                 }
             } else {
-                setItemData({ action: 0, name: '', path: '' })
+                setItemData({ action: 0, name: '', path: '', websiteUri: '' })
             }
 
     }, [state.selectedItem])

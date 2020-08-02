@@ -53,6 +53,9 @@ namespace ControllizerDeckProject.Core.Hardware
                         case (int)EventTypeMapping.LaunchApp:
                             instance.PushButtons.Find(e => e.Identifier == id).AssociatedAction = action.ToObject<ActionRunProgram>();
                             break;
+                        case (int)EventTypeMapping.OpenWebsite:
+                            instance.PushButtons.Find(e => e.Identifier == id).AssociatedAction = action.ToObject<ActionOpenWebsite>();
+                            break;
                     }
             }
         }

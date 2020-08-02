@@ -69,7 +69,10 @@ namespace ControllizerDeckProject.Net.Actions
                     break;
                 case EventTypeMapping.OpenWebsite:
                     string uri = (string)obj.SelectToken("websiteUri");
-                    InputDispatcher.UpdatePushButtonAction(componentId, new ActionOpenWebsite(uri));
+                    string name = (string)obj.SelectToken("name");
+                    var action = new ActionOpenWebsite() { WebsiteName = name, WebsiteUri = uri };
+                    action.Init();
+                    InputDispatcher.UpdatePushButtonAction(componentId, action);
                     break;
             }
             InputDispatcher.UpdateActionMappingFile();
