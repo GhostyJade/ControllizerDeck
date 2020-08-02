@@ -61,6 +61,7 @@ namespace ControllizerDeckProject.Net
             if (!request.HttpMethod.Equals("POST"))
                 return;
             //handle right request position ("/exit/" || "/add/" etc)
+            //TODO check if action exists
             ActionManager.GetPOSTActions().Find(e => e.ActionURI.Equals(request.RawUrl)).OnPost(request, response);
         }
         private void HandleGETRequest(HttpListenerRequest request, HttpListenerResponse response)
