@@ -75,6 +75,11 @@ const WelcomeScreenStylesOne = makeStyles(theme => ({
 }))
 
 const WelcomeScreenStylesTwo = makeStyles(theme => ({
+    titleText: {
+        paddingTop: 32,
+        paddingBottom: 32,
+        color: 'white'
+    },
     pageTwoContainer: {
         backgroundColor: '#303030',
         textAlign: 'center',
@@ -102,18 +107,14 @@ const WelcomeScreenStylesTwo = makeStyles(theme => ({
         position: 'absolute',
         bottom: 12
     },
+    dataContainer: {
+        padding: 24
+    },
 }))
-
-const TextFieldDarkTheme = {
-    root: {
-        color: 'white'
-    }
-}
 
 export {
     ConfigurationBarStyles,
     HardwareDrawerStyles,
     WelcomeScreenStylesOne,
-    WelcomeScreenStylesTwo,
-    TextFieldDarkTheme
+    WelcomeScreenStylesTwo
 }
