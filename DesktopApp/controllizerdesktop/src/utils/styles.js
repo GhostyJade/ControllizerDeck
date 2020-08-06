@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core'
+import { makeStyles, createMuiTheme } from '@material-ui/core'
 
 const drawerWidth = 230
 
@@ -78,7 +78,8 @@ const WelcomeScreenStylesTwo = makeStyles(theme => ({
     titleText: {
         paddingTop: 32,
         paddingBottom: 32,
-        color: 'white'
+        color: 'white',
+        fontSize: 20
     },
     pageTwoContainer: {
         backgroundColor: '#303030',
@@ -112,9 +113,61 @@ const WelcomeScreenStylesTwo = makeStyles(theme => ({
     },
 }))
 
+const PageButtonPropertiesStyle = makeStyles(theme => ({
+    pageContainer: {
+        backgroundColor: '#303030',
+        height: '100%'
+    },
+    btnPrev: {
+        color: 'white',
+        borderRadius: '50%',
+        backgroundColor: '#696b6e',
+        left: 12,
+        float: "left"
+    },
+    btnNext: {
+        color: 'white',
+        borderRadius: '50%',
+        backgroundColor: '#696b6e',
+        right: 12,
+        float: "right"
+    },
+    buttonContainer: {
+        width: '100%',
+        position: 'absolute',
+        bottom: 12
+    },
+    title: {
+        color: 'white'
+    },
+    text: {
+        color: 'white'
+    },
+}))
+
+const CustomInputField = createMuiTheme({
+    overrides: {
+        MuiInputBase: {
+            formControl: {
+                color: 'white',
+            },
+        },
+        MuiFormLabel: {
+            root: {
+                color: 'white',
+                "&$focused": {
+                    color: '#a800ff'
+                }
+            },
+        }
+    }
+})
+
 export {
     ConfigurationBarStyles,
     HardwareDrawerStyles,
     WelcomeScreenStylesOne,
-    WelcomeScreenStylesTwo
+    WelcomeScreenStylesTwo,
+    PageButtonPropertiesStyle,
+    CustomInputField
 }
