@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
-        zIndex: theme.zIndex.drawer + 1
+        zIndex: theme.zIndex.drawer + 1,
+        backgroundColor:'#a800ff'
     }
 }))
 
