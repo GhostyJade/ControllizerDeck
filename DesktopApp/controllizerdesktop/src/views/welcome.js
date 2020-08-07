@@ -2,19 +2,25 @@ import React from 'react'
 import PageOne from './welcome/pageone'
 import PageTwo from './welcome/pagetwo'
 import PageButtonProperties from './welcome/buttonconfig'
+import PageRotaryEncoders from './welcome/encoderconfig'
 
-export default function Welcome() {
-    const [state, setState] = React.useState({ page: 2, btnCount: 0, encodersCount: 0, knobsCount: 0, buttons: { matrix: false, w: 0, h: 0 } })
-    const [buttons, setButtons] = React.useState({ matrix: false })
+export default function Welcome(props) {
+    const [state, setState] = React.useState({ page: 0, btnCount: 0, encodersCount: 0, knobsCount: 0, buttons: { matrix: false, w: 0, h: 0 } })
+
+    const endConfiguration = (status) =>{
+        props.welcomeStateUpdater({...props.originalState, status: status})
+    }
 
     if (state.page === 0)
         return <PageOne state={state} update={setState} />
     else if (state.page === 1)
         return <PageTwo state={state} update={setState} />
     else if (state.page === 2)
-        return <PageButtonProperties buttons={buttons} setButtonsData={setButtons} state={state} update={setState} />
+        return <PageButtonProperties state={state} update={setState} />
+    else if (state.page === 4)
+        return <PageRotaryEncoders state={state} update={setState} end={endConfiguration}/>
     return (
-        <div>
+        <div style={{color: 'white'}}>
             Error. Configuration page '{state.page}' is not valid.
         </div>
     )

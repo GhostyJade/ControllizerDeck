@@ -7,10 +7,6 @@ import { ArrowLeft, ArrowRight } from '@material-ui/icons'
 const PageTwo = (props) => {
     const styles = WelcomeScreenStylesTwo()
 
-    const sendData = () => {
-        fetch('http://localhost:8080/welcome/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(props.state) })
-    }
-
     return (
         <ThemeProvider theme={CustomInputField}>
             <div className={styles.pageTwoContainer}>
