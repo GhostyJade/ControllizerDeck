@@ -137,12 +137,33 @@ const PageButtonPropertiesStyle = makeStyles(theme => ({
         position: 'absolute',
         bottom: 12
     },
+    textContainer: {
+        textAlign: 'center',
+        paddingBottom: 22
+    },
     title: {
+        paddingTop: 18,
+        fontSize: 20,
         color: 'white'
     },
     text: {
+        color: '#acacac'
+    },
+    inputText: {
+        color: 'white',
+        padding: 10,
+        paddingTop: 20
+    },
+    inputContainer: {
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    checkboxContainer: {
         color: 'white'
     },
+    checkbox: {
+        color: 'white'
+    }
 }))
 
 const CustomInputField = createMuiTheme({
@@ -163,11 +184,38 @@ const CustomInputField = createMuiTheme({
     }
 })
 
+const PageEncodersPropertiesStyle = makeStyles(theme => ({
+    pageContainer: {
+        backgroundColor: '#303030',
+        height: '100%'
+    },
+    btnPrev: {
+        color: 'white',
+        borderRadius: '50%',
+        backgroundColor: '#696b6e',
+        left: 12,
+        float: "left"
+    },
+    btnNext: {
+        color: 'white',
+        borderRadius: '50%',
+        backgroundColor: '#696b6e',
+        right: 12,
+        float: "right"
+    },
+    buttonContainer: {
+        width: '100%',
+        position: 'absolute',
+        bottom: 12
+    },
+}))
+
 export {
     ConfigurationBarStyles,
     HardwareDrawerStyles,
     WelcomeScreenStylesOne,
     WelcomeScreenStylesTwo,
     PageButtonPropertiesStyle,
-    CustomInputField
+    CustomInputField,
+    PageEncodersPropertiesStyle
 }
