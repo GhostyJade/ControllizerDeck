@@ -11,28 +11,31 @@ import { useTracked } from './components/DataContainer'
 import About from './views/about'
 import Welcome from './views/welcome'
 
+function fetchWelcomeData() {
+    return fetch("http://localhost:8080/firstlaunch/")
+        .then(result => result.json())
+}
+
+const fetchPromise = fetchWelcomeData()
+
 function App() {
     const [welcome, setWelcome] = React.useState({ error: false, status: false })
 
+    const setWelcomeEnded = () => {
+        setWelcome({ ...welcome, status: false })
+    }
+
     useEffect(() => {
-        const fetchWelcomeData = async () => {
-            await fetch("http://localhost:8080/firstlaunch/")
-                .then(result => result.json())
-                .then(response => {
-                    if (response.status)
-                        setWelcome({ error: false, status: true })
-                })
-                .catch(e => {
-                    setWelcome({ error: true, status: false })
-                })
-        }
-        fetchWelcomeData()
+        fetchPromise.then(response => {
+            setWelcome({ error: false, status: response.status })
+        }).catch(e => {
+            setWelcome({ error: true, status: false })
+        })
     }, [])
 
     const [state, dispatch] = useTracked()
-
-    if (!welcome.status)
-        return <Welcome />
+    if (welcome.status)
+        return <Welcome end={setWelcomeEnded} />
 
     return (
         <Router>

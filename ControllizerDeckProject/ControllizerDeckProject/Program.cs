@@ -16,8 +16,6 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using ControllizerDeckProject.Core;
-using ControllizerDeckProject.Core.Hardware;
 using ControllizerDeckProject.Net;
 using ControllizerDeckProject.Utils;
 
@@ -34,9 +32,16 @@ namespace ControllizerDeckProject
             SettingsManager.LoadSettings();
 
             ActionManager.Init();
-            HardwareDataManager hardware = new HardwareDataManager();
-            HardwareAction actions = new HardwareAction(hardware);
-            InputDispatcher.RegisterHardware(actions.HardwareCreator());
+
+            if (!CoreState.SettingsInstance.IsFirstLaunch)
+            {
+                HardwareHelper.InitHardware();
+            }
+            else
+            {
+                ConsoleManager.LogInfo("Waiting for hardware initialization.");
+            }
+
             HttpServer server = new HttpServer(CoreState.SettingsInstance.LocalServerAddress, CoreState.SettingsInstance.LocalServerPort); //TODO allow to change default parameters
             Task listen = server.Listen();
             listen.GetAwaiter().GetResult();

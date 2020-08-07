@@ -26,13 +26,24 @@ namespace ControllizerDeckProject.Utils
     public static class ConsoleManager
     {
         /// <summary>
-        /// Log a message changing text's color to red
+        /// Log an error message changing text's color to red
         /// </summary>
         /// <param name="msg">The message string</param>
         public static void LogError(string msg)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(msg);
+            Console.WriteLine("Error: {0}", msg);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        /// <summary>
+        /// Log a info message changing text's color to blue
+        /// </summary>
+        /// <param name="msg">The message string</param>
+        public static void LogInfo(string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Info: {0}", msg);
             Console.ForegroundColor = ConsoleColor.White;
         }
     }

@@ -24,6 +24,7 @@ export default function HardwareDrawer(props) {
 
     useEffect(() => {
         const pushButton = []
+        if (!props.data) return
         if (Object.keys(props.data).length !== 0) {
             for (const button of props.data.PushButtons) {
                 pushButton.push(button)
@@ -35,26 +36,27 @@ export default function HardwareDrawer(props) {
     const performPressAction = (data) => {
         dispatch({ type: 'item', item: data })
     }
-
-    const dimensions = props.data.MatrixLayout.split("x")
-    const w = parseInt(dimensions[0])
-    const h = parseInt(dimensions[1])
-
     let rows = []
 
-    let prevValue = 0
-    let currValue = w
+    if (props.data) {
+        const dimensions = props.data.MatrixLayout.split("x")
+        const w = parseInt(dimensions[0])
+        const h = parseInt(dimensions[1])
 
-    for (let y = 0; y < h; y++) {
-        rows.push(
-            <Row style={{ height: 128 }} key={y}>
-                {pushButtons.slice(prevValue, currValue).map((e, i) => {
-                    return <PushButton setter={props.setter} onPress={() => performPressAction(e)} key={"btn" + i} />
-                })}
-            </Row>
-        )
-        prevValue = currValue
-        currValue += w
+        let prevValue = 0
+        let currValue = w
+
+        for (let y = 0; y < h; y++) {
+            rows.push(
+                <Row style={{ height: 128 }} key={y}>
+                    {pushButtons.slice(prevValue, currValue).map((e, i) => {
+                        return <PushButton setter={props.setter} onPress={() => performPressAction(e)} key={"btn" + i} />
+                    })}
+                </Row>
+            )
+            prevValue = currValue
+            currValue += w
+        }
     }
 
     return (

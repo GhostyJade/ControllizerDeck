@@ -7,10 +7,6 @@ import PageRotaryEncoders from './welcome/encoderconfig'
 export default function Welcome(props) {
     const [state, setState] = React.useState({ page: 0, btnCount: 0, encodersCount: 0, knobsCount: 0, buttons: { matrix: false, w: 0, h: 0 } })
 
-    const endConfiguration = (status) =>{
-        props.welcomeStateUpdater({...props.originalState, status: status})
-    }
-
     if (state.page === 0)
         return <PageOne state={state} update={setState} />
     else if (state.page === 1)
@@ -18,10 +14,12 @@ export default function Welcome(props) {
     else if (state.page === 2)
         return <PageButtonProperties state={state} update={setState} />
     else if (state.page === 4)
-        return <PageRotaryEncoders state={state} update={setState} end={endConfiguration}/>
+        return <PageRotaryEncoders state={state} update={setState} end={props.end} />
     return (
         <div style={{color: 'white'}}>
             Error. Configuration page '{state.page}' is not valid.
         </div>
     )
 }
+
+//TODO set com port

@@ -34,7 +34,7 @@ namespace ControllizerDeckProject.Utils
         /// Settings file name
         /// </summary>
         private const string SettingsFileName = "settings.json";
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -67,7 +67,7 @@ namespace ControllizerDeckProject.Utils
         /// <param name="s">The settings instance</param>
         private static void SaveSettings(Settings s)
         {
-            JsonSerializer serializer = new JsonSerializer();
+            JsonSerializer serializer = new JsonSerializer() { Formatting = Formatting.Indented };
             using (StreamWriter streamWriter = new StreamWriter(string.Format("{0}/{1}/{2}", AppContext.BaseDirectory, SettingsPath, SettingsFileName)))
             using (JsonWriter writer = new JsonTextWriter(streamWriter))
             {

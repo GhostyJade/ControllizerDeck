@@ -17,7 +17,7 @@ function PageRotaryEncoders(props) {
                 body: JSON.stringify(props.state)
             })
             .then(response => response.json())
-            .then(result => props.end(result.result))
+            .then(result => { if (result.result) props.end() })
     }
 
     return (

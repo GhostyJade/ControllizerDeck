@@ -37,5 +37,7 @@ namespace ControllizerDeckProject.Utils
         /// The Local address on which the server listen to
         /// </summary>
         public string LocalServerAddress { get; set; } = "localhost";
+
+        public bool IsFirstLaunch { get; set; } = true;
     }
 }
