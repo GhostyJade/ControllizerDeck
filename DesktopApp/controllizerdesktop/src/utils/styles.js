@@ -1,4 +1,4 @@
-import { makeStyles, createMuiTheme } from '@material-ui/core'
+import { makeStyles, createMuiTheme, withStyles } from '@material-ui/core'
 
 const drawerWidth = 230
 
@@ -210,6 +210,46 @@ const PageEncodersPropertiesStyle = makeStyles(theme => ({
     },
 }))
 
+const PageSerialConfigStyles = makeStyles(theme => ({
+    pageContainer: {
+        backgroundColor: '#303030',
+        height: '100%'
+    },
+    btnPrev: {
+        color: 'white',
+        borderRadius: '50%',
+        backgroundColor: '#696b6e',
+        left: 12,
+        float: "left"
+    },
+    btnNext: {
+        color: 'white',
+        borderRadius: '50%',
+        backgroundColor: '#696b6e',
+        right: 12,
+        float: "right"
+    },
+    buttonContainer: {
+        width: '100%',
+        position: 'absolute',
+        bottom: 12
+    },
+    helperText: {
+        textAlign: 'center'
+    },
+    title: {
+        color: 'white',
+        fontSize: 20
+    },
+    text: {
+        color: '#acacac',
+        fontSize: 16
+    },
+    inputPortBarContainer: {
+        minWidth: 150
+    },
+}))
+
 export {
     ConfigurationBarStyles,
     HardwareDrawerStyles,
@@ -217,5 +257,6 @@ export {
     WelcomeScreenStylesTwo,
     PageButtonPropertiesStyle,
     CustomInputField,
-    PageEncodersPropertiesStyle
+    PageEncodersPropertiesStyle,
+    PageSerialConfigStyles,
 }

@@ -46,5 +46,4 @@ export default function Settings(props) {
             <Button onClick={handleSetPort}>Set port</Button>
         </div>
     )
-    //TODO add welcome configuration screen
 }

@@ -79,10 +79,13 @@ namespace ControllizerDeckProject.Net.Actions
                     }
                 };
 
+                string ComPort = (string)body.SelectToken("serialPort");
+
                 success = true;
                 HardwareHelper.StoreConfiguration(description);
                 HardwareHelper.InitHardware();
                 CoreState.SettingsInstance.IsFirstLaunch = false;
+                CoreState.SettingsInstance.COMPort = ComPort;
                 SettingsManager.SaveSettings();
             }
             catch

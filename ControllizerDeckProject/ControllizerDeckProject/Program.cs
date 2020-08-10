@@ -29,8 +29,8 @@ namespace ControllizerDeckProject
         public static void Main(string[] args)
 #pragma warning restore IDE0060 // Remove unused parameter
         {
+            //TODO add debug modifiers to tweak stuff while debugging
             SettingsManager.LoadSettings();
-
             ActionManager.Init();
 
             if (!CoreState.SettingsInstance.IsFirstLaunch)

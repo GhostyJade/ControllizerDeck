@@ -21,6 +21,9 @@ namespace ControllizerDeckProject.Utils
 
         public static void StoreConfiguration(HardwareDescription description)
         {
+            if (!Directory.Exists(AppContext.BaseDirectory + "Data/Hardware/"))
+                Directory.CreateDirectory(AppContext.BaseDirectory + "Data/Hardware/");
+
             JsonSerializer serializer = new JsonSerializer() { Formatting = Formatting.Indented };
             using (StreamWriter writer = new StreamWriter(string.Format("{0}/{1}", AppContext.BaseDirectory, HardwareDescriptionFile)))
             using (JsonWriter jsonWriter = new JsonTextWriter(writer))

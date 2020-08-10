@@ -58,11 +58,11 @@ const PageButtonProperties = (props) => {
                     </div>
                 </div>
                 <div className={styles.buttonContainer}>
-                    <IconButton className={styles.btnPrev} onClick={() => props.update({ ...props.state, page: 1 })}>
+                    <IconButton className={styles.btnPrev} onClick={() => props.update({ ...props.state, page: 2 })}>
                         <ArrowLeft />
                     </IconButton>
                     <IconButton className={styles.btnNext} onClick={() => {
-                        props.update({ ...props.state, page: 4 })
+                        props.update({ ...props.state, page: 5 })
                     }}>
                         <ArrowRight />
                     </IconButton>

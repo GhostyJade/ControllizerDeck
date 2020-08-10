@@ -26,7 +26,7 @@ function PageRotaryEncoders(props) {
                 Rotary encoders settings (TODO)
             </div>
             <div className={styles.buttonContainer}>
-                <IconButton className={styles.btnPrev} onClick={() => props.update({ ...props.state, page: 2 })}>
+                <IconButton className={styles.btnPrev} onClick={() => props.update({ ...props.state, page: 3 })}>
                     <ArrowLeft />
                 </IconButton>
                 <IconButton className={styles.btnNext} onClick={() => {
