@@ -53,6 +53,8 @@ namespace ControllizerDeckProject.Core.Input
         /// <param name="value">The new button state</param>
         public void UpdateState(bool value)
         {
+            if (IsPressed == value) return;
+            
             IsPressed = value;
 
             if (IsPressed && IsPressed != PreviousState && AssociatedAction != null)

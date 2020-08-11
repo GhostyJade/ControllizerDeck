@@ -31,8 +31,7 @@ namespace ControllizerDeckProject.Core
     /// </summary>
     public static class InputDispatcher
     {
-        
-        private static HardwareData InputDataMapping { get; set; } 
+        private static HardwareData InputDataMapping { get; set; }
 
         /// <summary>
         /// Assign to a PushButton an action
@@ -68,10 +67,12 @@ namespace ControllizerDeckProject.Core
         /// <param name="msg">The Serial input message</param>
         public static void PerformAction(string msg)
         {
+            if (msg == "") return;
+
             string[] data = msg.Split(':');
             string id = data[0];
             string state = data[1];
-            //PushButtonEvent
+            //PushButtonEvents
             if (id.StartsWith(PushButton.PushButtonIdentifier))
             {
                 id.Replace(PushButton.PushButtonIdentifier, "");
@@ -87,7 +88,7 @@ namespace ControllizerDeckProject.Core
                     int i = 0;
                     foreach (char c in state.TrimEnd())
                     {
-                        // Update PushButton's state for each button
+                        // Update PushButton's state for each button:
                         PushButton btn = InputDataMapping.PushButtons.Find(e => e.Identifier == i);
                         btn.UpdateState(MathHelper.BoolFromChar(c));
                         i++;
