@@ -31,8 +31,8 @@ namespace ControllizerDeckProject.Core
     /// </summary>
     public static class InputDispatcher
     {
-        public static bool HasInitializedAsMatrix = false;//TODO move to initialization data (static class)
-        private static HardwareDataManager InputEvents { get; set; } 
+        
+        private static HardwareData InputDataMapping { get; set; } 
 
         /// <summary>
         /// Assign to a PushButton an action
@@ -41,16 +41,16 @@ namespace ControllizerDeckProject.Core
         /// <param name="action">the PushButton new action</param>
         public static void UpdatePushButtonAction(int id, DigitalInputActionBase action)
         {
-            InputEvents.PushButtons.Find(e => e.Identifier == id).AssociatedAction = action;
+            InputDataMapping.PushButtons.Find(e => e.Identifier == id).AssociatedAction = action;
         }
 
         /// <summary>
         /// Set the hardware representation from an existing object
         /// </summary>
         /// <param name="instance"></param>
-        public static void RegisterHardware(HardwareDataManager instance)
+        public static void RegisterHardware(HardwareData instance)
         {
-            InputEvents = instance;
+            InputDataMapping = instance;
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace ControllizerDeckProject.Core
         /// <returns>A string containing the hardware description data.</returns>
         public static string ObjectsToJSON()
         {
-            return JsonConvert.SerializeObject(InputEvents, Formatting.Indented);
+            return JsonConvert.SerializeObject(InputDataMapping, Formatting.Indented);
         }
 
         /// <summary>
@@ -75,10 +75,10 @@ namespace ControllizerDeckProject.Core
             if (id.StartsWith(PushButton.PushButtonIdentifier))
             {
                 id.Replace(PushButton.PushButtonIdentifier, "");
-                if (!HasInitializedAsMatrix)
+                if (!InputDataMapping.HasInitializedAsMatrix)
                 {
                     int btnId = int.Parse(id);
-                    PushButton btn = InputEvents.PushButtons.Find(e => e.Identifier == btnId);
+                    PushButton btn = InputDataMapping.PushButtons.Find(e => e.Identifier == btnId);
                     btn.UpdateState(MathHelper.BoolFromInt(int.Parse(state)));
                     Console.WriteLine(btn.Identifier + " " + btn.IsPressed);
                 }
@@ -88,7 +88,7 @@ namespace ControllizerDeckProject.Core
                     foreach (char c in state.TrimEnd())
                     {
                         // Update PushButton's state for each button
-                        PushButton btn = InputEvents.PushButtons.Find(e => e.Identifier == i);
+                        PushButton btn = InputDataMapping.PushButtons.Find(e => e.Identifier == i);
                         btn.UpdateState(MathHelper.BoolFromChar(c));
                         i++;
                     }
@@ -97,13 +97,13 @@ namespace ControllizerDeckProject.Core
             else if (id.StartsWith(RotaryEncoder.RotaryEncoderIdentifier)) //Encoder events
             {
                 int encId = int.Parse(id.Replace(RotaryEncoder.RotaryEncoderIdentifier, ""));
-                RotaryEncoder enc = InputEvents.RotaryEncoders.Find(e => e.ComponentIdentifier == encId);
+                RotaryEncoder enc = InputDataMapping.RotaryEncoders.Find(e => e.ComponentIdentifier == encId);
                 enc.UpdateValue(long.Parse(state));
             }
             else if (id.StartsWith(RotaryEncoder.RotaryEncoderButtonIdentifier))
             {
                 int encId = int.Parse(id.Replace(RotaryEncoder.RotaryEncoderButtonIdentifier, ""));
-                RotaryEncoder enc = InputEvents.RotaryEncoders.Find(e => e.ComponentIdentifier == encId);
+                RotaryEncoder enc = InputDataMapping.RotaryEncoders.Find(e => e.ComponentIdentifier == encId);
                 enc.UpdateButtonState(MathHelper.BoolFromInt(int.Parse(state)));
             }
             else
@@ -114,7 +114,7 @@ namespace ControllizerDeckProject.Core
 
         public static void UpdateActionMappingFile()
         {
-            InputEvents.StoreMapping();
+            HardwareDataManager.StoreMapping(InputDataMapping);
         }
     }
 }

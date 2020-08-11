@@ -16,8 +16,6 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using Newtonsoft.Json.Linq;
-
 using System.Collections.Generic;
 
 namespace ControllizerDeckProject.Core.Hardware
@@ -79,18 +77,5 @@ namespace ControllizerDeckProject.Core.Hardware
         public ButtonsData btnData;
         public KnobsData knbData;
         public EncodersData encData;
-
-        public JObject Serialize()
-        {
-            JObject container = new JObject();
-            JObject btns = JObject.FromObject(btnData);
-            container.Add("PushButton", btns);
-            JArray encoders = new JArray();
-            encData.encoders.ForEach(e => encoders.Add(new JObject(e)));
-            container.Add("RotaryEncoder", encoders);
-            JObject knobs = JObject.FromObject(knbData);
-            container.Add("Knobs", knobs);
-            return container;
-        }
     }
 }

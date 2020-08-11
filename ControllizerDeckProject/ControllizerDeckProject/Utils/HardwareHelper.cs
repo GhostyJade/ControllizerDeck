@@ -14,7 +14,7 @@ namespace ControllizerDeckProject.Utils
 
         public static void InitHardware()
         {
-            HardwareDataManager hardware = new HardwareDataManager();
+            HardwareData hardware = HardwareDataManager.LoadData();
             HardwareAction actions = new HardwareAction(hardware);
             InputDispatcher.RegisterHardware(actions.HardwareCreator());
         }
@@ -28,7 +28,7 @@ namespace ControllizerDeckProject.Utils
             using (StreamWriter writer = new StreamWriter(string.Format("{0}/{1}", AppContext.BaseDirectory, HardwareDescriptionFile)))
             using (JsonWriter jsonWriter = new JsonTextWriter(writer))
             {
-                serializer.Serialize(jsonWriter, description.Serialize());
+                serializer.Serialize(jsonWriter, HardwareDataManager.Serialize(description));
             }
         }
     }

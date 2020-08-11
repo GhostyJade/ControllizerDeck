@@ -30,101 +30,16 @@ namespace ControllizerDeckProject.Core.Hardware
     /// <summary>
     /// This class load the hardware description file and prepare it's content to be read to the rest of the app
     /// </summary>
-    public class HardwareDataManager
+    public static class HardwareDataManager
     {
         private const string HardwareDescriptionFile = "Data/Hardware/hardwaredescription.json";
         private const string ActionDataFile = "Data/Hardware/actionmapping.json";
 
-        public string MatrixLayout { get; private set; }
-
-        /// <summary>
-        /// A list of PushButtons
-        /// </summary>
-        public List<PushButton> PushButtons { get; private set; } = new List<PushButton>();
-
-        /// <summary>
-        /// A list of Rotary Encoders
-        /// </summary>
-        public List<RotaryEncoder> RotaryEncoders { get; private set; } = new List<RotaryEncoder>();
-
-        /// <summary>
-        /// A list of Knobs
-        /// </summary>
-        public List<Knob> Knobs { get; private set; } = new List<Knob>();
-
-        /// <summary>
-        /// Create an Hardware mapping from a raw json string
-        /// </summary>
-        /// <param name="jsonHardwareData">the hardware json description string</param>
-        public HardwareDataManager(string jsonHardwareData)
-        {
-            ParseJson(jsonHardwareData);
-        }
-
-        /// <summary>
-        /// Load an Hardware mapping from file
-        /// </summary>
-        public HardwareDataManager()
-        {
-            ParseJson(LoadFromFile());
-        }
-
-        private string LoadFromFile()
+        private static string LoadFromFile()
         {
             if (!File.Exists(AppContext.BaseDirectory + HardwareDescriptionFile))
                 throw new FileNotFoundException(HardwareDescriptionFile);
             return File.ReadAllText(AppContext.BaseDirectory + HardwareDescriptionFile);
-        }
-
-        private void ParseJson(string jsonData)
-        {
-            JToken data = JToken.Parse(jsonData);
-            JObject pushButtonObj = (JObject)data.SelectToken("PushButton");
-            string type = (string)pushButtonObj.SelectToken("type");
-            string identifier = (string)pushButtonObj.SelectToken("identifier");
-            if (identifier != null)
-            {
-                PushButton.UpdateIdentifier(identifier);
-            }
-            //check what type of pushbutton the hardware has
-            if (type == "list")
-            {
-                JArray btn = (JArray)pushButtonObj.SelectToken("buttons");
-                for (int i = 0; i < btn.Count; i++)
-                {
-                    int id = (int)btn[i].SelectToken("id");
-                    PushButtons.Add(new PushButton(id));
-                }
-            }
-            else if (type == "matrix")
-            {
-                InputDispatcher.HasInitializedAsMatrix = true;
-                MatrixLayout = (string)pushButtonObj.SelectToken("layout");
-                int count = (int)pushButtonObj.SelectToken("size");
-                for (int i = 0; i < count; i++)
-                {
-                    PushButtons.Add(new PushButton(i));
-                }
-            }
-            else
-            {
-                //log unknown type
-            }
-
-            JArray rotEnc = (JArray)data.SelectToken("RotaryEncoder");
-            for (int i = 0; i < rotEnc.Count; i++)
-            {
-                int id = (int)rotEnc[i].SelectToken("id");
-                bool hasButton = (bool)rotEnc[i].SelectToken("hasButton");
-                RotaryEncoders.Add(new RotaryEncoder(id, hasButton));
-            }
-
-            JObject knobsObj = (JObject)data.SelectToken("Knobs");
-            int knobsCount = (int)knobsObj.SelectToken("size");
-            for(int i = 0; i < knobsCount; i++)
-            {
-                Knobs.Add(new Knob(i));
-            }
         }
 
         private class ActionDataMapping
@@ -133,10 +48,10 @@ namespace ControllizerDeckProject.Core.Hardware
             public DigitalInputActionBase action;
         }
 
-        public void StoreMapping()
+        public static void StoreMapping(HardwareData inputDataMapping)
         {
             List<ActionDataMapping> rawData = new List<ActionDataMapping>();
-            PushButtons.ForEach(e =>
+            inputDataMapping.PushButtons.ForEach(e =>
             {
                 if (e.AssociatedAction != null)
                     rawData.Add(new ActionDataMapping() { id = e.Identifier, action = e.AssociatedAction });
@@ -153,6 +68,93 @@ namespace ControllizerDeckProject.Core.Hardware
                 serializer.Formatting = Formatting.Indented;
                 serializer.Serialize(writer, obj);
             }
+        }
+
+        /// <summary>
+        /// Load an Hardware mapping from file
+        /// </summary>
+        public static HardwareData LoadData()
+        {
+            return LoadData(LoadFromFile());
+        }
+
+        /// <summary>
+        /// Create an Hardware mapping from a raw json string
+        /// </summary>
+        /// <param name="jsonHardwareData">the hardware json description string</param>
+        public static HardwareData LoadData(string jsonData)
+        {
+            HardwareData d = new HardwareData();
+
+            JToken data = JToken.Parse(jsonData);
+            JObject pushButtonObj = (JObject)data.SelectToken("PushButton");
+            string type = (string)pushButtonObj.SelectToken("type");
+            string identifier = (string)pushButtonObj.SelectToken("identifier");
+            if (identifier != null)
+            {
+                PushButton.UpdateIdentifier(identifier);
+            }
+            //check what type of pushbutton the hardware has
+            if (type == "list")
+            {
+                JArray btn = (JArray)pushButtonObj.SelectToken("buttons");
+                for (int i = 0; i < btn.Count; i++)
+                {
+                    int id = (int)btn[i].SelectToken("id");
+                    d.PushButtons.Add(new PushButton(id));
+                }
+            }
+            else if (type == "matrix")
+            {
+                d.HasInitializedAsMatrix = true;
+                d.MatrixLayout = (string)pushButtonObj.SelectToken("layout");
+                int count = (int)pushButtonObj.SelectToken("size");
+                for (int i = 0; i < count; i++)
+                {
+                    d.PushButtons.Add(new PushButton(i));
+                }
+            }
+            else
+            {
+                //log unknown type
+            }
+
+            JArray rotEnc = (JArray)data.SelectToken("RotaryEncoder");
+            for (int i = 0; i < rotEnc.Count; i++)
+            {
+                int id = (int)rotEnc[i].SelectToken("id");
+                bool hasButton = (bool)rotEnc[i].SelectToken("hasButton");
+                d.RotaryEncoders.Add(new RotaryEncoder(id, hasButton));
+            }
+
+            JObject knobsObj = (JObject)data.SelectToken("Knobs");
+            int knobsCount = (int)knobsObj.SelectToken("size");
+            for (int i = 0; i < knobsCount; i++)
+            {
+                d.Knobs.Add(new Knob(i));
+            }
+
+            return d;
+        }
+
+        public static JObject Serialize(HardwareDescription d)
+        {
+            JObject container = new JObject();
+            JObject btns = JObject.FromObject(d.btnData);
+            container.Add("PushButton", btns);
+            JArray encoders = new JArray();
+            d.encData.encoders.ForEach(e => encoders.Add(new JObject(e)));
+            container.Add("RotaryEncoder", encoders);
+            JObject knobs = JObject.FromObject(d.knbData);
+            container.Add("Knobs", knobs);
+            return container;
+        }
+
+        public static HardwareDescription Deserialize()
+        {
+            using JsonReader reader = new JsonTextReader(File.OpenText("Data/Hardware/hardwaredescription.json"));
+            JsonSerializer serializer = new JsonSerializer();
+            return serializer.Deserialize<HardwareDescription>(reader);
         }
     }
 }
