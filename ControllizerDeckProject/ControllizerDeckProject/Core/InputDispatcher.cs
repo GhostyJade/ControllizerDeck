@@ -74,9 +74,10 @@ namespace ControllizerDeckProject.Core
             //PushButtonEvent
             if (id.StartsWith(PushButton.PushButtonIdentifier))
             {
+                id.Replace(PushButton.PushButtonIdentifier, "");
                 if (!HasInitializedAsMatrix)
                 {
-                    int btnId = int.Parse(id.Replace(PushButton.PushButtonIdentifier, ""));
+                    int btnId = int.Parse(id);
                     PushButton btn = InputEvents.PushButtons.Find(e => e.Identifier == btnId);
                     btn.UpdateState(MathHelper.BoolFromInt(int.Parse(state)));
                     Console.WriteLine(btn.Identifier + " " + btn.IsPressed);
