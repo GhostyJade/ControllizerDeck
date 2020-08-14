@@ -1,12 +1,23 @@
  version: 2.1
-
- orbs:
-  win: circleci/windows@2.2.0
-
+ 
  jobs:
    build:
-     executor: win/default     
+       executors:
+           - docker:
+               - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+           - working_directory: ControllizerDeckProject/
+       filter:
+           branches:
+               only: master
     
      steps:
        - checkout
-       - run: dotnet build
+       - run: 
+           name: Restore pkgs
+           command: dotnet restore
+       - run:
+           name: Build
+           command: dotnet build
+       - run:
+           name: Test
+           command: dotnet test 
