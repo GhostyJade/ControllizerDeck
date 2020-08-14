@@ -11,7 +11,7 @@ jobs:
         executor: default
         steps:
             - checkout
-            - run: dotnet test ControllizerCoreTests
+            - run: dotnet test
             #- run: 
             #    name: Restore pkgs
             #    command: dotnet restore
