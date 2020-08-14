@@ -25,7 +25,7 @@ jobs:
 workflows:
   default:
     jobs:
-      - build
-    filter:
-      branches:
-          only: master
+      - build:
+        filter:
+          branches:
+              only: master
