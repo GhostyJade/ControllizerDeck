@@ -9,12 +9,12 @@ executors:
 jobs:
     build:
         executor: default
-        steps:
-            - checkout
-            - run: dotnet test
         filter:
           branches:
               only: master
+        steps:
+            - checkout
+            - run: dotnet test
             #- run: 
             #    name: Restore pkgs
             #    command: dotnet restore
