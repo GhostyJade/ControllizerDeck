@@ -10,10 +10,10 @@ jobs:
     build:
         executor: default
         steps:
-            - checkout
-            - run: dotnet test ControllizerDeckProject/ControllizerDeckProject.sln
             - persist_to_workspace:
                 root: /test_results
+            - checkout
+            - run: dotnet test ControllizerDeckProject/ControllizerDeckProject.sln
             #- run: 
             #    command: mkdir -p test-results
             - store_test_results:
