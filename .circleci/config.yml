@@ -4,6 +4,8 @@ executors:
   default:
     docker:
     - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+    - persist_to_workspace:
+        root: /test_results
     
 jobs:
     build:
@@ -11,8 +13,8 @@ jobs:
         steps:
             - checkout
             - run: dotnet test ControllizerDeckProject/ControllizerDeckProject.sln
-            - run: 
-                command: mkdir -p test-results
+            #- run: 
+            #    command: mkdir -p test-results
             - store_test_results:
                 path: test-results
 workflows:
