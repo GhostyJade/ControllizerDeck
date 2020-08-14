@@ -11,6 +11,8 @@ jobs:
         steps:
             - checkout
             - run: dotnet test ControllizerDeckProject/ControllizerDeckProject.sln
+            - run: 
+                command: mkdir test-results
             - store_test_results:
                 path: test-results
 workflows:
