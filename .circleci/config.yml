@@ -11,16 +11,8 @@ jobs:
         steps:
             - checkout
             - run: dotnet test ControllizerDeckProject/ControllizerDeckProject.sln
-            #- run: 
-            #    name: Restore pkgs
-            #    command: dotnet restore
-            #- run:
-            #    name: Build
-            #    command: dotnet build
-            #- run:
-            #    name: Test
-            #   command: dotnet test 
-            
+            - store_test_results:
+                path: test-results
 workflows:
   default:
     jobs:
@@ -28,5 +20,3 @@ workflows:
         filter:
           branches:
               only: master
-      - store_test_results:
-          path: test-results
