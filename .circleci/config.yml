@@ -4,11 +4,11 @@ executors:
   default:
     docker:
     - image: mcr.microsoft.com/dotnet/core/sdk:3.1
-    working_directory: ControllizerDeckProject/
     
 jobs:
     build:
         executor: default
+        working_directory: ControllizerDeckProject/
         steps:
             - checkout
             - run: dotnet test ControllizerCoreTests/ControllizerCoreTests.csproj
