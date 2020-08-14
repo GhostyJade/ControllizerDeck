@@ -3,7 +3,9 @@
 <p>
 <a href="README.it.md">
 <img src="https://img.shields.io/badge/Read%20in-Italian-%23a800ff"></a>
+<img alt="CircleCI" src="https://img.shields.io/circleci/build/github/GhostyJade/ControllizerDeck/master?label=CircleCI%20Build">  
 </p>
+
 
 Do you ever wanted to have some kind of device that control your favourite applications but you don't have enough money to buy it (like the Elgato Stream Deck) or what you find is specific to an application(or a set of application, like the Loupdeck)?
 
