@@ -5,6 +5,12 @@ workflows:
     filter:
       branches:
           only: master
+  jobs:
+    build:
+        executor: default
+        steps:
+            - checkout
+            - run: dotnet test
 
 executors:
   default:
@@ -12,12 +18,7 @@ executors:
     - image: mcr.microsoft.com/dotnet/core/sdk:3.1
     working_directory: ControllizerDeckProject/
     
-jobs:
-    build:
-        executor: default
-        steps:
-            - checkout
-            - run: dotnet test
+
             #- run: 
             #    name: Restore pkgs
             #    command: dotnet restore
