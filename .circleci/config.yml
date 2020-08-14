@@ -11,15 +11,16 @@ jobs:
         executor: default
         steps:
             - checkout
-            - run: 
-                name: Restore pkgs
-                command: dotnet restore
-            - run:
-                name: Build
-                command: dotnet build
-            - run:
-                name: Test
-                command: dotnet test 
+            - run: dotnet test
         filter:
           branches:
               only: master
+            #- run: 
+            #    name: Restore pkgs
+            #    command: dotnet restore
+            #- run:
+            #    name: Build
+            #    command: dotnet build
+            #- run:
+            #    name: Test
+            #   command: dotnet test 
