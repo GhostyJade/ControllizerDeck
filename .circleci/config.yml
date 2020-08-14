@@ -8,10 +8,9 @@ executors:
 jobs:
     build:
         executor: default
-        working_directory: ControllizerDeckProject/
         steps:
             - checkout
-            - run: dotnet test ./ControllizerDeckProject.sln
+            - run: dotnet test ControllizerDeckProject/ControllizerDeckProject.sln
             #- run: 
             #    name: Restore pkgs
             #    command: dotnet restore
