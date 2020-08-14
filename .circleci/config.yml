@@ -1,24 +1,17 @@
 version: 2.1
 
-workflows:
-  default:
-    filter:
-      branches:
-          only: master
-  jobs:
-    build:
-        executor: default
-        steps:
-            - checkout
-            - run: dotnet test
-
 executors:
   default:
     docker:
     - image: mcr.microsoft.com/dotnet/core/sdk:3.1
     working_directory: ControllizerDeckProject/
     
-
+jobs:
+    build:
+        executor: default
+        steps:
+            - checkout
+            - run: dotnet test
             #- run: 
             #    name: Restore pkgs
             #    command: dotnet restore
@@ -28,3 +21,11 @@ executors:
             #- run:
             #    name: Test
             #   command: dotnet test 
+            
+workflows:
+  default:
+    jobs:
+      - build
+    filter:
+      branches:
+          only: master
