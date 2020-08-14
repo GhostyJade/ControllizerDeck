@@ -1,5 +1,11 @@
 version: 2.1
 
+workflows:
+  default:
+    filter:
+      branches:
+          only: master
+
 executors:
   default:
     docker:
@@ -9,9 +15,6 @@ executors:
 jobs:
     build:
         executor: default
-        filter:
-          branches:
-              only: master
         steps:
             - checkout
             - run: dotnet test
