@@ -11,7 +11,7 @@ jobs:
         working_directory: ControllizerDeckProject/
         steps:
             - checkout
-            - run: dotnet test ./ControllizerCoreProject.sln
+            - run: dotnet test ./ControllizerDeckProject.sln
             #- run: 
             #    name: Restore pkgs
             #    command: dotnet restore
