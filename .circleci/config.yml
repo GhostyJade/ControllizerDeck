@@ -1,23 +1,23 @@
  version: 2.1
  
  jobs:
-   build:
-       executors:
+    build:
+        executors:
            - docker:
                - image: mcr.microsoft.com/dotnet/core/sdk:3.1
            - working_directory: ControllizerDeckProject/
-       filter:
-           branches:
-               only: master
+        filter:
+            branches:
+                only: master
     
-     steps:
-       - checkout
-       - run: 
+    steps:
+        - checkout
+        - run: 
            name: Restore pkgs
            command: dotnet restore
-       - run:
+        - run:
            name: Build
            command: dotnet build
-       - run:
+        - run:
            name: Test
            command: dotnet test 
