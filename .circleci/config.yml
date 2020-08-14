@@ -28,3 +28,5 @@ workflows:
         filter:
           branches:
               only: master
+      - store_test_results:
+          path: test-results
