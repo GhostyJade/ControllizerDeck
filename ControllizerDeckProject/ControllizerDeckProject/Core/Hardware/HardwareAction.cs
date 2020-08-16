@@ -29,11 +29,11 @@ namespace ControllizerDeckProject.Core.Hardware
     {
         private const string ActionDataFile = "Data/Hardware/actionmapping.json";
 
-        private HardwareDataManager instance;
+        private HardwareData instance;
 
-        public HardwareAction(HardwareDataManager descriptorInstance)
+        public HardwareAction(HardwareData dataInstance)
         {
-            instance = descriptorInstance;
+            instance = dataInstance;
             DispatchHardwareFragment();
         }
 
@@ -76,7 +76,7 @@ namespace ControllizerDeckProject.Core.Hardware
                 DispatchHardwareFragment(LoadFromFile());
         }
 
-        public HardwareDataManager HardwareCreator()
+        public HardwareData HardwareCreator()
         {
             return instance;
         }
