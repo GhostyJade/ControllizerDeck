@@ -1,0 +1,28 @@
+version: 2.1
+
+executors:
+  default:
+    docker:
+    - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+
+    
+jobs:
+    build:
+        executor: default
+        steps:
+            - checkout
+            #- persist_to_workspace:
+            #    root: .
+            #    paths: ~/test_results
+            - run: dotnet test ControllizerDeckProject/ControllizerDeckProject.sln -o ~/test-results
+            #- run: 
+            #    command: mkdir -p test-results
+            - store_test_results:
+                path: ~/test-results
+workflows:
+  default:
+    jobs:
+      - build:
+        filter:
+          branches:
+              only: master
