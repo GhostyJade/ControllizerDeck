@@ -88,50 +88,59 @@ namespace ControllizerDeckProject.Core.Hardware
 
             JToken data = JToken.Parse(jsonData);
             JObject pushButtonObj = (JObject)data.SelectToken("PushButton");
-            string type = (string)pushButtonObj.SelectToken("type");
-            string identifier = (string)pushButtonObj.SelectToken("identifier");
-            if (identifier != null)
+            if (pushButtonObj != null)
             {
-                PushButton.UpdateIdentifier(identifier);
-            }
-            //check what type of pushbutton the hardware has
-            if (type == "list")
-            {
-                JArray btn = (JArray)pushButtonObj.SelectToken("buttons");
-                for (int i = 0; i < btn.Count; i++)
+                string type = (string)pushButtonObj.SelectToken("type");
+                string identifier = (string)pushButtonObj.SelectToken("identifier");
+                if (identifier != null)
                 {
-                    int id = (int)btn[i].SelectToken("id");
-                    d.PushButtons.Add(new PushButton(id));
+                    PushButton.UpdateIdentifier(identifier);
                 }
-            }
-            else if (type == "matrix")
-            {
-                d.HasInitializedAsMatrix = true;
-                d.MatrixLayout = (string)pushButtonObj.SelectToken("layout");
-                int count = (int)pushButtonObj.SelectToken("size");
-                for (int i = 0; i < count; i++)
+                //check what type of pushbutton the hardware has
+                if (type == "list")
                 {
-                    d.PushButtons.Add(new PushButton(i));
+                    JArray btn = (JArray)pushButtonObj.SelectToken("buttons");
+                    for (int i = 0; i < btn.Count; i++)
+                    {
+                        int id = (int)btn[i].SelectToken("id");
+                        d.PushButtons.Add(new PushButton(id));
+                    }
                 }
-            }
-            else
-            {
-                //log unknown type
+                else if (type == "matrix")
+                {
+                    d.HasInitializedAsMatrix = true;
+                    d.MatrixLayout = (string)pushButtonObj.SelectToken("layout");
+                    int count = (int)pushButtonObj.SelectToken("size");
+                    for (int i = 0; i < count; i++)
+                    {
+                        d.PushButtons.Add(new PushButton(i));
+                    }
+                }
+                else
+                {
+                    //log unknown type
+                }
             }
 
             JArray rotEnc = (JArray)data.SelectToken("RotaryEncoder");
-            for (int i = 0; i < rotEnc.Count; i++)
+            if (rotEnc != null)
             {
-                int id = (int)rotEnc[i].SelectToken("id");
-                bool hasButton = (bool)rotEnc[i].SelectToken("hasButton");
-                d.RotaryEncoders.Add(new RotaryEncoder(id, hasButton));
+                for (int i = 0; i < rotEnc.Count; i++)
+                {
+                    int id = (int)rotEnc[i].SelectToken("id");
+                    bool hasButton = (bool)rotEnc[i].SelectToken("hasButton");
+                    d.RotaryEncoders.Add(new RotaryEncoder(id, hasButton));
+                }
             }
 
             JObject knobsObj = (JObject)data.SelectToken("Knobs");
-            int knobsCount = (int)knobsObj.SelectToken("size");
-            for (int i = 0; i < knobsCount; i++)
+            if (knobsObj != null)
             {
-                d.Knobs.Add(new Knob(i));
+                int knobsCount = (int)knobsObj.SelectToken("size");
+                for (int i = 0; i < knobsCount; i++)
+                {
+                    d.Knobs.Add(new Knob(i));
+                }
             }
 
             return d;
