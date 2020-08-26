@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 
 import { Button, MenuItem, Select, FormControl, InputLabel } from '@material-ui/core'
+import { server_address, server_port } from '../utils/net'
 
 export default function Settings(props) {
 
@@ -8,7 +9,7 @@ export default function Settings(props) {
     const [port, setPort] = React.useState('');
 
     const handleSetPort = () => {
-        fetch("http://localhost:8080/ports/", {
+        fetch(`http://${server_address}:${server_port}/ports/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -24,7 +25,7 @@ export default function Settings(props) {
     }
 
     const handleGetPorts = () => {
-        fetch("http://localhost:8080/ports/list/").then(response => response.json())
+        fetch(`http://${server_address}:${server_port}/ports/list/`).then(response => response.json())
             .then(data => {
                 if (data.result) {
                     setAvailablePorts(data.ports)

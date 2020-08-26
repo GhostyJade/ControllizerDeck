@@ -3,6 +3,8 @@ import { PageSerialConfigStyles } from '../../utils/styles'
 import { IconButton, FormControl, InputLabel, NativeSelect, Typography, createMuiTheme, ThemeProvider } from '@material-ui/core'
 import { ArrowLeft, ArrowRight } from '@material-ui/icons'
 
+import { server_address, server_port } from '../../utils/net'
+
 const CustomSelectField = createMuiTheme({
     overrides: {
         MuiNativeSelect: {
@@ -23,7 +25,7 @@ function PageSerialConfig(props) {
     const [availablePorts, setAvailablePorts] = React.useState([])
 
     const handleGetPorts = () => {
-        fetch("http://localhost:8080/ports/list/").then(response => response.json())
+        fetch(`http://${server_address}:${server_port}/ports/list/`).then(response => response.json())
             .then(data => {
                 if (data.result) {
                     setAvailablePorts(data.ports)

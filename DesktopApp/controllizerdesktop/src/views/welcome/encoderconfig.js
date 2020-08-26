@@ -2,13 +2,14 @@ import React from 'react'
 import { IconButton } from '@material-ui/core'
 import { ArrowLeft, Check } from '@material-ui/icons'
 import { PageEncodersPropertiesStyle } from '../../utils/styles'
+import { server_address, server_port } from '../../utils/net'
 
 function PageRotaryEncoders(props) {
 
     const styles = PageEncodersPropertiesStyle()
 
     const sendData = () => {
-        fetch('http://localhost:8080/welcome/',
+        fetch(`http://${server_address}:${server_port}/welcome/`,
             {
                 method: 'POST',
                 headers: {

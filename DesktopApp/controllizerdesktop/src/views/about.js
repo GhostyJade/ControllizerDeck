@@ -26,7 +26,7 @@ export default function About(props) {
                     Controllizer Deck - © GhostyJade 2019-2020
                 </Typography>
                 <Typography className={styles.text}>
-                    This application is relased under GPLv3.
+                    This application is released under GPLv3.
                 </Typography>
             </div>
         </div>

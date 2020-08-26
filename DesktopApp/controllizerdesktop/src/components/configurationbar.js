@@ -5,6 +5,7 @@ import { useTracked } from './DataContainer'
 import { Add as AddIcon } from '@material-ui/icons'
 
 import { ConfigurationBarStyles } from '../utils/styles'
+import { server_address, server_port } from '../utils/net'
 
 const ParametersComponent = ({ itemData, setItemData, state }) => {
     const id = itemData.action
@@ -134,7 +135,7 @@ export default function ConfigurationBar(props) {
     const sendData = () => {
         //if (itemData.action === 0 || itemData.name === '' || itemData.path === '') return;// TODO check path if action number is 1, allow 0 to be action reset
         //TODO add checks
-        fetch('http://localhost:8080/hardware/functions/', {
+        fetch(`http://${server_address}:${server_port}/hardware/functions/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: state.selectedItem.Identifier, data: itemData })

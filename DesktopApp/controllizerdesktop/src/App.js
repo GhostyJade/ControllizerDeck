@@ -10,9 +10,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useTracked } from './components/DataContainer'
 import About from './views/about'
 import Welcome from './views/welcome'
+import { server_address, server_port } from './utils/net'
 
 function fetchWelcomeData() {
-    return fetch("http://localhost:8080/firstlaunch/")
+    return fetch(`http://${server_address}:${server_port}/firstlaunch/`)
         .then(result => result.json())
 }
 

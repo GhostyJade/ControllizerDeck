@@ -3,6 +3,7 @@ import HardwareDrawer from '../components/hardwaredrawer'
 import axios from 'axios'
 import ConfigurationBar from '../components/configurationbar'
 import MissingBackend from './nobackend'
+import { server_address, server_port } from '../utils/net'
 
 export default function Home(props) {
 
@@ -10,7 +11,7 @@ export default function Home(props) {
 
     useEffect(() => {
         async function fetchData() {
-            const result = await axios('http://localhost:8080/hardware/')
+            const result = await axios(`http://${server_address}:${server_port}/hardware/`)
             if (result)
                 setHardwareComponents({ data: result.data, success: true })
             else
