@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using ControllizerDeckProject.Core.ControllizerActions.Types;
+
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace ControllizerDeckProject.Core.ControllizerActions
@@ -8,7 +10,7 @@ namespace ControllizerDeckProject.Core.ControllizerActions
         public string WebsiteName;
         public string WebsiteUri;
 
-        public ActionOpenWebsite() : base("OpenWebsite", EventTypeMapping.OpenWebsite)
+        public ActionOpenWebsite() : base("OpenWebsite", DigitalActionType.OpenWebsite)
         { }
 
         public override void Execute()

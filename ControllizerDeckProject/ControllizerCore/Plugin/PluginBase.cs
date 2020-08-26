@@ -18,9 +18,19 @@
 
 namespace ControllizerCore.Plugin
 {
+    /// <summary>
+    /// This class is used to define an instantiatable plugin for the backend.
+    /// A plugin is used to expand basic features of this app (add custom actions, expand hardware support, ...)
+    /// </summary>
     public abstract class PluginBase
     {
+        /// <summary>
+        /// The plugin name
+        /// </summary>
         public string PluginName { get; private set; }
+        /// <summary>
+        /// The plugin version
+        /// </summary>
         public string PluginVersion { get; private set; }
 
         protected PluginBase(string name, string version)
@@ -29,8 +39,17 @@ namespace ControllizerCore.Plugin
             PluginVersion = version;
         }
 
+        /// <summary>
+        /// This method is called when the plugin is initialized
+        /// </summary>
         public abstract void InitPlugin();
+        /// <summary>
+        /// This method is called when the plugin must be executed
+        /// </summary>
         public abstract void ExecutePlugin();
+        /// <summary>
+        /// This method is called when the app is closing. Use this if the plugin need to destroy stuff or store data
+        /// </summary>
         public abstract void DestroyPlugin();
     }
 }

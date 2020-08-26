@@ -18,6 +18,7 @@
 
 using ControllizerDeckProject.Core;
 using ControllizerDeckProject.Core.ControllizerActions;
+using ControllizerDeckProject.Core.ControllizerActions.Types;
 using ControllizerDeckProject.Utils;
 
 using Newtonsoft.Json.Linq;
@@ -51,23 +52,23 @@ namespace ControllizerDeckProject.Net.Actions
 
             string jsonBody = ResponseFactory.JsonStringFromRequest(request);
 
-            //Parse data
+            // Data parsing:
             JToken t = JToken.Parse(jsonBody);
             int componentId = (int)t.SelectToken("id");
 
             JObject obj = (JObject)t.SelectToken("data");
-            EventTypeMapping eventType = (EventTypeMapping)(int)obj.SelectToken("action");
+            DigitalActionType eventType = (DigitalActionType)(int)obj.SelectToken("action");
             switch (eventType)
             {
-                case EventTypeMapping.None:
+                case DigitalActionType.None:
                     InputDispatcher.UpdatePushButtonAction(componentId, null);
                     break;
-                case EventTypeMapping.LaunchApp:
+                case DigitalActionType.LaunchApp:
                     string actionName = (string)obj.SelectToken("name");
                     string appPath = (string)obj.SelectToken("path");
                     InputDispatcher.UpdatePushButtonAction(componentId, new ActionRunProgram(actionName) { FullAppDirectory = appPath, AppName = actionName });
                     break;
-                case EventTypeMapping.OpenWebsite:
+                case DigitalActionType.OpenWebsite:
                     string uri = (string)obj.SelectToken("websiteUri");
                     string name = (string)obj.SelectToken("name");
                     var action = new ActionOpenWebsite() { WebsiteName = name, WebsiteUri = uri };

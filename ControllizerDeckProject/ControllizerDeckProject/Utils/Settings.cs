@@ -31,13 +31,16 @@ namespace ControllizerDeckProject.Utils
         /// <summary>
         /// The Local port on which the server listen to
         /// </summary>
-        public int LocalServerPort { get; set; } = 8080;
+        public int LocalServerPort { get; set; } = 8192;
 
         /// <summary>
         /// The Local address on which the server listen to
         /// </summary>
         public string LocalServerAddress { get; set; } = "localhost";
 
+        /// <summary>
+        /// If <see langword="true"/>, the backend await to load the mapping and prepare the configuration instead
+        /// </summary>
         public bool IsFirstLaunch { get; set; } = true;
     }
 }

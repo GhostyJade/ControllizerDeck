@@ -16,35 +16,22 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using ControllizerDeckProject.Core.ControllizerActions.Types;
+using ControllizerDeckProject.Core.Types;
 
 namespace ControllizerDeckProject.Core
 {
-    /// <summary>
-    /// This class provide an abstraction for implementing an action for an hardware digital input
-    /// </summary>
-    public abstract class DigitalInputActionBase
+    public abstract class AnalogInputActionBase
     {
-        /// <summary>
-        /// The Action name
-        /// </summary>
         public string Name { get; private set; }
+        public AnalogActionType ActionType { get; private set; }
 
-        /// <summary>
-        /// The Action type
-        /// </summary>
-        public DigitalActionType Type { get; private set; }
+        public AnalogInputActionBase(string Name, AnalogActionType ActionType)
+        {
+            this.Name = Name;
+            this.ActionType = ActionType;
+        }
 
-        public DigitalInputActionBase(string name, DigitalActionType type) { Name = name; Type = type; }
-
-        /// <summary>
-        /// Called when the action is initialized
-        /// </summary>
         public abstract void Init();
-
-        /// <summary>
-        /// Called when the action is executed
-        /// </summary>
-        public abstract void Execute();
+        public abstract void Execute(decimal value);
     }
 }

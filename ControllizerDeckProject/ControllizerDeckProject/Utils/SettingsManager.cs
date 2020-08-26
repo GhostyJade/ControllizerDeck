@@ -91,9 +91,9 @@ namespace ControllizerDeckProject.Utils
                 using (JsonReader reader = new JsonTextReader(sr))
                 {
                     Settings settings = serializer.Deserialize<Settings>(reader);
-                    //TODO Check COM validity
                     CoreState.SettingsInstance = settings;
-                    SerialManager.ManagerInstance.Start();
+                    if (SerialIO.GetPortNames().Contains(settings.COMPort))
+                        SerialManager.ManagerInstance.Start();
                 }
             }
         }

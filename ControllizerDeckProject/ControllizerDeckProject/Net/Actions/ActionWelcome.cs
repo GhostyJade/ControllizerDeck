@@ -27,7 +27,11 @@ using System.Net;
 namespace ControllizerDeckProject.Net.Actions
 {
     /// <summary>
-    /// This class is used to create the hardwaredescription file by the frontend
+    /// Path: /welcome/
+    /// Method: POST
+    /// 
+    /// This class is used to create the hardware description file by the frontend
+    /// 
     /// </summary>
     public class ActionWelcome : ActionBase
     {

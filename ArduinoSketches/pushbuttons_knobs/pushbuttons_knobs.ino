@@ -10,6 +10,10 @@
 
 #define KNOB_TRESHOLD 1
 
+#define DELAY_MS 1000
+
+unsigned long prevTime = 0;
+
 IOExtension pushButtons(SH_CP, DS, ST_CP, IN_P);
 
 String lastButtonsValue = "";
@@ -17,8 +21,8 @@ String lastButtonsValue = "";
 void setup()
 {
     Serial.begin(9600);
-    pinMode(KN1, INPUT);
-    pinMode(KN2, INPUT);
+    //pinMode(KN1, INPUT);
+    //pinMode(KN2, INPUT);
     lastButtonsValue = readButtons();
 }
 
@@ -27,13 +31,17 @@ void setup()
 
 void loop()
 {
-    String currentButtonsValue = readButtons();
-    if (!currentButtonsValue.equals(lastButtonsValue))
-    {
-        Serial.println(currentButtonsValue);
-        lastButtonsValue = currentButtonsValue;
+    unsigned long currentTime = millis();
+
+    if (currentTime - prevTime >= DELAY_MS) {
+        String currentButtonsValue = readButtons();
+        if (currentButtonsValue != lastButtonsValue)
+        {
+            Serial.println(currentButtonsValue);
+            lastButtonsValue = currentButtonsValue;
+        }
+       // updateKnobs();
     }
-    updateKnobs();
 }
 
 // Read pushbutton (74HC595) values
@@ -49,6 +57,8 @@ String readButtons()
 
 int KN1_PrevValue = 0;
 int KN2_PrevValue = 0;
+
+//Update knobs input value while performing debouncing
 void updateKnobs()
 {
     int kn1_val = analogRead(KN1);

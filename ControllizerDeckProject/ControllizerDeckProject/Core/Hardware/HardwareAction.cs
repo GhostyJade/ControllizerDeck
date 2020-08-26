@@ -17,6 +17,7 @@
 */
 
 using ControllizerDeckProject.Core.ControllizerActions;
+using ControllizerDeckProject.Core.ControllizerActions.Types;
 
 using Newtonsoft.Json.Linq;
 
@@ -50,10 +51,10 @@ namespace ControllizerDeckProject.Core.Hardware
                 if (action != null)
                     switch ((int)action.SelectToken("Type"))
                     {
-                        case (int)EventTypeMapping.LaunchApp:
+                        case (int)DigitalActionType.LaunchApp:
                             instance.PushButtons.Find(e => e.Identifier == id).AssociatedAction = action.ToObject<ActionRunProgram>();
                             break;
-                        case (int)EventTypeMapping.OpenWebsite:
+                        case (int)DigitalActionType.OpenWebsite:
                             instance.PushButtons.Find(e => e.Identifier == id).AssociatedAction = action.ToObject<ActionOpenWebsite>();
                             break;
                     }

@@ -22,7 +22,7 @@ using System.Collections.Generic;
 namespace ControllizerDeckProject.Net
 {
     /// <summary>
-    /// Util class used to manage HTTP Actions
+    /// Utility class used to manage HTTP Actions
     /// </summary>
     public static class ActionManager
     {
@@ -49,7 +49,7 @@ namespace ControllizerDeckProject.Net
         }
 
         /// <summary>
-        /// 
+        /// Get a list containing all POST actions
         /// </summary>
         /// <returns>A list of HTTP POST Actions</returns>
         public static List<ActionBase> GetPOSTActions()
@@ -65,7 +65,7 @@ namespace ControllizerDeckProject.Net
 
 
         /// <summary>
-        /// 
+        /// Get a list containing all GET actions
         /// </summary>
         /// <returns>A list of HTTP GET Actions</returns>
         public static List<ActionBase> GetGETActions()

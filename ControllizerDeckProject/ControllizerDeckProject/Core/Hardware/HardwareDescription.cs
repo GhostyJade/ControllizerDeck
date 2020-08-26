@@ -24,15 +24,30 @@ namespace ControllizerDeckProject.Core.Hardware
     /// This class provides the exact representation of the hardwareconfiguration.json file.
     /// Here, there are some struct to represent data for the file.
     /// 
-    /// Note. If you want to get the file you must call the <see cref="Serialize"/> method
+    /// Note. If you want to get the file content, you must call the <see cref="Serialize"/> method
     /// </summary>
     public class HardwareDescription
     {
+        /// <summary>
+        /// The button data object
+        /// </summary>
         public struct ButtonsData
         {
+            /// <summary>
+            /// The button configuration type (matrix or list)
+            /// </summary>
             public string type;
+            /// <summary>
+            /// If the <see cref="type"/> is "matrix", this represent the layout of the matrix (like 3x2)
+            /// </summary>
             public string layout;
+            /// <summary>
+            /// The pushbutton identifier (default is "PB")
+            /// </summary>
             public string identifier;
+            /// <summary>
+            /// The button count
+            /// </summary>
             public int size;
 
             public override string ToString()

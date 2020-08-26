@@ -21,7 +21,7 @@ using System.Net;
 namespace ControllizerDeckProject.Net.Actions
 {
     /// <summary>
-    /// This class represent an abstracion for an HTTP Action. Every action must implement this class and register itself via <see cref="ActionManager.RegisterAction(ActionBase)"/>
+    /// This class represent an abstraction for an HTTP Action. Every action must implement this class and register itself via <see cref="ActionManager.RegisterAction(ActionBase)"/>
     /// </summary>
     public abstract class ActionBase
     {
@@ -38,7 +38,7 @@ namespace ControllizerDeckProject.Net.Actions
         /// </summary>
         public string ActionName { get; private set; }
         /// <summary>
-        /// The action URI where the frontend execute api calls
+        /// The action URI where the frontend execute API calls
         /// </summary>
         public string ActionURI { get; private set; }
         /// <summary>
@@ -54,14 +54,14 @@ namespace ControllizerDeckProject.Net.Actions
         }
 
         /// <summary>
-        /// Called when a POST request is recieved
+        /// Called when a POST request is received
         /// </summary>
         /// <param name="request"></param>
         /// <param name="response"></param>
         public virtual void OnPost(HttpListenerRequest request, HttpListenerResponse response) { }
 
         /// <summary>
-        /// Called when a GET request is recieved
+        /// Called when a GET request is received
         /// </summary>
         /// <param name="request"></param>
         /// <param name="response"></param>

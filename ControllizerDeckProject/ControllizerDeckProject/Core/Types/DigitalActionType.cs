@@ -1,9 +1,9 @@
-﻿namespace ControllizerDeckProject.Core.ControllizerActions
+﻿namespace ControllizerDeckProject.Core.ControllizerActions.Types
 {
     /// <summary>
-    /// Map index with event names
+    /// Map index with event names for digital actions
     /// </summary>
-    public enum EventTypeMapping
+    public enum DigitalActionType
     {
         /// <summary>
         /// No mapping
@@ -20,6 +20,6 @@
         /// <summary>
         /// Mapped to nothing...yet.
         /// </summary>
-        SendDiscordMessage = 3
+        SendDiscordMessage = 3,
     }
 }

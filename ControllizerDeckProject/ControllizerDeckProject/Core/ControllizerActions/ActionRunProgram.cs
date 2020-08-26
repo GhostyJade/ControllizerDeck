@@ -16,6 +16,8 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using ControllizerDeckProject.Core.ControllizerActions.Types;
+
 using System;
 using System.Diagnostics;
 
@@ -27,16 +29,16 @@ namespace ControllizerDeckProject.Core.ControllizerActions
     public class ActionRunProgram : DigitalInputActionBase
     {
         /// <summary>
-        /// The applicaton name
+        /// The application name
         /// </summary>
         public string AppName = "";
         
         /// <summary>
-        /// The application path
+        /// The full application path
         /// </summary>
         public string FullAppDirectory = "";
 
-        public ActionRunProgram(string actionName) : base(actionName, EventTypeMapping.LaunchApp)
+        public ActionRunProgram(string actionName) : base(actionName, DigitalActionType.LaunchApp)
         { }
 
         public override void Execute()

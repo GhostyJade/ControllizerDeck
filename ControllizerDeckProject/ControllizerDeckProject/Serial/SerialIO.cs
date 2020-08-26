@@ -31,7 +31,7 @@ namespace ControlizerCore.Serial
         /// </summary>
         private static SerialIO instance;
         /// <summary>
-        /// The serial port baudrate
+        /// The serial port baud rate
         /// </summary>
         public static int BaudRate { get; set; }
 
@@ -87,7 +87,7 @@ namespace ControlizerCore.Serial
         /// <summary>
         /// Read a line (terminated by \n) from the serial and return it
         /// </summary>
-        /// <returns>a string containing the readed line</returns>
+        /// <returns>a string containing the read line</returns>
         public string Read() => serial.ReadLine();
 
         /// <summary>

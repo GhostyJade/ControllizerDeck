@@ -18,16 +18,18 @@
 
 using ControllizerDeckProject.Utils;
 
-using System;
 using System.Net;
 
 namespace ControllizerDeckProject.Net.Actions
 {
 
     /// <summary>
-    /// This action return a bool that indicate if the application has already been intializated before or not
+    /// Path: /firstlaunch/
+    /// Method: GET
     /// 
-    /// See: <seealso cref="Settings.IsFirstLaunch"/>
+    /// This action return a bool that indicate if the application has already been initialized before or not
+    /// 
+    /// See: <seealso cref="Settings.IsFirstLaunch"/> <seealso cref="ActionWelcome"/>
     /// </summary>
     public class ActionFirstLaunch : ActionBase
     {
@@ -36,7 +38,7 @@ namespace ControllizerDeckProject.Net.Actions
 
         public override void OnGet(HttpListenerRequest request, HttpListenerResponse response)
         {
-            ResponseFactory.GenerateResponse(response, "{\"status\":" + CoreState.SettingsInstance.IsFirstLaunch.ToString().ToLower()+"}");
+            ResponseFactory.GenerateResponse(response, "{\"status\":" + CoreState.SettingsInstance.IsFirstLaunch.ToString().ToLower() + "}");
         }
     }
 }
