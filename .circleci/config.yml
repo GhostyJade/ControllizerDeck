@@ -25,4 +25,4 @@ workflows:
       - build:
         filter:
           branches:
-              only: master
+              only: test
