@@ -65,6 +65,7 @@ namespace ControllizerDeckProject.Net.Actions
 
                 HardwareDescription description = new HardwareDescription
                 {
+                    // TODO make identifiers editable
                     btnData = new HardwareDescription.ButtonsData()
                     {
                         identifier = "PB",
@@ -79,6 +80,8 @@ namespace ControllizerDeckProject.Net.Actions
                     },
                     encData = new HardwareDescription.EncodersData()
                     {
+                        encoderIdentifier = "RE",
+                        encoderButtonIdentifier = "REB",
                         encoders = encodersList
                     }
                 };

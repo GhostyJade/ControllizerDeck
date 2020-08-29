@@ -67,7 +67,9 @@ namespace ControllizerDeckProject.Core
         /// <param name="msg">The Serial input message</param>
         public static void PerformAction(string msg)
         {
-            if (msg == "") return;
+            // Check if the received message is not empty:
+            if (msg == "") 
+                return;
 
             string[] data = msg.Split(':');
             string id = data[0];
@@ -106,7 +108,8 @@ namespace ControllizerDeckProject.Core
                 int encId = int.Parse(id.Replace(RotaryEncoder.RotaryEncoderButtonIdentifier, ""));
                 RotaryEncoder enc = InputDataMapping.RotaryEncoders.Find(e => e.ComponentIdentifier == encId);
                 enc.UpdateButtonState(MathHelper.BoolFromInt(int.Parse(state)));
-            }
+            } 
+            //TODO add knobs here
             else
             {
                 Console.WriteLine(msg);

@@ -29,8 +29,11 @@ namespace ControllizerDeckProject
         public static void Main(string[] args)
 #pragma warning restore IDE0060 // Remove unused parameter
         {
-            //TODO add debug modifiers to tweak stuff while debugging
+            // TODO add debug modifiers to tweak stuff while debugging
+
+            // Load app settings:
             SettingsManager.LoadSettings();
+            // Init all HTTP actions
             ActionManager.Init();
 
             if (!CoreState.SettingsInstance.IsFirstLaunch)
@@ -42,7 +45,8 @@ namespace ControllizerDeckProject
                 ConsoleManager.LogInfo("Waiting for hardware initialization.");
             }
 
-            HttpServer server = new HttpServer(CoreState.SettingsInstance.LocalServerAddress, CoreState.SettingsInstance.LocalServerPort); //TODO allow to change default parameters
+            // Server initialization:
+            HttpServer server = new HttpServer(CoreState.SettingsInstance.LocalServerAddress, CoreState.SettingsInstance.LocalServerPort);
             Task listen = server.Listen();
             listen.GetAwaiter().GetResult();
         }

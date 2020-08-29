@@ -26,24 +26,33 @@ using System.Threading;
 
 namespace ControllizerDeckProject.PluginSystem
 {
-    public static class PluginLoader
+    /// <summary>
+    /// This class manage the Controllizer Deck's plugins
+    /// </summary>
+    public static class PluginManager
     {
         private const string DefaultPluginExtension = "*.dll";
         private static List<Thread> pluginThreadPool = new List<Thread>();
 
-        private static Dictionary<string, PluginBase> PluginInstances = new Dictionary<string, PluginBase>();
+        private static readonly Dictionary<string, PluginBase> PluginInstances = new Dictionary<string, PluginBase>();
 
+        /// <summary>
+        /// Load all plugins in the specified path and add an instance to this app
+        /// </summary>
+        /// <param name="path">The plugins' folder</param>
+        /// <returns>True if succeed, false otherwise</returns>
         public static bool GetAllPluginsInPath(string path)
         {
             if (!Directory.Exists(path))
                 return false;
+            //TODO: everything below this comment can fail...consider to put everything in a try/catch block and handle exceptions
             foreach (string filename in Directory.GetFiles(path, DefaultPluginExtension, SearchOption.AllDirectories))
             {
                 Assembly pluginDll = Assembly.LoadFile(filename);
                 foreach (var assemblyType in pluginDll.GetExportedTypes())
                 {
-                    if (assemblyType.IsSubclassOf(typeof(PluginBase))){
-
+                    if (assemblyType.IsSubclassOf(typeof(PluginBase)))
+                    {
                         var plugin = Activator.CreateInstance(assemblyType) as PluginBase;
                         PluginInstances.Add(plugin.PluginName, plugin);
                     }
@@ -52,14 +61,20 @@ namespace ControllizerDeckProject.PluginSystem
             return true;
         }
 
+        /// <summary>
+        /// Initialize all plugins
+        /// </summary>
         public static void InitAll()
         {
-            foreach(PluginBase p in PluginInstances.Values)
+            foreach (PluginBase p in PluginInstances.Values)
             {
                 p.InitPlugin();
             }
         }
 
+        /// <summary>
+        /// Execute a plugin in it's own <see cref="Thread"/>
+        /// </summary>
         public static void ExecuteAll()
         {
             foreach (PluginBase p in PluginInstances.Values)
@@ -69,6 +84,9 @@ namespace ControllizerDeckProject.PluginSystem
             pluginThreadPool.ForEach(e => e.Start());
         }
 
+        /// <summary>
+        /// Destroy all instantiated plugins
+        /// </summary>
         public static void DestroyAll()
         {
             pluginThreadPool.ForEach(e => e.Join());

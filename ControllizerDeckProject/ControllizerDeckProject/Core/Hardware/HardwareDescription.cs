@@ -24,7 +24,7 @@ namespace ControllizerDeckProject.Core.Hardware
     /// This class provides the exact representation of the hardwareconfiguration.json file.
     /// Here, there are some struct to represent data for the file.
     /// 
-    /// Note. If you want to get the file content, you must call the <see cref="Serialize"/> method
+    /// Note. If you want to get the file content, you must call the <see cref="HardwareDataManager.Serialize(HardwareDescription)"/> method
     /// </summary>
     public class HardwareDescription
     {
@@ -52,36 +52,56 @@ namespace ControllizerDeckProject.Core.Hardware
 
             public override string ToString()
             {
-                return string.Format("Type:{0}, Layout:{1}, Id:{2}, Size:{3}", type, layout, identifier, size);
+                return string.Format("Type:{0}, Layout:{1}, ButtonIdentifier:{2}, Size:{3}", type, layout, identifier, size);
             }
         }
 
+        /// <summary>
+        /// The knob data object
+        /// </summary>
         public struct KnobsData
         {
+            /// <summary>
+            /// The knob identifier (default is "K")
+            /// </summary>
             public string identifier;
+            /// <summary>
+            /// The knob count
+            /// </summary>
             public int size;
 
             public override string ToString()
             {
-                return string.Format("Id:{0}, Size:{1}", identifier, size);
+                return string.Format("KnobIdentifier:{0}, Size:{1}", identifier, size);
             }
         }
 
         public struct Encoder
         {
+            /// <summary>
+            /// The encoder id
+            /// </summary>
             public int Id;
+            /// <summary>
+            /// If <see langword="true"/>, the encoder has a button, <see langword="false"/> otherwise.
+            /// </summary>
             public bool HasButton;
+            /// <summary>
+            /// 
+            /// </summary>
 
             public override string ToString()
             {
-                return string.Format("Id:{0}, HasButton{1}", Id, HasButton);
+                return string.Format("Id:{0}, HasButton: {1}", Id, HasButton);
             }
         }
 
         public struct EncodersData
         {
             public List<Encoder> encoders;
-            //TODO add identifiers for btn and encoder
+
+            public string encoderIdentifier;
+            public string encoderButtonIdentifier;
 
             public override string ToString()
             {

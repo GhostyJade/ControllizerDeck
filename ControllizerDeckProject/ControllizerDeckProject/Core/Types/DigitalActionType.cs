@@ -18,8 +18,13 @@
         /// </summary>
         OpenWebsite = 2,
         /// <summary>
+        /// Mapped to <see cref="ActionRunMacro"/>
+        /// </summary>
+        Macro = 3,
+        /// <summary>
         /// Mapped to nothing...yet.
         /// </summary>
-        SendDiscordMessage = 3,
+        SendDiscordMessage = 4,
+
     }
 }

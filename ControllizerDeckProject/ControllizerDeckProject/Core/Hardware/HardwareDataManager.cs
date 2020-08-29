@@ -87,6 +87,7 @@ namespace ControllizerDeckProject.Core.Hardware
             HardwareData d = new HardwareData();
 
             JToken data = JToken.Parse(jsonData);
+            // Parses push buttons' data:
             JObject pushButtonObj = (JObject)data.SelectToken("PushButton");
             if (pushButtonObj != null)
             {
@@ -96,7 +97,7 @@ namespace ControllizerDeckProject.Core.Hardware
                 {
                     PushButton.UpdateIdentifier(identifier);
                 }
-                //check what type of pushbutton the hardware has
+                // Check what type of pushbutton the hardware has:
                 if (type == "list")
                 {
                     JArray btn = (JArray)pushButtonObj.SelectToken("buttons");
@@ -118,10 +119,11 @@ namespace ControllizerDeckProject.Core.Hardware
                 }
                 else
                 {
-                    //log unknown type
+                    //log unknown/invalid type
                 }
             }
 
+            // Parses rotary encoders' data:
             JArray rotEnc = (JArray)data.SelectToken("RotaryEncoder");
             if (rotEnc != null)
             {
@@ -133,6 +135,7 @@ namespace ControllizerDeckProject.Core.Hardware
                 }
             }
 
+            // Parses knobs' data
             JObject knobsObj = (JObject)data.SelectToken("Knobs");
             if (knobsObj != null)
             {
@@ -146,6 +149,11 @@ namespace ControllizerDeckProject.Core.Hardware
             return d;
         }
 
+        /// <summary>
+        /// Make a JObject from an HardwareDescription to stored as a json file
+        /// </summary>
+        /// <param name="d">the HardwareDescription object</param>
+        /// <returns>the Json representation of the HardwareDescription object</returns>
         public static JObject Serialize(HardwareDescription d)
         {
             JObject container = new JObject();
@@ -159,9 +167,14 @@ namespace ControllizerDeckProject.Core.Hardware
             return container;
         }
 
+        /// <summary>
+        /// Load an HardwareDescription from file
+        /// <note type="note">This method is unused</note>
+        /// </summary>
+        /// <returns>An HardwareDescription object containing the file's content</returns>
         public static HardwareDescription Deserialize()
         {
-            using JsonReader reader = new JsonTextReader(File.OpenText("Data/Hardware/hardwaredescription.json"));
+            using JsonReader reader = new JsonTextReader(File.OpenText(HardwareDescriptionFile));
             JsonSerializer serializer = new JsonSerializer();
             return serializer.Deserialize<HardwareDescription>(reader);
         }

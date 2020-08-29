@@ -43,6 +43,7 @@ namespace ControllizerDeckProject.Net.Actions
 
         public override void OnPost(HttpListenerRequest request, HttpListenerResponse response)
         {
+            // Check if the request has the correct json content
             if (request.ContentType == null)
             {
                 ConsoleManager.LogError("Missing Content-Type in " + ActionName);
@@ -76,8 +77,10 @@ namespace ControllizerDeckProject.Net.Actions
                     InputDispatcher.UpdatePushButtonAction(componentId, action);
                     break;
             }
+            // Store new action mapping:
             InputDispatcher.UpdateActionMappingFile();
 
+            // Send response to the frontend
             string jsonResponse = "{\"result\":true}";
             ResponseFactory.GenerateResponse(response, jsonResponse);
         }
