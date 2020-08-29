@@ -8,6 +8,8 @@ const path = require('path');
 const url = require('url');
 const ipcMain = electron.ipcMain;
 
+const isDev = require('electron-is-dev')
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -18,11 +20,13 @@ function createWindow() {
     mainWindow = new BrowserWindow({ width: 800, height: 600, show: false, webPreferences: { webSecurity: false, nodeIntegration: true, preload: __dirname + "/preload.js" } })
 
     // and load the index.html of the app.
-    const startURL = ("http://localhost:3000/home") || url.format({
-        pathname: path.join(__dirname, '/../build/index.html/home'),
+    const startURL = isDev ? "http://localhost:3000/home" : url.format({
+        pathname: path.join(__dirname, '../build/index.html'),
         protocol: 'file:',
         slashes: true
     })
+    console.log(isDev)
+    console.log(startURL)
     mainWindow.loadURL(startURL);
 
     // Open the DevTools.

@@ -2,6 +2,7 @@
   "name": "controllizerdesktop",
   "version": "0.1.0",
   "private": true,
+  "author": "GhostyJade",
   "dependencies": {
     "@material-ui/core": "^4.9.12",
     "@material-ui/icons": "^4.9.1",
@@ -14,9 +15,10 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "electron-is-dev": "^1.2.0",
     "react-tracked": "^1.4.0"
   },
-  "main": "src/electron.js",
+  "main": "public/electron.js",
   "homepage": "./",
   "scripts": {
     "start": "react-scripts start",
@@ -24,7 +26,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron-dev": "set ELECTRON_START_URL=http://localhost:3000 && electron .",
-    "electron": "electron ."
+    "electron": "electron .",
+    "pack": "electron-builder --dir -c.extraMetadata.main=build/electron.js",
+    "dist": "electron-builder"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,6 +46,24 @@
     ]
   },
   "devDependencies": {
-    "electron": "^8.2.5"
+    "electron": "^8.2.5",
+    "electron-builder": "22.8.0"
+  },
+  "build": {
+    "appId": "com.ghostyjade.controllizerdeck",
+    "productName": "Controllizer Deck",
+    "copyright": "Copyright © 2020 ${author}",
+    "files": [
+      "build/**/*",
+      "public/logo192.png",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "release"
+    },
+    "win": {
+      "target": "portable"
+    }
   }
 }
