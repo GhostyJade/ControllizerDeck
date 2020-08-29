@@ -3,7 +3,7 @@
 <p>
 <a href="README.it.md">
 <img src="https://img.shields.io/badge/Read%20in-Italian-%23a800ff"></a>
-<img alt="CircleCI" src="https://img.shields.io/circleci/build/github/GhostyJade/ControllizerDeck/master?label=CircleCI%20Build">  
+<img alt="CircleCI" src="https://img.shields.io/circleci/build/github/GhostyJade/ControllizerDeck/test?label=CircleCI%20Build">  
 </p>
 
 
