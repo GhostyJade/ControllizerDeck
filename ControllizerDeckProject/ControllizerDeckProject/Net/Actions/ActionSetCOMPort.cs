@@ -18,6 +18,9 @@
 
 using ControlizerCore.Serial;
 
+using ControllizerCore.Net.Actions;
+using ControllizerCore.Utils;
+
 using ControllizerDeckProject.Utils;
 
 using Newtonsoft.Json.Linq;

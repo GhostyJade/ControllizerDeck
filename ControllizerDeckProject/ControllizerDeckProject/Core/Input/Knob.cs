@@ -16,7 +16,8 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using ControllizerDeckProject.Utils;
+using ControllizerCore.Input.Action;
+using ControllizerCore.Utils;
 
 namespace ControllizerDeckProject.Core.Input
 {

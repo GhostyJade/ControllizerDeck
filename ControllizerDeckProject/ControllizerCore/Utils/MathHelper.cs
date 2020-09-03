@@ -18,7 +18,7 @@
 
 using System;
 
-namespace ControllizerDeckProject.Utils
+namespace ControllizerCore.Utils
 {
     /// <summary>
     /// This class provides some useful Math related methods

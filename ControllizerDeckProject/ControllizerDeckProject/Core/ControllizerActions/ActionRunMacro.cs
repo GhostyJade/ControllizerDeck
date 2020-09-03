@@ -1,4 +1,5 @@
-﻿using ControllizerDeckProject.Core.ControllizerActions.Types;
+﻿using ControllizerCore.Input.Action;
+using ControllizerCore.Input.Types;
 
 namespace ControllizerDeckProject.Core.ControllizerActions
 {

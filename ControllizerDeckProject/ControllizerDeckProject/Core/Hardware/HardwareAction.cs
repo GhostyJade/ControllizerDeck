@@ -16,8 +16,9 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using ControllizerCore.Input.Types;
+
 using ControllizerDeckProject.Core.ControllizerActions;
-using ControllizerDeckProject.Core.ControllizerActions.Types;
 
 using Newtonsoft.Json.Linq;
 
@@ -47,7 +48,7 @@ namespace ControllizerDeckProject.Core.Hardware
             {
                 int id = (int)btn[i].SelectToken("id");
                 var action = btn[i].SelectToken("action");
-                Console.WriteLine(action.ToString());
+                // Console.WriteLine(action.ToString());
                 if (action != null)
                     switch ((int)action.SelectToken("Type"))
                     {

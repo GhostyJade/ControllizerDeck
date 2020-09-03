@@ -1,4 +1,4 @@
-﻿namespace ControllizerDeckProject.Core.Types
+﻿namespace ControllizerCore.Input.Types
 {
     /// <summary>
     /// Map index with event names for analog actions

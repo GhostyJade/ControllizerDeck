@@ -16,9 +16,9 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using ControllizerDeckProject.Core.ControllizerActions.Types;
+using ControllizerCore.Input.Types;
 
-namespace ControllizerDeckProject.Core
+namespace ControllizerCore.Input.Action
 {
     /// <summary>
     /// This class provide an abstraction for implementing an action for an hardware digital input

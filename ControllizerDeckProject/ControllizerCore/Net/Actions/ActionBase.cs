@@ -18,7 +18,7 @@
 
 using System.Net;
 
-namespace ControllizerDeckProject.Net.Actions
+namespace ControllizerCore.Net.Actions
 {
     /// <summary>
     /// This class represent an abstraction for an HTTP Action. Every action must implement this class and register itself via <see cref="ActionManager.RegisterAction(ActionBase)"/>

@@ -1,4 +1,4 @@
-﻿namespace ControllizerDeckProject.Core.ControllizerActions.Types
+﻿namespace ControllizerCore.Input.Types
 {
     /// <summary>
     /// Map index with event names for digital actions

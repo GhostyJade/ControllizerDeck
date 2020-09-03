@@ -16,9 +16,11 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using ControllizerCore.Input.Action;
+using ControllizerCore.Utils;
+
 using ControllizerDeckProject.Core.Hardware;
 using ControllizerDeckProject.Core.Input;
-using ControllizerDeckProject.Utils;
 
 using Newtonsoft.Json;
 
@@ -68,7 +70,7 @@ namespace ControllizerDeckProject.Core
         public static void PerformAction(string msg)
         {
             // Check if the received message is not empty:
-            if (msg == "") 
+            if (msg == "")
                 return;
 
             string[] data = msg.Split(':');
@@ -108,7 +110,7 @@ namespace ControllizerDeckProject.Core
                 int encId = int.Parse(id.Replace(RotaryEncoder.RotaryEncoderButtonIdentifier, ""));
                 RotaryEncoder enc = InputDataMapping.RotaryEncoders.Find(e => e.ComponentIdentifier == encId);
                 enc.UpdateButtonState(MathHelper.BoolFromInt(int.Parse(state)));
-            } 
+            }
             //TODO add knobs here
             else
             {

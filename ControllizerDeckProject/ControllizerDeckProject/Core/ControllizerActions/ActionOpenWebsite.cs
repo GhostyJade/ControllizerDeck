@@ -1,4 +1,5 @@
-﻿using ControllizerDeckProject.Core.ControllizerActions.Types;
+﻿using ControllizerCore.Input.Action;
+using ControllizerCore.Input.Types;
 
 using System.Diagnostics;
 using System.Runtime.InteropServices;

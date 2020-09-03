@@ -16,6 +16,9 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using ControllizerCore.Net;
+using ControllizerCore.Utils;
+
 using ControllizerDeckProject.Net;
 using ControllizerDeckProject.Utils;
 
@@ -34,7 +37,7 @@ namespace ControllizerDeckProject
             // Load app settings:
             SettingsManager.LoadSettings();
             // Init all HTTP actions
-            ActionManager.Init();
+            ActionRegister.Register();
 
             if (!CoreState.SettingsInstance.IsFirstLaunch)
             {

@@ -16,9 +16,12 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using ControllizerCore.Input.Types;
+using ControllizerCore.Net.Actions;
+using ControllizerCore.Utils;
+
 using ControllizerDeckProject.Core;
 using ControllizerDeckProject.Core.ControllizerActions;
-using ControllizerDeckProject.Core.ControllizerActions.Types;
 using ControllizerDeckProject.Utils;
 
 using Newtonsoft.Json.Linq;

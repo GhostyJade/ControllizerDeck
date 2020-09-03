@@ -16,7 +16,8 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using ControllizerDeckProject.Core.ControllizerActions.Types;
+using ControllizerCore.Input.Action;
+using ControllizerCore.Input.Types;
 
 using System;
 using System.Diagnostics;
@@ -32,7 +33,7 @@ namespace ControllizerDeckProject.Core.ControllizerActions
         /// The application name
         /// </summary>
         public string AppName = "";
-        
+
         /// <summary>
         /// The full application path
         /// </summary>

@@ -16,28 +16,18 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using ControllizerDeckProject.Net.Actions;
+using ControllizerCore.Net.Actions;
+
 using System.Collections.Generic;
 
-namespace ControllizerDeckProject.Net
+namespace ControllizerCore.Net
 {
     /// <summary>
     /// Utility class used to manage HTTP Actions
     /// </summary>
     public static class ActionManager
     {
-        public static Dictionary<string, ActionBase> actions = new Dictionary<string, ActionBase>();
-
-        public static void Init()
-        {
-            RegisterAction(new ActionExit());
-            RegisterAction(new ActionAvailablePorts());
-            RegisterAction(new ActionSetCOMPort());
-            RegisterAction(new ActionGetHardwareComponents());
-            RegisterAction(new ActionSetHardwareFunctions());
-            RegisterAction(new ActionFirstLaunch());
-            RegisterAction(new ActionWelcome());
-        }
+        private static Dictionary<string, ActionBase> actions = new Dictionary<string, ActionBase>();
 
         /// <summary>
         /// Register an HTTP Action

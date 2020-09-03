@@ -18,6 +18,8 @@
 
 using ControlizerCore.Serial;
 
+using ControllizerCore.Net.Actions;
+
 using ControllizerDeckProject.Utils;
 
 using System.Net;
