@@ -42,5 +42,7 @@ namespace ControllizerDeckProject.Utils
         /// If <see langword="true"/>, the backend await to load the mapping and prepare the configuration instead
         /// </summary>
         public bool IsFirstLaunch { get; set; } = true;
+
+        public bool useWifi { get; set; } = false;
     }
 }

@@ -114,7 +114,7 @@ namespace ControllizerDeckProject.Core
             //TODO add knobs here
             else
             {
-                Console.WriteLine(msg);
+                Console.WriteLine("Unknown action: {0}", msg);
             }
         }
 

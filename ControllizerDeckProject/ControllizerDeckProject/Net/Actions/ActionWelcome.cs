@@ -89,7 +89,7 @@ namespace ControllizerDeckProject.Net.Actions
                 };
 
                 string ComPort = (string)body.SelectToken("serialPort");
-
+                //TODO add wifi there
                 success = true;
                 HardwareHelper.StoreConfiguration(description);
                 HardwareHelper.InitHardware();

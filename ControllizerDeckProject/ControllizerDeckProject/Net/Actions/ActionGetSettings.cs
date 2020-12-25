@@ -21,7 +21,7 @@ using ControlizerCore.Serial;
 using ControllizerCore.Net.Actions;
 
 using ControllizerDeckProject.Utils;
-
+using Newtonsoft.Json.Linq;
 using System.Net;
 
 namespace ControllizerDeckProject.Net.Actions
@@ -34,25 +34,21 @@ namespace ControllizerDeckProject.Net.Actions
     /// This function is used to send a list of COM ports to the client.
     /// 
     /// </summary>
-    public class ActionAvailablePorts : ActionBase
+    public class ActionGetSettings : ActionBase
     {
-        public ActionAvailablePorts() : base("AvailablePortList", "/ports/list/", HTTPType.GET)
+        public ActionGetSettings() : base("GetSettings", "/settings/", HTTPType.GET)
         { }
 
         public override void OnGet(HttpListenerRequest request, HttpListenerResponse response)
         {
-            string[] portArray = SerialIO.GetPortNames().ToArray();
-
-            string jsonResponse = "{\"result\":true,\n \"ports\":[";
-            for (int i = 0; i < portArray.Length; i++)
+            JObject obj = new JObject()
             {
-                jsonResponse += $"\"{portArray[i]}\"";
-                if (i != portArray.Length - 1)
-                    jsonResponse += ",";
-            }
-            jsonResponse += "]}";
+                { "result", true },
+                { "ports", new JArray(SerialIO.GetPortNames().ToArray()) },
+                { "wifi", CoreState.SettingsInstance.useWifi }
+            };
 
-            ResponseFactory.GenerateResponse(response, jsonResponse);
+            ResponseFactory.GenerateResponse(response, obj.ToString());
         }
     }
 }

@@ -9,8 +9,8 @@ namespace ControllizerDeckProject.Utils
         public static void Register()
         {
             ActionManager.RegisterAction(new ActionExit());
-            ActionManager.RegisterAction(new ActionAvailablePorts());
-            ActionManager.RegisterAction(new ActionSetCOMPort());
+            ActionManager.RegisterAction(new ActionGetSettings());
+            ActionManager.RegisterAction(new ActionChangeSettings());
             ActionManager.RegisterAction(new ActionGetHardwareComponents());
             ActionManager.RegisterAction(new ActionSetHardwareFunctions());
             ActionManager.RegisterAction(new ActionFirstLaunch());
