@@ -11,6 +11,7 @@ import { useTracked } from './components/DataContainer'
 import About from './views/about'
 import Welcome from './views/welcome'
 import { server_address, server_port } from './utils/net'
+import MissingBackend from './views/nobackend'
 
 function fetchWelcomeData() {
     return fetch(`http://${server_address}:${server_port}/firstlaunch/`)
@@ -37,6 +38,8 @@ function App() {
     const [state, dispatch] = useTracked()
     if (welcome.status)
         return <Welcome end={setWelcomeEnded} />
+    //if(welcome.error)
+    //    return <MissingBackend/>
 
     return (
         <Router>

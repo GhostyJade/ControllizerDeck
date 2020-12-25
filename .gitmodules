@@ -1,0 +1,9 @@
+[submodule "ArduinoSketches/esp32_wifi/lib/Adafruit_SSD1306"]
+	path = ArduinoSketches/esp32_wifi/lib/Adafruit_SSD1306
+	url = https://github.com/adafruit/Adafruit_SSD1306
+[submodule "ArduinoSketches/esp32_wifi/lib/Adafruit-GFX-Library"]
+	path = ArduinoSketches/esp32_wifi/lib/Adafruit-GFX-Library
+	url = https://github.com/adafruit/Adafruit-GFX-Library
+[submodule "ArduinoSketches/esp32_wifi/lib/Adafruit_BusIO"]
+	path = ArduinoSketches/esp32_wifi/lib/Adafruit_BusIO
+	url = https://github.com/adafruit/Adafruit_BusIO
