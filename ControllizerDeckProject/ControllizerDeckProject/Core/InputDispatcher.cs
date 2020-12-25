@@ -72,6 +72,8 @@ namespace ControllizerDeckProject.Core
             // Check if the received message is not empty:
             if (msg == "")
                 return;
+            if (!msg.Contains(":"))
+                return;
 
             string[] data = msg.Split(':');
             string id = data[0];
