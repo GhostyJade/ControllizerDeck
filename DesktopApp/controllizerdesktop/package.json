@@ -12,8 +12,10 @@
     "axios": "^0.19.2",
     "clsx": "^1.1.1",
     "electron-is-dev": "^1.2.0",
+    "i18next": "^19.8.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-i18next": "^11.8.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-tracked": "^1.4.0"

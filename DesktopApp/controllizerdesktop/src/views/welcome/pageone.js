@@ -16,7 +16,7 @@ const PageOne = (props) => {
                 <Typography className={styles.pageOneText}>This wizard will help you configure the hardware description used by this application</Typography>
             </div>
             <div className={styles.btnNextContainer}>
-                <IconButton className={styles.btnNext} onClick={() => props.update({...props.state, page: 1 })}>
+                <IconButton className={styles.btnNext} onClick={() => props.update({ ...props.state, page: 1 })}>
                     <ArrowRight />
                 </IconButton>
             </div>

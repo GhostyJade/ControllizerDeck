@@ -1,8 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react'
 import HardwareDrawer from '../components/hardwaredrawer'
 import axios from 'axios'
 import ConfigurationBar from '../components/configurationbar'
-import MissingBackend from './nobackend'
 import { server_address, server_port } from '../utils/net'
 
 export default function Home(props) {
@@ -21,7 +21,7 @@ export default function Home(props) {
     }, [])
 
     return (
-        !hardwareComponents.success ? <MissingBackend /> :
+        !hardwareComponents.success ? <></> :
             <>
                 <ConfigurationBar />
                 <HardwareDrawer data={hardwareComponents.data} />

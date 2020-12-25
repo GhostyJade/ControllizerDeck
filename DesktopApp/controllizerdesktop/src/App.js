@@ -38,8 +38,8 @@ function App() {
     const [state, dispatch] = useTracked()
     if (welcome.status)
         return <Welcome end={setWelcomeEnded} />
-    //if(welcome.error)
-    //    return <MissingBackend/>
+    if(welcome.error)
+        return <MissingBackend/>
 
     return (
         <Router>

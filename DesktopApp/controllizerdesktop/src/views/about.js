@@ -1,5 +1,6 @@
 import React from 'react'
 import { Typography, makeStyles } from '@material-ui/core'
+import { useTranslation } from 'react-i18next';
 
 const AboutStyles = makeStyles(theme => ({
     container: {
@@ -18,6 +19,7 @@ const AboutStyles = makeStyles(theme => ({
 
 export default function About(props) {
     const styles = AboutStyles()
+    const { t } = useTranslation();
 
     return (
         <div className={styles.container}>
@@ -26,7 +28,7 @@ export default function About(props) {
                     Controllizer Deck - © GhostyJade 2019-2020
                 </Typography>
                 <Typography className={styles.text}>
-                    This application is released under GPLv3.
+                    {t('ABOUT_LICENSING')}
                 </Typography>
             </div>
         </div>
