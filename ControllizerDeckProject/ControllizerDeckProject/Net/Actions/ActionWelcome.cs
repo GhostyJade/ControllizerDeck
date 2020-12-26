@@ -89,13 +89,23 @@ namespace ControllizerDeckProject.Net.Actions
                 };
 
                 string ComPort = (string)body.SelectToken("serialPort");
-                //TODO add wifi there
-                success = true;
+                string WifiPort = (string)body.SelectToken("wifiPort");
+                bool useWifi = !string.IsNullOrEmpty(WifiPort);
                 HardwareHelper.StoreConfiguration(description);
                 HardwareHelper.InitHardware();
                 CoreState.SettingsInstance.IsFirstLaunch = false;
-                CoreState.SettingsInstance.COMPort = ComPort;
+                CoreState.SettingsInstance.useWifi = useWifi;
+                if (!useWifi)
+                {
+                    CoreState.SettingsInstance.COMPort = ComPort;
+                }
+                else
+                {
+                    if (int.TryParse(WifiPort, out int value))
+                        CoreState.SettingsInstance.WifiServerPort = value;
+                }
                 SettingsManager.SaveSettings();
+                success = true;
             }
             catch
             {

@@ -5,7 +5,6 @@ import { PageEncodersPropertiesStyle } from '../../utils/styles'
 import { server_address, server_port } from '../../utils/net'
 
 function PageRotaryEncoders(props) {
-
     const styles = PageEncodersPropertiesStyle()
 
     const sendData = () => {
@@ -27,7 +26,7 @@ function PageRotaryEncoders(props) {
                 Rotary encoders settings (TODO)
             </div>
             <div className={styles.buttonContainer}>
-                <IconButton className={styles.btnPrev} onClick={() => props.update({ ...props.state, page: 3 })}>
+                <IconButton className={styles.btnPrev} onClick={() => props.update({ ...props.state, page: 4 })}>
                     <ArrowLeft />
                 </IconButton>
                 <IconButton className={styles.btnNext} onClick={() => {

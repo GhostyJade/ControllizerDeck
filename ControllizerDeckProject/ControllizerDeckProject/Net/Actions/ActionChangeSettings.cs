@@ -69,7 +69,12 @@ namespace ControllizerDeckProject.Net.Actions
             }
             else
             {
-                WifiManager.ManagerInstance.Start();
+                // Set udp port, start WifiManager
+                if (int.TryParse(port, out int value))
+                {
+                    CoreState.SettingsInstance.WifiServerPort = value;
+                    WifiManager.ManagerInstance.Start();
+                }
             }
 
             string jsonResponse = "{\"result\":true}";

@@ -44,5 +44,6 @@ namespace ControllizerDeckProject.Utils
         public bool IsFirstLaunch { get; set; } = true;
 
         public bool useWifi { get; set; } = false;
+        public int WifiServerPort { get; set; } = 5001;
     }
 }

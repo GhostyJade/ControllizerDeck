@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { PageSerialConfigStyles } from '../../utils/styles'
-import { IconButton, FormControl, InputLabel, NativeSelect, Typography, createMuiTheme, ThemeProvider } from '@material-ui/core'
+import { IconButton, FormControl, InputLabel, NativeSelect, Typography, createMuiTheme, ThemeProvider, TextField } from '@material-ui/core'
 import { ArrowLeft, ArrowRight } from '@material-ui/icons'
 
 import { server_address, server_port } from '../../utils/net'
@@ -19,13 +19,13 @@ const CustomSelectField = createMuiTheme({
     }
 })
 
-function PageSerialConfig(props) {
+function SerialConfig(props) {
     const styles = PageSerialConfigStyles()
 
     const [availablePorts, setAvailablePorts] = React.useState([])
 
     const handleGetPorts = () => {
-        fetch(`http://${server_address}:${server_port}/ports/list/`).then(response => response.json())
+        fetch(`http://${server_address}:${server_port}/settings/`).then(response => response.json())
             .then(data => {
                 if (data.result) {
                     setAvailablePorts(data.ports)
@@ -58,11 +58,11 @@ function PageSerialConfig(props) {
                     </FormControl>
                 </div>
                 <div className={styles.buttonContainer}>
-                    <IconButton className={styles.btnPrev} onClick={() => props.update({ ...props.state, page: 1 })}>
+                    <IconButton className={styles.btnPrev} onClick={() => props.update({ ...props.state, page: 2 })}>
                         <ArrowLeft />
                     </IconButton>
                     <IconButton className={styles.btnNext} onClick={() => {
-                        props.update({ ...props.state, page: 3 })
+                        props.update({ ...props.state, page: 4 })
                     }}>
                         <ArrowRight />
                     </IconButton>
@@ -72,4 +72,44 @@ function PageSerialConfig(props) {
     )
 }
 
-export default PageSerialConfig
+function WifiConfig(props) {
+    const styles = PageSerialConfigStyles()
+
+    const handlePortChange = (e) => {
+        props.update({ ...props.state, wifiPort: e.target.value })
+    }
+
+    return (
+        <ThemeProvider theme={CustomSelectField}>
+            <div className={styles.pageContainer}>
+                <div className={styles.helperText}>
+                    <Typography className={styles.title}>Wi-Fi settings</Typography>
+                    <Typography className={styles.text}>Here's you can set the socket port used by this application. This port is used to listen to the hardware device triggers. </Typography>
+                </div>
+                <div>
+                    <FormControl className={styles.inputPortBarContainer}>
+                        <TextField label="Port" value={props.state.wifiPort} onChange={handlePortChange} type="number" />
+                    </FormControl>
+                </div>
+                <div className={styles.buttonContainer}>
+                    <IconButton className={styles.btnPrev} onClick={() => props.update({ ...props.state, page: 2 })}>
+                        <ArrowLeft />
+                    </IconButton>
+                    <IconButton className={styles.btnNext} onClick={() => {
+                        props.update({ ...props.state, page: 4 })
+                    }}>
+                        <ArrowRight />
+                    </IconButton>
+                </div>
+            </div>
+        </ThemeProvider>
+    )
+}
+
+function PageConnectivityConfig(props) {
+    if (props.connectionMethod === 'usb')
+        return <SerialConfig {...props} />
+    return <WifiConfig {...props} />
+}
+
+export default PageConnectivityConfig

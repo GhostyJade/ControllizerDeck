@@ -250,6 +250,53 @@ const PageSerialConfigStyles = makeStyles(theme => ({
     },
 }))
 
+const PageConnectivityConfigStyles = makeStyles(theme => ({
+    pageContainer: {
+        backgroundColor: '#303030',
+        height: '100%'
+    },
+    btnPrev: {
+        color: 'white',
+        borderRadius: '50%',
+        backgroundColor: '#696b6e',
+        left: 12,
+        float: "left"
+    },
+    btnNext: {
+        color: 'white',
+        borderRadius: '50%',
+        backgroundColor: '#696b6e',
+        right: 12,
+        float: "right"
+    },
+    buttonContainer: {
+        width: '100%',
+        position: 'absolute',
+        bottom: 12
+    },
+    helperText: {
+        textAlign: 'center'
+    },
+    title: {
+        color: 'white',
+        fontSize: 20
+    },
+    text: {
+        color: '#acacac',
+        fontSize: 16
+    },
+    iconContainer: {
+        paddingTop: 40
+    },
+    icon: {
+        width: 256,
+        height: 256
+    },
+    scaledIcon: {
+        transform: 'scale(1.2)'
+    }
+}))
+
 export {
     ConfigurationBarStyles,
     HardwareDrawerStyles,
@@ -259,4 +306,5 @@ export {
     CustomInputField,
     PageEncodersPropertiesStyle,
     PageSerialConfigStyles,
+    PageConnectivityConfigStyles,
 }

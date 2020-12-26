@@ -28,10 +28,11 @@ namespace ControllizerDeckProject.Net.Actions
 {
 
     /// <summary>
-    /// Path: /ports/list/
+    /// Path: /settings/
     /// Method: GET
     /// 
     /// This function is used to send a list of COM ports to the client.
+    /// Also, it's used to set if wifi is enabled or not
     /// 
     /// </summary>
     public class ActionGetSettings : ActionBase
