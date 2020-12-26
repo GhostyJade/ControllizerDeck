@@ -18,7 +18,6 @@ function PushButton({ onPress }) {
 }
 
 export default function HardwareDrawer(props) {
-
     const [, dispatch] = useTracked()
     const [pushButtons, setPushButtons] = React.useState([])
 
@@ -38,7 +37,7 @@ export default function HardwareDrawer(props) {
     }
     let rows = []
 
-    if (props.data) {
+    if (props.data && props.data.HasInitializedAsMatrix) {
         const dimensions = props.data.MatrixLayout.split("x")
         const w = parseInt(dimensions[0])
         const h = parseInt(dimensions[1])
@@ -56,6 +55,13 @@ export default function HardwareDrawer(props) {
             )
             prevValue = currValue
             currValue += w
+        }
+    } else if (props.data) {
+        for (let i = 0; i < pushButtons.length; i++) {
+            const e = pushButtons[i];
+            rows.push(
+                <PushButton setter={props.setter} onPress={() => performPressAction(e)} key={"btn" + i} />
+            )
         }
     }
 
