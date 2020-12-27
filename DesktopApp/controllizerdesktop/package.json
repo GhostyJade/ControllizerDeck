@@ -1,21 +1,24 @@
 {
   "name": "controllizerdesktop",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "private": true,
   "author": "GhostyJade",
   "dependencies": {
-    "@material-ui/core": "^4.9.12",
+    "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "clsx": "^1.1.1",
+    "electron-is-dev": "^1.2.0",
+    "i18next": "^19.8.4",
+    "material-ui-image": "^3.3.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-i18next": "^11.8.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "electron-is-dev": "^1.2.0",
     "react-tracked": "^1.4.0"
   },
   "main": "public/electron.js",
@@ -51,7 +54,7 @@
   },
   "build": {
     "appId": "com.ghostyjade.controllizerdeck",
-    "productName": "Controllizer Deck",
+    "productName": "ControllizerDeckApp",
     "copyright": "Copyright © 2020 ${author}",
     "files": [
       "build/**/*",

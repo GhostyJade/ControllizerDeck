@@ -17,7 +17,7 @@
 */
 
 using ControlizerCore.Serial;
-
+using ControllizerDeckProject.Wifi;
 using Newtonsoft.Json;
 
 using System;
@@ -92,8 +92,10 @@ namespace ControllizerDeckProject.Utils
                 {
                     Settings settings = serializer.Deserialize<Settings>(reader);
                     CoreState.SettingsInstance = settings;
-                    if (SerialIO.GetPortNames().Contains(settings.COMPort))
+                    if (SerialIO.GetPortNames().Contains(settings.COMPort) && !settings.useWifi)
                         SerialManager.ManagerInstance.Start();
+                    if (settings.useWifi)
+                        WifiManager.ManagerInstance.Start();
                 }
             }
         }

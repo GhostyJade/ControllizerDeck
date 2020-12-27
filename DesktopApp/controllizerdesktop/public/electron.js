@@ -25,8 +25,6 @@ function createWindow() {
         protocol: 'file:',
         slashes: true
     })
-    console.log(isDev)
-    console.log(startURL)
     mainWindow.loadURL(startURL);
 
     // Open the DevTools.

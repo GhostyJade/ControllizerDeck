@@ -102,11 +102,10 @@ namespace ControllizerDeckProject.Core.Hardware
                 // Check what type of pushbutton the hardware has:
                 if (type == "list")
                 {
-                    JArray btn = (JArray)pushButtonObj.SelectToken("buttons");
-                    for (int i = 0; i < btn.Count; i++)
+                    int btnCount = (int)pushButtonObj.SelectToken("size");
+                    for (int i = 0; i < btnCount; i++)
                     {
-                        int id = (int)btn[i].SelectToken("id");
-                        d.PushButtons.Add(new PushButton(id));
+                        d.PushButtons.Add(new PushButton(i));
                     }
                 }
                 else if (type == "matrix")

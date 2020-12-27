@@ -35,7 +35,7 @@ namespace ControllizerCore.Net
         /// <param name="a">the HTTP action instance to register</param>
         public static void RegisterAction(ActionBase a)
         {
-            actions.Add(a.ActionURI, a);
+            actions.Add(a.ActionName, a);
         }
 
         /// <summary>

@@ -22,7 +22,7 @@ using ControllizerCore.Net.Actions;
 using ControllizerCore.Utils;
 
 using ControllizerDeckProject.Utils;
-
+using ControllizerDeckProject.Wifi;
 using Newtonsoft.Json.Linq;
 
 using System.Net;
@@ -30,15 +30,15 @@ using System.Net;
 namespace ControllizerDeckProject.Net.Actions
 {
     /// <summary>
-    /// Path: /ports/
+    /// Path: /settings/
     /// Method: POST
     /// 
-    /// This function is called to set the new COM port.
+    /// This function is called to update the backend's settings.
     /// 
     /// </summary>
-    public class ActionSetCOMPort : ActionBase
+    public class ActionChangeSettings : ActionBase
     {
-        public ActionSetCOMPort() : base("SetCOMPort", "/ports/", HTTPType.POST)
+        public ActionChangeSettings() : base("UpdateSettings", "/settings/", HTTPType.POST)
         { }
 
         public override void OnPost(HttpListenerRequest request, HttpListenerResponse response)
@@ -55,15 +55,31 @@ namespace ControllizerDeckProject.Net.Actions
             //Parse body and get port value
             JToken t = JToken.Parse(jsonBody);
             string port = (string)t.SelectToken("port");
+            bool? useWifi = (bool?)t.SelectToken("wifi");
 
             // Set port value
             CoreState.SettingsInstance.COMPort = port;
+            //Set if use wifi to communicate
+            CoreState.SettingsInstance.useWifi = useWifi.GetValueOrDefault(false);
 
-            // Starts the SerialManager
-            SerialManager.ManagerInstance.Start();
+            if (!useWifi.Value)
+            {
+                // Starts the SerialManager
+                SerialManager.ManagerInstance.Start();
+            }
+            else
+            {
+                // Set udp port, start WifiManager
+                if (int.TryParse(port, out int value))
+                {
+                    CoreState.SettingsInstance.WifiServerPort = value;
+                    WifiManager.ManagerInstance.Start();
+                }
+            }
 
             string jsonResponse = "{\"result\":true}";
             ResponseFactory.GenerateResponse(response, jsonResponse);
+            SettingsManager.SaveSettings();
         }
     }
 }
