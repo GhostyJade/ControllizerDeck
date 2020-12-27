@@ -1,7 +1,8 @@
-import { makeStyles, createMuiTheme } from '@material-ui/core'
+import { makeStyles, createMuiTheme } from '@material-ui/core';
 
-const drawerWidth = 230
+const drawerWidth = 230;
 
+// eslint-disable-next-line no-unused-vars
 const ConfigurationBarStyles = makeStyles((theme) => ({
     drawerPaper: {
         width: drawerWidth
@@ -35,15 +36,16 @@ const ConfigurationBarStyles = makeStyles((theme) => ({
         color: '#000',
         fontSize: 18,
     }
-}))
+}));
 
 const HardwareDrawerStyles = {
     container: {
         marginTop: 34,
         marginLeft: 34,
     }
-}
+};
 
+// eslint-disable-next-line no-unused-vars
 const WelcomeScreenStylesOne = makeStyles(theme => ({
     pageOneContainer: {
         backgroundColor: '#303030',
@@ -65,15 +67,16 @@ const WelcomeScreenStylesOne = makeStyles(theme => ({
         borderRadius: '50%',
         backgroundColor: '#696b6e',
         right: 12,
-        float: "right"
+        float: 'right'
     },
     btnNextContainer: {
         width: '100%',
         position: 'absolute',
         bottom: 12
     }
-}))
+}));
 
+// eslint-disable-next-line no-unused-vars
 const WelcomeScreenStylesTwo = makeStyles(theme => ({
     titleText: {
         paddingTop: 32,
@@ -94,14 +97,14 @@ const WelcomeScreenStylesTwo = makeStyles(theme => ({
         borderRadius: '50%',
         backgroundColor: '#696b6e',
         left: 12,
-        float: "left"
+        float: 'left'
     },
     btnNext: {
         color: 'white',
         borderRadius: '50%',
         backgroundColor: '#696b6e',
         right: 12,
-        float: "right"
+        float: 'right'
     },
     buttonContainer: {
         width: '100%',
@@ -111,8 +114,9 @@ const WelcomeScreenStylesTwo = makeStyles(theme => ({
     dataContainer: {
         padding: 24
     },
-}))
+}));
 
+// eslint-disable-next-line no-unused-vars
 const PageButtonPropertiesStyle = makeStyles(theme => ({
     pageContainer: {
         backgroundColor: '#303030',
@@ -123,14 +127,14 @@ const PageButtonPropertiesStyle = makeStyles(theme => ({
         borderRadius: '50%',
         backgroundColor: '#696b6e',
         left: 12,
-        float: "left"
+        float: 'left'
     },
     btnNext: {
         color: 'white',
         borderRadius: '50%',
         backgroundColor: '#696b6e',
         right: 12,
-        float: "right"
+        float: 'right'
     },
     buttonContainer: {
         width: '100%',
@@ -164,7 +168,7 @@ const PageButtonPropertiesStyle = makeStyles(theme => ({
     checkbox: {
         color: 'white'
     }
-}))
+}));
 
 const CustomInputField = createMuiTheme({
     overrides: {
@@ -176,14 +180,15 @@ const CustomInputField = createMuiTheme({
         MuiFormLabel: {
             root: {
                 color: 'white',
-                "&$focused": {
+                '&$focused': {
                     color: '#a800ff'
                 }
             },
         }
     }
-})
+});
 
+// eslint-disable-next-line no-unused-vars
 const PageEncodersPropertiesStyle = makeStyles(theme => ({
     pageContainer: {
         backgroundColor: '#303030',
@@ -194,22 +199,23 @@ const PageEncodersPropertiesStyle = makeStyles(theme => ({
         borderRadius: '50%',
         backgroundColor: '#696b6e',
         left: 12,
-        float: "left"
+        float: 'left'
     },
     btnNext: {
         color: 'white',
         borderRadius: '50%',
         backgroundColor: '#696b6e',
         right: 12,
-        float: "right"
+        float: 'right'
     },
     buttonContainer: {
         width: '100%',
         position: 'absolute',
         bottom: 12
     },
-}))
+}));
 
+// eslint-disable-next-line no-unused-vars
 const PageSerialConfigStyles = makeStyles(theme => ({
     pageContainer: {
         backgroundColor: '#303030',
@@ -220,14 +226,14 @@ const PageSerialConfigStyles = makeStyles(theme => ({
         borderRadius: '50%',
         backgroundColor: '#696b6e',
         left: 12,
-        float: "left"
+        float: 'left'
     },
     btnNext: {
         color: 'white',
         borderRadius: '50%',
         backgroundColor: '#696b6e',
         right: 12,
-        float: "right"
+        float: 'right'
     },
     buttonContainer: {
         width: '100%',
@@ -248,8 +254,9 @@ const PageSerialConfigStyles = makeStyles(theme => ({
     inputPortBarContainer: {
         minWidth: 150
     },
-}))
+}));
 
+// eslint-disable-next-line no-unused-vars
 const PageConnectivityConfigStyles = makeStyles(theme => ({
     pageContainer: {
         backgroundColor: '#303030',
@@ -260,14 +267,14 @@ const PageConnectivityConfigStyles = makeStyles(theme => ({
         borderRadius: '50%',
         backgroundColor: '#696b6e',
         left: 12,
-        float: "left"
+        float: 'left'
     },
     btnNext: {
         color: 'white',
         borderRadius: '50%',
         backgroundColor: '#696b6e',
         right: 12,
-        float: "right"
+        float: 'right'
     },
     buttonContainer: {
         width: '100%',
@@ -295,7 +302,7 @@ const PageConnectivityConfigStyles = makeStyles(theme => ({
     scaledIcon: {
         transform: 'scale(1.2)'
     }
-}))
+}));
 
 export {
     ConfigurationBarStyles,
@@ -307,4 +314,4 @@ export {
     PageEncodersPropertiesStyle,
     PageSerialConfigStyles,
     PageConnectivityConfigStyles,
-}
+};

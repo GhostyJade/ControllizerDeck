@@ -1,7 +1,8 @@
-import React from 'react'
-import { Typography, makeStyles } from '@material-ui/core'
+import React from 'react';
+import { Typography, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
+// eslint-disable-next-line no-unused-vars
 const AboutStyles = makeStyles(theme => ({
     container: {
         backgroundColor: '#303030',
@@ -15,10 +16,11 @@ const AboutStyles = makeStyles(theme => ({
         textAlign: 'center',
         paddingTop: 88 //48px is appbar height
     }
-}))
+}));
 
+// eslint-disable-next-line no-unused-vars
 export default function About(props) {
-    const styles = AboutStyles()
+    const styles = AboutStyles();
     const { t } = useTranslation();
 
     return (
@@ -32,5 +34,5 @@ export default function About(props) {
                 </Typography>
             </div>
         </div>
-    )
+    );
 }

@@ -1,6 +1,6 @@
-import React from "react";
-import { Button, Grid, Typography, makeStyles } from "@material-ui/core";
-import { useTranslation } from "react-i18next";
+import React from 'react';
+import { Button, Grid, Typography, makeStyles } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 const useStyle = makeStyles(() => ({
     container: {
@@ -11,6 +11,7 @@ const useStyle = makeStyles(() => ({
 /**
  * This View is used to display a message when the backend is not reachable.
  */
+// eslint-disable-next-line no-unused-vars
 export default function MissingBackend(props) {
     const classes = useStyle();
     const { t } = useTranslation();
@@ -33,7 +34,7 @@ export default function MissingBackend(props) {
                             variant="outlined"
                             onClick={() =>
                                 window.shell.openExternal(
-                                    "https://github.com/GhostyJade/ControllizerDeck"
+                                    'https://github.com/GhostyJade/ControllizerDeck'
                                 )
                             }
                         >{t('MB_DOWNLOAD_BUTTON')}

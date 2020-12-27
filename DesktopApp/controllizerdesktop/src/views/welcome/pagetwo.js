@@ -1,17 +1,20 @@
-import React from 'react'
-import { WelcomeScreenStylesTwo, CustomInputField } from '../../utils/styles'
-import { Typography, FormControl, ThemeProvider, TextField, IconButton } from '@material-ui/core'
-import { ArrowLeft, ArrowRight } from '@material-ui/icons'
+import React from 'react';
+import { WelcomeScreenStylesTwo, CustomInputField } from '../../utils/styles';
+import { Typography, FormControl, ThemeProvider, TextField, IconButton } from '@material-ui/core';
+import { ArrowLeft, ArrowRight } from '@material-ui/icons';
+import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 
-/**Hardware basic settings */
+/* Hardware basic settings */
 const PageTwo = (props) => {
-    const styles = WelcomeScreenStylesTwo()
+    const styles = WelcomeScreenStylesTwo();
+    const { t } = useTranslation();
 
     return (
         <ThemeProvider theme={CustomInputField}>
             <div className={styles.pageTwoContainer}>
                 <div className={styles.container}>
-                    <Typography className={styles.titleText}>Hardware Configuration</Typography>
+                    <Typography className={styles.titleText}>{t('PAGE_TWO_TITLE')}</Typography>
                     <div>
                         <div className={styles.dataContainer}>
                             <FormControl>
@@ -20,7 +23,7 @@ const PageTwo = (props) => {
                                     type="number"
                                     value={props.state.btnCount}
                                     onChange={e => props.update({ ...props.state, btnCount: e.target.value })}
-                                    label="Button count"
+                                    label={t('PAGE_TWO_BTNS')}
                                 />
                             </FormControl>
                         </div>
@@ -31,7 +34,7 @@ const PageTwo = (props) => {
                                     type="number"
                                     value={props.state.encodersCount}
                                     onChange={e => props.update({ ...props.state, encodersCount: e.target.value })}
-                                    label="Encoder count"
+                                    label={t('PAGE_TWO_ENCS')}
                                 />
                             </FormControl>
                         </div>
@@ -42,7 +45,7 @@ const PageTwo = (props) => {
                                     type="number"
                                     value={props.state.knobsCount}
                                     onChange={e => props.update({ ...props.state, knobsCount: e.target.value })}
-                                    label="Knob count"
+                                    label={t('PAGE_TWO_KNBS')}
                                 />
                             </FormControl>
                         </div>
@@ -53,14 +56,19 @@ const PageTwo = (props) => {
                         <ArrowLeft />
                     </IconButton>
                     <IconButton className={styles.btnNext} onClick={() => {
-                        props.update({ ...props.state, page: 2 })
+                        props.update({ ...props.state, page: 2 });
                     }}>
                         <ArrowRight />
                     </IconButton>
                 </div>
             </div>
         </ThemeProvider>
-    )
-}
+    );
+};
 
 export default PageTwo;
+
+PageTwo.propTypes = {
+    update: PropTypes.func,
+    state: PropTypes.object
+};
