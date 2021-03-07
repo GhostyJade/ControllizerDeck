@@ -9,6 +9,7 @@ import { server_address, server_port } from '../utils/net';
 
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import MacroDialog from './MacroDialog';
 
 const ParametersComponent = ({ itemData, setItemData, state }) => {
     const id = itemData.action;
@@ -16,6 +17,8 @@ const ParametersComponent = ({ itemData, setItemData, state }) => {
         return <FileChooser state={state} itemData={itemData} setItemData={setItemData} />;
     if (id === 2)
         return <WebsitePicker state={state} itemData={itemData} setItemData={setItemData} />;
+    if (id === 3)
+        return <Macro state={state} itemData={itemData} setItemData={setItemData} />;
     return null;
 };
 
@@ -23,6 +26,70 @@ ParametersComponent.propTypes = {
     itemData: PropTypes.object,
     setItemData: PropTypes.func,
     state: PropTypes.object
+};
+
+const Macro = (props) => {
+    const styles = ConfigurationBarStyles();
+    const { t } = useTranslation();
+    const [macroDialogOpen, setMacroDialogOpen] = React.useState(false);
+    const [keyCode, setKeyCode] = React.useState(props.itemData.keyCodes || []);
+
+    const setKeyCodes = (item) => {
+        setKeyCode(item);
+        props.setItemData({ ...props.itemData, keyCodes: keyCode });
+    };
+
+    const openMacroDialog = () => {
+        setMacroDialogOpen(true);
+    };
+
+    const closeMacroDialog = () => {
+        setMacroDialogOpen(false);
+    };
+
+    return (
+        <div>
+            <FormControl>
+                <TextField
+                    id="macroName"
+                    type="text"
+                    className={styles.actionTypeBox}
+                    value={props.itemData.name}
+                    onChange={e => props.setItemData({ ...props.itemData, name: e.target.value })}
+                    label={t('MACRO_NAME')}
+                />
+            </FormControl>
+            <FormControl className={styles.actionTypeBox} >
+                <InputLabel id="macroType">{t('MACRO_TYPE')}</InputLabel>
+                <Select labelId="macroType" value={props.itemData.macroType} onChange={e => props.setItemData({ ...props.itemData, macroType: e.target.value })}>
+                    <MenuItem value={0}>Keystroke</MenuItem>
+                    <MenuItem value={1}>Text</MenuItem>
+                    <MenuItem value={2} disabled>Mouse</MenuItem>
+                </Select>
+            </FormControl>
+            {
+                props.itemData.macroType === 0 && (
+                    <FormControl>
+                        <TextField
+                            id="macroData"
+                            type="text"
+                            className={styles.actionTypeBox}
+                            value={props.itemData.keyCodes}
+                            label={t('MACRO_PICKER')}
+                            InputProps={{
+                                endAdornment: <InputAdornment position="end"><IconButton onClick={openMacroDialog}><AddIcon /></IconButton></InputAdornment>
+                            }}
+                        />
+                    </FormControl>
+                )}
+            <MacroDialog isOpen={macroDialogOpen} close={closeMacroDialog} keyCode={keyCode} setKeyCode={setKeyCodes} />
+        </div>
+    );
+};
+
+Macro.propTypes = {
+    itemData: PropTypes.object,
+    setItemData: PropTypes.func
 };
 
 const WebsitePicker = (props) => {
@@ -76,6 +143,7 @@ const DataComponent = (props) => {
                     <MenuItem value={0}>{t('ACTION_TYPE_NONE')}</MenuItem>
                     <MenuItem value={1}>{t('ACTION_TYPE_RUN')}</MenuItem>
                     <MenuItem value={2}>{t('ACTION_TYPE_OPEN_WEBSITE')}</MenuItem>
+                    <MenuItem value={3}>{t('ACTION_TYPE_MACRO')}</MenuItem>
                 </Select>
             </FormControl>
             <ParametersComponent state={state} itemData={itemData} setItemData={setItemData} />
@@ -148,7 +216,7 @@ export default function ConfigurationBar(props) {
     const [state,] = useTracked();
     const styles = ConfigurationBarStyles();
 
-    const [itemData, setItemData] = React.useState({ action: 0, name: '', path: '', websiteUri: '' });
+    const [itemData, setItemData] = React.useState({ action: 0, name: '', path: '', websiteUri: '', keyCodes: [], macroType: 0 });
 
     useEffect(() => {
         if (state.selectedItem != null)
@@ -157,9 +225,11 @@ export default function ConfigurationBar(props) {
                     setItemData({ action: state.selectedItem.AssociatedAction.Type, name: state.selectedItem.AssociatedAction.AppName, path: state.selectedItem.AssociatedAction.FullAppDirectory });
                 } else if (state.selectedItem.AssociatedAction.Type === 2) { //action 2 = open website
                     setItemData({ action: state.selectedItem.AssociatedAction.Type, name: state.selectedItem.AssociatedAction.WebsiteName, websiteUri: state.selectedItem.AssociatedAction.WebsiteUri });
+                } else if (state.selectedItem.AssociatedAction.Type === 3) {// action 3 = macro
+                    setItemData({ action: state.selectedItem.AssociatedAction.Type, name: state.selectedItem.AssociatedAction.WebsiteName, keyCodes: state.selectedItem.AssociatedAction.WebsiteUri });
                 }
             } else {
-                setItemData({ action: 0, name: '', path: '', websiteUri: '' });
+                setItemData({ action: 0, name: '', path: '', websiteUri: '', keyCodes: [], macroType: 0 });
             }
 
     }, [state.selectedItem]);

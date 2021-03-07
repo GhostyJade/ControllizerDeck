@@ -79,6 +79,11 @@ namespace ControllizerDeckProject.Net.Actions
                     action.Init();
                     InputDispatcher.UpdatePushButtonAction(componentId, action);
                     break;
+                case DigitalActionType.Macro:
+                    ActionRunMacro.MacroType macroType = (ActionRunMacro.MacroType)(int)obj.SelectToken("macroType");
+                    string macroText = (string)obj.SelectToken("macroText");
+                    InputDispatcher.UpdatePushButtonAction(componentId, new ActionRunMacro(macroType, macroText));
+                    break; // TODO add selected keys to execute macro
             }
             // Store new action mapping:
             InputDispatcher.UpdateActionMappingFile();
