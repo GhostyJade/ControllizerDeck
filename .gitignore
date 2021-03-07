@@ -1,0 +1,6 @@
+﻿################################################################################
+# Il file gitignore è stato creato automaticamente da Microsoft(R) Visual Studio.
+################################################################################
+
+/ControllizerDeckProject/ControllizerDeckProject/Properties/PublishProfiles
+/ControllizerDeckProject/ControllizerDeckProject/ControllizerDeckProject.csproj.user
