@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 
 namespace ControllizerDeck.FileUpdateGenerator.Data
@@ -11,9 +10,9 @@ namespace ControllizerDeck.FileUpdateGenerator.Data
         public string filename;
         public string sha1File;
 
-        public UpdateFile(string path)
+        public UpdateFile(string path, string rootPath)
         {
-            filename = path.Split("\\").Reverse().First();
+            filename = path.Replace(rootPath, "");
             GetDateAsSha1(path);
         }
 

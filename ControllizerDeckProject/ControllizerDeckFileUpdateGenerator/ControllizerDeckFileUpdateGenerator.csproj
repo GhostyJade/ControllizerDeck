@@ -5,6 +5,8 @@
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>ControllizerDeck.FileUpdateGenerator</RootNamespace>
     <AssemblyName>ControllizerDeck.FileUpdateGenerator</AssemblyName>
+    <Platforms>AnyCPU;x64</Platforms>
+    <StartupObject>ControllizerDeck.FileUpdateGenerator.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

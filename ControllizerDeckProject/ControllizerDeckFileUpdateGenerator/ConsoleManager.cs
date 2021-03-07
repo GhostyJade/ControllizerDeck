@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Terminal.Gui;
 
 namespace ControllizerDeck.FileUpdateGenerator
@@ -16,6 +15,7 @@ namespace ControllizerDeck.FileUpdateGenerator
         private List<CheckBox> filesCheckboxes = new List<CheckBox>();
         private Dictionary<int, string> files = new Dictionary<int, string>();
 
+        private string SelectedFilePath;
         public void Init(Toplevel container)
         {
             mainWindow = new Window("ControllizerDeck File Update Generator")
@@ -80,6 +80,7 @@ namespace ControllizerDeck.FileUpdateGenerator
             if (!openDialog.Canceled)
             {
                 string path = openDialog.FilePaths[0];
+                SelectedFilePath = path;
                 var files = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
                 var filesWindow = new Window("Select files...") { X = 0, Y = 0, Width = 80, Height = 20 };
                 var filesView = new ScrollView(new Rect(0, 0, 80, 20));
@@ -118,7 +119,7 @@ namespace ControllizerDeck.FileUpdateGenerator
         {
             foreach (var file in files.Values)
             {
-                DataList.Add(new UpdateFile(file));
+                DataList.Add(new UpdateFile(file, SelectedFilePath));
             }
         }
 

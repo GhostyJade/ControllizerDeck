@@ -12,6 +12,7 @@
 		<FileVersion>0.0.0.1</FileVersion>
 		<Version>0.0.1</Version>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<Platforms>AnyCPU;x64</Platforms>
 	</PropertyGroup>
 
 	<ItemGroup>
