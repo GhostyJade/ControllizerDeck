@@ -32,9 +32,9 @@ namespace ControllizerDeckProject.PluginSystem
     public static class PluginManager
     {
         private const string DefaultPluginExtension = "*.dll";
-        private static List<Thread> pluginThreadPool = new List<Thread>();
+        private static readonly List<Thread> pluginThreadPool = new();
 
-        private static readonly Dictionary<string, PluginBase> PluginInstances = new Dictionary<string, PluginBase>();
+        private static readonly Dictionary<string, PluginBase> PluginInstances = new();
 
         /// <summary>
         /// Load all plugins in the specified path and add an instance to this app

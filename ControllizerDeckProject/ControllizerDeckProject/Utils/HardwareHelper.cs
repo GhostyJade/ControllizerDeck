@@ -42,7 +42,7 @@ namespace ControllizerDeckProject.Utils
         public static void InitHardware()
         {
             HardwareData hardware = HardwareDataManager.LoadData();
-            HardwareAction actions = new HardwareAction(hardware);
+            HardwareAction actions = new(hardware);
             InputDispatcher.RegisterHardware(actions.HardwareCreator());
         }
 
@@ -55,12 +55,10 @@ namespace ControllizerDeckProject.Utils
             if (!Directory.Exists(AppContext.BaseDirectory + "Data/Hardware/"))
                 Directory.CreateDirectory(AppContext.BaseDirectory + "Data/Hardware/");
 
-            JsonSerializer serializer = new JsonSerializer() { Formatting = Formatting.Indented };
-            using (StreamWriter writer = new StreamWriter(string.Format("{0}/{1}", AppContext.BaseDirectory, HardwareDescriptionFile)))
-            using (JsonWriter jsonWriter = new JsonTextWriter(writer))
-            {
-                serializer.Serialize(jsonWriter, HardwareDataManager.Serialize(description));
-            }
+            JsonSerializer serializer = new() { Formatting = Formatting.Indented };
+            using StreamWriter writer = new(string.Format("{0}/{1}", AppContext.BaseDirectory, HardwareDescriptionFile));
+            using JsonWriter jsonWriter = new JsonTextWriter(writer);
+            serializer.Serialize(jsonWriter, HardwareDataManager.Serialize(description));
         }
     }
 }

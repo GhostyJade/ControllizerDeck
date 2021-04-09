@@ -26,9 +26,7 @@ namespace ControllizerDeckProject
 {
     public class Program
     {
-#pragma warning disable IDE0060 // Remove unused parameter
         public static void Main(string[] args)
-#pragma warning restore IDE0060 // Remove unused parameter
         {
             // TODO add debug modifiers to tweak stuff while debugging
 
@@ -47,7 +45,7 @@ namespace ControllizerDeckProject
             }
 
             // Server initialization:
-            HttpServer server = new HttpServer(CoreState.SettingsInstance.LocalServerAddress, CoreState.SettingsInstance.LocalServerPort);
+            HttpServer server = new(CoreState.SettingsInstance.LocalServerAddress, CoreState.SettingsInstance.LocalServerPort);
             Task listen = server.Listen();
             listen.GetAwaiter().GetResult();
         }

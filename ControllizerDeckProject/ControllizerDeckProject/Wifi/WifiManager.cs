@@ -56,7 +56,7 @@ namespace ControllizerDeckProject.Wifi
         public void Dispose()
         {
             running = false;
-            wifiThread.Abort();
+            wifiThread.Join();
             client.Close();
         }
     }

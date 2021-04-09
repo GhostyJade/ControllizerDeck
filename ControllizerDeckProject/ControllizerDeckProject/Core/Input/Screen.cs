@@ -2,7 +2,9 @@
 {
     public class Screen
     {
-        private int width, height;
+        private readonly int width;
+        private readonly int height;
+
         public Screen()
         {
 

@@ -12,8 +12,8 @@ namespace ControllizerDeck.FileUpdateGenerator
         private Window mainWindow;
         private UpdateFileList DataList = null;
 
-        private List<CheckBox> filesCheckboxes = new List<CheckBox>();
-        private Dictionary<int, string> files = new Dictionary<int, string>();
+        private readonly List<CheckBox> filesCheckboxes = new();
+        private readonly Dictionary<int, string> files = new();
 
         private string SelectedFilePath;
         public void Init(Toplevel container)
@@ -60,7 +60,7 @@ namespace ControllizerDeck.FileUpdateGenerator
                 string filename = saveDialog.FileName.ToString();
                 using (StreamWriter writer = File.CreateText(filename))
                 {
-                    JsonSerializer s = new JsonSerializer() { Formatting = Formatting.Indented };
+                    JsonSerializer s = new() { Formatting = Formatting.Indented };
                     s.Serialize(writer, DataList.ConvertToJObject());
                 }
                 MessageBox.Query(50, 10, "Save", "Save succeeded", "OK");
@@ -123,7 +123,7 @@ namespace ControllizerDeck.FileUpdateGenerator
             }
         }
 
-        private void AboutView()
+        private static void AboutView()
         {
             MessageBox.Query(50, 10, "About", "A simple util that generates a file list to update Controllizer Deck and all of it's components.\n\nMade by GhostyJade", "Ok");
         }

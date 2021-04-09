@@ -27,7 +27,7 @@ namespace ControllizerCore.Net
     /// </summary>
     public static class ActionManager
     {
-        private static Dictionary<string, ActionBase> actions = new Dictionary<string, ActionBase>();
+        private static readonly Dictionary<string, ActionBase> actions = new();
 
         /// <summary>
         /// Register an HTTP Action
@@ -44,7 +44,7 @@ namespace ControllizerCore.Net
         /// <returns>A list of HTTP POST Actions</returns>
         public static List<ActionBase> GetPOSTActions()
         {
-            List<ActionBase> a = new List<ActionBase>();
+            List<ActionBase> a = new();
             foreach (ActionBase action in actions.Values)
             {
                 if (action.ActionType == ActionBase.HTTPType.POST)
@@ -60,7 +60,7 @@ namespace ControllizerCore.Net
         /// <returns>A list of HTTP GET Actions</returns>
         public static List<ActionBase> GetGETActions()
         {
-            List<ActionBase> a = new List<ActionBase>();
+            List<ActionBase> a = new();
             foreach (ActionBase action in actions.Values)
             {
                 if (action.ActionType == ActionBase.HTTPType.GET)

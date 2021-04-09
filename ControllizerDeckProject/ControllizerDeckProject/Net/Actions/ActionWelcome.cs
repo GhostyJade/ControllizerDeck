@@ -63,9 +63,9 @@ namespace ControllizerDeckProject.Net.Actions
                 {
                     layout = (int)btnData.SelectToken("w") + "x" + (int)btnData.SelectToken("h");
                 }
-                List<HardwareDescription.Encoder> encodersList = new List<HardwareDescription.Encoder>();
+                List<HardwareDescription.Encoder> encodersList = new();
 
-                HardwareDescription description = new HardwareDescription
+                HardwareDescription description = new()
                 {
                     // TODO make identifiers editable
                     btnData = new HardwareDescription.ButtonsData()
